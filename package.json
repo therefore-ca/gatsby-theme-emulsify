@@ -1,0 +1,31 @@
+{
+  "name": "gatsby-theme-emulsify",
+  "version": "0.0.1",
+  "description": "Emulsify Design System using Gatsby",
+  "main": "index.js",
+  "keywords": [
+    "gatsby",
+    "gatsby-theme"
+  ],
+  "author": "Evan Willhite <evan@fourkitchens.com>",
+  "license": "MIT",
+  "peerDependencies": {
+    "gatsby": "^2.1.9",
+    "react": "^16.8.2",
+    "react-dom": "^16.8.2"
+  },
+  "devDependencies": {
+    "gatsby": "^2.9.4",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6"
+  },
+  "scripts": {
+    "develop": "gatsby develop",
+    "build": "gatsby build",
+    "deploy": "gatsby build --prefix-paths && gh-pages -d public"
+  },
+  "dependencies": {
+    "gatsby-plugin-compile-es6-packages": "^1.1.0",
+    "gatsby-plugin-page-creator": "^2.0.13"
+  }
+}
