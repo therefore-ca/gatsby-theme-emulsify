@@ -26,6 +26,13 @@
   },
   "dependencies": {
     "gatsby-plugin-compile-es6-packages": "^1.1.0",
-    "gatsby-plugin-page-creator": "^2.0.13"
+    "gatsby-plugin-page-creator": "^2.0.13",
+    "gatsby-plugin-react-helmet": "^3.0.12",
+    "gatsby-plugin-sharp": "^2.1.5",
+    "gatsby-plugin-svg-sprite": "^2.0.1",
+    "gatsby-source-filesystem": "^2.0.39",
+    "gatsby-transformer-remark": "^2.4.0",
+    "gatsby-transformer-sharp": "^2.1.21",
+    "react-helmet": "^5.2.1"
   }
 }

@@ -1,0 +1,27 @@
+.main-menu {
+  flex: 0 1 20%;
+  font-size: 0.9rem;
+  height: 100vh;
+  list-style: none;
+  margin: 0;
+  padding: 1rem;
+  position: sticky;
+  top: 54px;
+}
+
+.main-menu--large {
+  font-size: 1rem;
+  padding: 2rem;
+}
+
+.menu-child {
+  display: none;
+}
+
+.menu-child--open {
+  display: block;
+}
+
+.main-menu .main-menu {
+  height: auto;
+}

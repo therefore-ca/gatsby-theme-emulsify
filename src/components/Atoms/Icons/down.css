@@ -1,0 +1,22 @@
+.down-icon,
+.up-icon {
+  cursor: pointer;
+  float: right;
+  fill: #2f2f2f;
+  height: 25px;
+  margin-right: 1rem;
+  width: 25px;
+}
+
+.down-icon:hover,
+.up-icon:hover{
+  fill: #aaa;
+}
+
+.icon-hidden {
+  display: none;
+}
+
+.icon-shown {
+  display: block;
+}

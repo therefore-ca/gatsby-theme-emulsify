@@ -1,0 +1,17 @@
+.main {
+  display: flex;
+}
+
+.main-content {
+  border-left: 1px solid;
+  width: 80%;
+}
+
+.main-content-content {
+  padding: 3rem;
+}
+
+.main-title {
+  background-color: #efefef;
+  padding: 5rem 3rem;
+}

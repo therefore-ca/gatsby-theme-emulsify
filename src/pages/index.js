@@ -1,3 +1,12 @@
 import React from "react"
 
-export default () => <h1>Hello from gatsby-theme-developer</h1>
+import Layout from "../components/Templates/layout"
+import SEO from "../components/Templates/seo"
+
+const IndexPage = () => (
+  <Layout>
+    <SEO title="Home" keywords={[`gatsby`, `application`, `react`]} />
+  </Layout>
+)
+
+export default IndexPage

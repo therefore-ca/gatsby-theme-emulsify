@@ -1,7 +1,14 @@
 const path = require("path")
 
 module.exports = {
+  siteMetadata: {
+    title: 'Emulsify',
+    author: 'Four Kitchens',
+    description: 'A Design System Driven by Gatsby',
+    // siteUrl: '',
+  },
   plugins: [
+    `gatsby-plugin-react-helmet`,
     {
       resolve: "gatsby-plugin-page-creator",
       options: {
@@ -12,9 +19,27 @@ module.exports = {
       resolve: "gatsby-plugin-compile-es6-packages",
       options: {
         // replace with the name of your theme
-        modules: ["gatsby-theme-developer"],
+        modules: ["gatsby-theme-emulsify"],
       },
     },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `components`,
+        path: `${__dirname}/content/components`,
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `pages`,
+        path: `${__dirname}/content/pages`,
+      },
+    },
+    `gatsby-transformer-remark`,
+    `gatsby-transformer-sharp`,
+    `gatsby-plugin-sharp`,
+    'gatsby-plugin-svg-sprite',
   ],
 }
 

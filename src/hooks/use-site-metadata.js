@@ -6,11 +6,6 @@ export default () => {
       site {
         siteMetadata {
           title
-          social {
-            twitter
-            github
-            instagram
-          }
         }
       }
     }

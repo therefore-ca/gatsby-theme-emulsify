@@ -1,0 +1,34 @@
+.wrapper {
+  transition: transform .11s cubic-bezier(.2,0,1,.9),-webkit-transform .11s cubic-bezier(.2,0,1,.9);
+  will-change: transform;
+}
+
+.wrapper-open {
+  transform: translate(16rem);
+}
+
+.parent-menu {
+  background-color: #131212;
+  color: #fff;
+  height: 100%;
+  left: -16rem;
+  overflow-y: auto;
+  overflow-x: hidden;
+  position: fixed;
+  top: 0;
+  width: 16rem;
+}
+
+.parent-menu .main-menu {
+  position: static;
+}
+
+.parent-menu ul {
+  list-style: none;
+  padding: 2rem;
+  margin: 0;
+}
+
+.parent-menu a {
+  color: white;
+}

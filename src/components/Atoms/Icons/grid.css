@@ -1,0 +1,12 @@
+.grid-icon {
+  cursor: pointer;
+  float: left;
+  fill: #2f2f2f;
+  height: 25px;
+  margin-right: 1rem;
+  width: 25px;
+}
+
+.grid-icon:hover {
+  fill: #aaa;
+}
