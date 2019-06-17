@@ -22,7 +22,6 @@ export default class Site extends Component {
 
   render() {
     const { frontmatter, title, html, edges } = this.props;
-    console.log(title);
     return (
       <div
         className={this.state.isMenuOpen ? 'wrapper-open wrapper' : 'wrapper'}

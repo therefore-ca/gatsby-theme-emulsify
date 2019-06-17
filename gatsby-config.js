@@ -18,7 +18,6 @@ module.exports = {
     {
       resolve: "gatsby-plugin-compile-es6-packages",
       options: {
-        // replace with the name of your theme
         modules: ["gatsby-theme-emulsify"],
       },
     },
@@ -36,10 +35,15 @@ module.exports = {
         path: `${__dirname}/content/pages`,
       },
     },
+    {
+      resolve: '@stackbit/gatsby-plugin-menus',
+      options: {
+        sourceUrlPath: `fields.url`,
+      },
+    },
     `gatsby-transformer-remark`,
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
-    'gatsby-plugin-svg-sprite',
   ],
 }
 
