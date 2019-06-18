@@ -16,10 +16,19 @@ export default class Layout extends Component {
     return (
       <StaticQuery
         query={graphql`
-          query SiteTitleQuery {
+          query SiteQuery {
             site {
               siteMetadata {
                 title
+              }
+            }
+            allMarkdownRemark(
+              filter: {frontmatter: {title: { eq: "Welcome" }}},
+            ) {
+              nodes {
+                frontmatter {
+                  title
+                }
               }
             }
           }
