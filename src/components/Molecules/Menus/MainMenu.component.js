@@ -23,28 +23,54 @@ class MainMenu extends Component {
 
   render() {
     const { large, filter, data } = this.props;
-    const menuItems = data.allFile.nodes
-    const directories = data.allDirectory.nodes
+    let menuItems = data.allFile.nodes
 
     const directoryTree = {};
 
-    directories.forEach(dir => {
-      if (dir.name !== 'pages') {
-        if (dir.relativeDirectory) {
-          directoryTree.children = [];
-          directoryTree.children.push(
-            {
-              parent: dir.relativeDirectory,
-              item: dir.name
-            }
-          );
-        }
-        else {
-          directoryTree.item = dir.name;
+    // directories.forEach(dir => {
+    //   if (dir.name !== 'pages') {
+    //     if (dir.relativeDirectory) {
+    //       directoryTree.children = [];
+    //       directoryTree.children.push(
+    //         {
+    //           parent: dir.relativeDirectory,
+    //           item: dir.name
+    //         }
+    //       );
+    //     }
+    //     else {
+    //       directoryTree.item = dir.name;
+    //     }
+    //   }
+    // })
+
+    directoryTree.children = [];
+
+    menuItems.forEach(item => {
+      if (item.name !== 'index') {
+        const itemDir = item.relativeDirectory.split('/');
+        if (itemDir !== '') {
+          if (itemDir.length === 2) {
+            directoryTree.children.push(
+              {
+                parent: itemDir[0],
+                child: itemDir[1],
+                item: item
+              }
+            );
+          }
+          else {
+            directoryTree.children.push(
+              {
+                child: itemDir[0],
+                item: item
+              }
+            )
+          }
         }
       }
     })
-    console.log(directoryTree);
+    
 
     // const directories = [];
     // menuItems.forEach(item => {
@@ -80,39 +106,47 @@ class MainMenu extends Component {
     //     )
     //   }
     // });
-    
 
-    const items = menuItems.map(item => (
-      <ListItem
-        filter={filter}
-        item={item}
-        key={item.id}
-        itemName={item.name}
-        itemLink={item}
-        icon
-      />
-    ))
+    // const items = menuItems.map(item => (
+    //   <ListItem
+    //     filter={filter}
+    //     item={item}
+    //     key={item.id}
+    //     itemName={item.name}
+    //     itemLink={item}
+    //     icon
+    //   />
+    // ))
 
     let childElement;
-    if (directoryTree.children[0].parent) {
+    console.log(directoryTree.children.length)
+    for (let i = 0; i < directoryTree.children.length; i++) {
+      const menuItem = directoryTree.children[i];
       childElement = (
-        <ul className={`main-menu ${large ? 'main-menu--large' : ''}`}>
-          <li>{directoryTree.children[0].parent}</li>
+        <div>
+          <li>{menuItem.parent}</li>
           <ul>
-            <li>{directoryTree.children[0].item}</li>
+            <li>{menuItem.child}</li>
+            <ul>
+            <ListItem
+              filter={filter}
+              item={menuItem.item}
+              key={menuItem.item.id}
+              itemName={menuItem.item.name}
+              itemLink={menuItem.item}
+              icon
+            />
+            </ul>
           </ul>
-        </ul>
-      )
-    }
-    else {
-      childElement = (
-        <ul className={`main-menu ${large ? 'main-menu--large' : ''}`}>
-          <li>{directoryTree.item}</li>
-        </ul>
+        </div>
       )
     }
 
-    return childElement;
+    return (
+      <ul className={`main-menu ${large ? 'main-menu--large' : ''}`}>
+        {childElement}
+      </ul>
+    )
   }
 }
 

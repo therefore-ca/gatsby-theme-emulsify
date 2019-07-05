@@ -45,37 +45,10 @@ export default class ListItem extends Component {
     //   directories.push(directory);
     // }
 
-    // If the homepage, don't add to menu.
-    if (item.name !== 'index') {
-      if (item.relativeDirectory !== '') {
-        return (
-          <ul>
-            <DownIcon
-              className={`${this.state.toggled ? 'icon-hidden' : ''}`}
-              aria-label="Toggle Open"
-              onClick={this.toggle}
-            />
-            <UpIcon
-              className={`${this.state.toggled ? 'icon-shown' : 'icon-hidden'}`}
-              aria-label="Toggle Closed"
-              onClick={this.toggle}
-            />
-            <div className={`menu-child ${this.state.toggled ? 'menu-child--open' : ''}`}>
-              { children }
-            </div>
-          </ul>
-        );
-      }
-      else {
-        return (
-          <li key={key}>
-            <a href={itemLink}>{listItemContent.title}</a>
-          </li>
-        );
-      }
-    }
-    else {
-      return null;
-    }
+    return (
+      <li key={key}>
+        <a href={itemLink}>{listItemContent.title}</a>
+      </li>
+    );
   }
 }

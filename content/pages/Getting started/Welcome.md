@@ -1,7 +1,6 @@
 ---
 title: "Welcome"
 description: "This is the Welcome Page and it has some information."
-menus: main
 ---
 
 # Welcome to Emulsify Design Guide
