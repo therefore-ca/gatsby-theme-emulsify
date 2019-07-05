@@ -10,7 +10,7 @@ import "./layout.css"
 
 import Site from "./Site.js"
 
-export default class LayoutComponent extends Component {
+export default class ComponentLayout extends Component {
   render() {
     const { frontmatter, html, title, edges } = this.props
     return (

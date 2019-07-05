@@ -1,7 +1,6 @@
 ---
-title: "Welcome"
-description: "This is the Index Page and it has some information."
-menus: main
+title: "Home"
+description: "This is the Homepage and it has some information."
 ---
 
 # Welcome to Emulsify Design Guide
