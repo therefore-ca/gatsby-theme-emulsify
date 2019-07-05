@@ -39,6 +39,9 @@ module.exports = {
       resolve: '@stackbit/gatsby-plugin-menus',
       options: {
         sourceUrlPath: `fields.url`,
+        menus: {
+          main: []
+        }
       },
     },
     `gatsby-transformer-remark`,

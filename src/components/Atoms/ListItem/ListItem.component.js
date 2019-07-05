@@ -36,6 +36,7 @@ export default class ListItem extends Component {
 
   render() {
     const { item, itemName, itemLink, children, key, filter } = this.props;
+    // console.log(this.props);
     if (item.node.fields.collection === filter) {
       if (children.props) {
         return (

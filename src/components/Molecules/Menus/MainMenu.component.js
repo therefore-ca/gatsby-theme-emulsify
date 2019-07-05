@@ -22,17 +22,19 @@ class MainMenu extends Component {
   };
 
   render() {
-    const { large, listItems, filter } = this.props;
+    const { large, listItems, filter, data } = this.props;
+    const menuItems = data.allFile.edges
 
-    // const directories = [];
-    // menu.edges.forEach(item => {
-    //   let directory = item.node.relativeDirectory;
-    //   directory = directory.split('/')
-    //   if (!directories.includes(directory)) {
-    //     directories.push(directory);
-    //   }
-    // });
-    // console.log(directories);
+    const directories = [];
+    menuItems.forEach(item => {
+      let directory = item.node.relativeDirectory;
+      directory = directory.split('/')
+      if (!directories.includes(directory)) {
+        directories.push(directory);
+      }
+    });
+
+    console.log(this.props);
 
     const items = listItems.map(item => (
       <ListItem
@@ -42,6 +44,7 @@ class MainMenu extends Component {
         itemName={item.node.frontmatter.title}
         itemLink={item.node.fields.slug}
         icon
+        directories
       />
     ))
 
@@ -62,6 +65,18 @@ export default () => (
             node {
               name
               relativeDirectory
+            }
+          }
+        }
+        menus {
+          main {
+            identifier
+            title
+            url
+            items {
+              identifier
+              title
+              url
             }
           }
         }
