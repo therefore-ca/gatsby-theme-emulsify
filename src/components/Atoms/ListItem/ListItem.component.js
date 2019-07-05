@@ -35,13 +35,21 @@ export default class ListItem extends Component {
   };
 
   render() {
-    const { item, itemName, itemLink, children, key, filter } = this.props;
-    // console.log(this.props);
-    if (item.node.fields.collection === filter) {
-      if (children.props) {
+    const { item, itemLink, key, children } = this.props;
+    const listItemContent = item.children[0].frontmatter;
+
+    // const directories = [];
+    // let directory = item.relativeDirectory;
+    // directory = directory.split('/')
+    // if (!directories.includes(directory)) {
+    //   directories.push(directory);
+    // }
+
+    // If the homepage, don't add to menu.
+    if (item.name !== 'index') {
+      if (item.relativeDirectory !== '') {
         return (
-          <li key={key}>
-            <a href={itemLink}>{itemName}</a>
+          <ul>
             <DownIcon
               className={`${this.state.toggled ? 'icon-hidden' : ''}`}
               aria-label="Toggle Open"
@@ -55,13 +63,13 @@ export default class ListItem extends Component {
             <div className={`menu-child ${this.state.toggled ? 'menu-child--open' : ''}`}>
               { children }
             </div>
-          </li>
+          </ul>
         );
       }
       else {
         return (
           <li key={key}>
-            <a href={itemLink}>{itemName}</a>
+            <a href={itemLink}>{listItemContent.title}</a>
           </li>
         );
       }

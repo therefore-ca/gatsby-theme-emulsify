@@ -22,37 +22,97 @@ class MainMenu extends Component {
   };
 
   render() {
-    const { large, listItems, filter, data } = this.props;
-    const menuItems = data.allFile.edges
+    const { large, filter, data } = this.props;
+    const menuItems = data.allFile.nodes
+    const directories = data.allDirectory.nodes
 
-    const directories = [];
-    menuItems.forEach(item => {
-      let directory = item.node.relativeDirectory;
-      directory = directory.split('/')
-      if (!directories.includes(directory)) {
-        directories.push(directory);
+    const directoryTree = {};
+
+    directories.forEach(dir => {
+      if (dir.name !== 'pages') {
+        if (dir.relativeDirectory) {
+          directoryTree.children = [];
+          directoryTree.children.push(
+            {
+              parent: dir.relativeDirectory,
+              item: dir.name
+            }
+          );
+        }
+        else {
+          directoryTree.item = dir.name;
+        }
       }
-    });
+    })
+    console.log(directoryTree);
 
-    console.log(this.props);
+    // const directories = [];
+    // menuItems.forEach(item => {
+    //   let directory = item.relativeDirectory;
+    //   // Make sure it has a parent directory.
+    //   if (directory !== '') {
+    //     // Create directory array.
+    //     const directoryArray = directory.split('/');
+    //     const menuItem = directoryArray.map(tree =>
+          
+    //     )
+    //     directoryArray.forEach(item => {
+    //       if (!directories.includes(item)) {
+    //         directories.push(item);
+    //       }
+    //     });
+    //   }
+    // });
+    // const directory = directoryTree.map(dir => {
+    //   if (dir.children) {
+    //     return (
+    //       <div>
+    //       <li>{dir.children[0].parent}</li>
+    //       <ul key={dir.children[0].parent}>
+    //         <li>{dir.item}</li>
+    //       </ul>
+    //       </div>
+    //     )
+    //   }
+    //   else {
+    //     return (
+    //       <li>{dir.item}</li>
+    //     )
+    //   }
+    // });
+    
 
-    const items = listItems.map(item => (
+    const items = menuItems.map(item => (
       <ListItem
         filter={filter}
         item={item}
-        key={item.node.id}
-        itemName={item.node.frontmatter.title}
-        itemLink={item.node.fields.slug}
+        key={item.id}
+        itemName={item.name}
+        itemLink={item}
         icon
-        directories
       />
     ))
 
-    return (
-      <ul className={`main-menu ${large ? 'main-menu--large' : ''}`}>
-        {items}
-      </ul>
-    )
+    let childElement;
+    if (directoryTree.children[0].parent) {
+      childElement = (
+        <ul className={`main-menu ${large ? 'main-menu--large' : ''}`}>
+          <li>{directoryTree.children[0].parent}</li>
+          <ul>
+            <li>{directoryTree.children[0].item}</li>
+          </ul>
+        </ul>
+      )
+    }
+    else {
+      childElement = (
+        <ul className={`main-menu ${large ? 'main-menu--large' : ''}`}>
+          <li>{directoryTree.item}</li>
+        </ul>
+      )
+    }
+
+    return childElement;
   }
 }
 
@@ -60,23 +120,23 @@ export default () => (
   <StaticQuery
     query={graphql`
       query {
-        allFile(filter: { sourceInstanceName: { eq: "pages" } }) {
-          edges {
-            node {
-              name
-              relativeDirectory
-            }
+        allDirectory(filter: {sourceInstanceName: {eq: "pages"}}) {
+          nodes {
+            name
+            relativeDirectory
           }
         }
-        menus {
-          main {
-            identifier
-            title
-            url
-            items {
-              identifier
-              title
-              url
+        allFile(filter: { sourceInstanceName: { eq: "pages" } }) {
+          nodes {
+            relativeDirectory
+            name
+            children {
+              ... on MarkdownRemark {
+                id
+                frontmatter {
+                  title
+                }
+              }
             }
           }
         }
