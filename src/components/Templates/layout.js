@@ -22,15 +22,6 @@ export default class Layout extends Component {
                 title
               }
             }
-            allMarkdownRemark(
-              filter: {frontmatter: {title: { eq: "Welcome" }}},
-            ) {
-              nodes {
-                frontmatter {
-                  title
-                }
-              }
-            }
           }
         `}
         render={(data, props) => (

@@ -3,7 +3,6 @@ import { graphql } from "gatsby"
 
 import LayoutComponent from "./layout-component"
 import SEO from "./seo"
-// import LayoutComponent from "../components/Templates/layout-component.js"
 
 export default class ComponentTemplate extends Component {
   render() {

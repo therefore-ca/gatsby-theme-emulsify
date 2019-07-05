@@ -1,0 +1,9 @@
+---
+title: "Welcome"
+description: "This is the Index Page and it has some information."
+menus: main
+---
+
+# Welcome to Emulsify Design Guide
+
+We hope you enjoy reading through this!
