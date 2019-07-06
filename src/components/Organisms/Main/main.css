@@ -1,4 +1,5 @@
 .main {
+  background: url("/waves.jpg");
   display: flex;
 }
 
@@ -9,12 +10,18 @@
 .main-content-content {
   background-color: #fff;
   color: #3b3f40;
-  padding: 3rem;
+  padding: 3rem 6rem;
 }
 
 .main-title {
-  background-color: rgba(0, 100, 162, 0.67);
+  background-color: rgba(1, 80, 136, 0.63);
   color: #fff;
+  font-size: 3rem;
   margin-bottom: 0;
-  padding: 9rem 6rem;
+  padding: 15rem 6rem 2rem;
+}
+
+.main-content-content h1 {
+  color: #085a7d;
+  font-size: 1.8rem;
 }

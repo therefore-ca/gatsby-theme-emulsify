@@ -1,3 +1,7 @@
+body {
+  font: 17px/1.7 'Helvetica', 'Arial', sans-serif;
+}
+
 .wrapper {
   transition: transform .11s cubic-bezier(.2,0,1,.9),-webkit-transform .11s cubic-bezier(.2,0,1,.9);
   will-change: transform;
