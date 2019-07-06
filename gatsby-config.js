@@ -36,12 +36,13 @@ module.exports = {
       },
     },
     {
-      resolve: '@stackbit/gatsby-plugin-menus',
+      resolve: "gatsby-plugin-react-svg",
       options: {
-        sourceUrlPath: `fields.url`,
-      },
+        rule: {
+          include: /assets/
+        }
+      }
     },
-    'gatsby-plugin-svg-sprite',
     `gatsby-transformer-remark`,
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,

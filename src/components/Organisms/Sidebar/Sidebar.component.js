@@ -2,7 +2,7 @@ import PropTypes from "prop-types"
 import React, { Component } from "react"
 import "./sidebar.css"
 
-import DownIcon from "../../Atoms/Icons/Down.component"
+import DownIcon from "../../../../assets/down.svg"
 import MainMenu from "../../Molecules/Menus/MainMenu.component"
 
 const Link = process.env.STORYBOOK_ENV
@@ -43,6 +43,7 @@ export default class Main extends Component {
               {siteTitle}
             </Link>
             <DownIcon
+              className="down-icon"
               onClick={this.open}
               aria-label="Close Overlay"
             />

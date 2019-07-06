@@ -1,9 +1,6 @@
 import PropTypes from "prop-types"
 import React, { Component } from "react"
 
-import DownIcon from "../../Atoms/Icons/Down.component"
-import UpIcon from "../../Atoms/Icons/Up.component"
-
 /**
  * Component that renders a list item.
  */

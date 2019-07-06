@@ -21,6 +21,15 @@
   padding: 0 0.5rem 3rem;
 }
 
+.down-icon {
+  cursor: pointer;
+  fill: #fff;
+  height: 30px;
+  float: right;
+  margin-top: 0.75rem;
+  width: 30px;
+}
+
 .sidebar a {
   color: #fff;
 }
