@@ -2,7 +2,6 @@ import PropTypes from "prop-types"
 import React, { Component } from "react"
 import "./site.css"
 
-import Header from "../Organisms/Header/Header.component"
 import Main from "../Organisms/Main/Main.component"
 import MainMenu from "../Molecules/Menus/MainMenu.component"
 import ListItem from "../Atoms/ListItem/ListItem.component"

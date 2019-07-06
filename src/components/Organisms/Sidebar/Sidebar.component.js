@@ -2,7 +2,7 @@ import PropTypes from "prop-types"
 import React, { Component } from "react"
 import "./sidebar.css"
 
-import GridIcon from "../../Atoms/Icons/Grid.component"
+import DownIcon from "../../Atoms/Icons/Down.component"
 import MainMenu from "../../Molecules/Menus/MainMenu.component"
 
 const Link = process.env.STORYBOOK_ENV
@@ -42,7 +42,7 @@ export default class Main extends Component {
             <Link to="/">
               {siteTitle}
             </Link>
-            <GridIcon
+            <DownIcon
               onClick={this.open}
               aria-label="Close Overlay"
             />

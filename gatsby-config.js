@@ -41,6 +41,7 @@ module.exports = {
         sourceUrlPath: `fields.url`,
       },
     },
+    'gatsby-plugin-svg-sprite',
     `gatsby-transformer-remark`,
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
