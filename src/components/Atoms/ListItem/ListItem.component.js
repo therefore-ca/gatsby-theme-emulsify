@@ -43,8 +43,8 @@ export default class ListItem extends Component {
     // }
 
     return (
-      <li key={key}>
-        <a href={itemLink}>{listItemContent.title}</a>
+      <li className="menu-item" key={key}>
+        <a className="menu-link" href={itemLink}>{listItemContent.title}</a>
       </li>
     );
   }

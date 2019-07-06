@@ -126,9 +126,9 @@ class MainMenu extends Component {
       const menuItem = directoryTree.children[i];
       childElement = (
         <div>
-          <li>{menuItem.parent}</li>
+          <li className="menu-item">{menuItem.parent}</li>
           <ul>
-            <li>{menuItem.child}</li>
+            <li className="menu-item">{menuItem.child}</li>
             <ul>
             <ListItem
               filter={filter}
