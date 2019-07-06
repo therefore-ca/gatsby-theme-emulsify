@@ -1,17 +1,29 @@
 import React, { Component } from "react"
 import "./main.css"
 
-import MainMenu from "../../Molecules/Menus/MainMenu.component"
+import Sidebar from "../Sidebar/Sidebar.component"
 
 /**
  * Component that renders the main area.
  */
 export default class Main extends Component {
+  state = { isMenuOpen: false };
+
+  toggleOpen = () => {
+    this.setState(prevState => ({
+      isMenuOpen: !prevState.isMenuOpen
+    }));
+  };
+  
   render() {
-    const { title, html, pages } = this.props;
+    const { title, siteTitle, html, pages } = this.props;
     return (
       <div className="main">
-        <MainMenu listItems={pages} filter="pages" />
+        <Sidebar
+          pages={pages}
+          siteTitle={siteTitle}
+          toggleOpen={this.toggleOpen.bind(this)} 
+        />
         <div className="main-content">
           <h1 className="main-title">
           {title}

@@ -44,6 +44,8 @@ class MainMenu extends Component {
     //   }
     // })
 
+    // ANOTHER IDEA: push the information below to the menuItems object?
+
     directoryTree.children = [];
 
     menuItems.forEach(item => {
@@ -119,7 +121,7 @@ class MainMenu extends Component {
     // ))
 
     let childElement;
-    console.log(directoryTree.children.length)
+    // console.log(directoryTree.children.length)
     for (let i = 0; i < directoryTree.children.length; i++) {
       const menuItem = directoryTree.children[i];
       childElement = (

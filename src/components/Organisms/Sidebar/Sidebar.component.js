@@ -1,0 +1,56 @@
+import PropTypes from "prop-types"
+import React, { Component } from "react"
+import "./sidebar.css"
+
+import GridIcon from "../../Atoms/Icons/Grid.component"
+import MainMenu from "../../Molecules/Menus/MainMenu.component"
+
+const Link = process.env.STORYBOOK_ENV
+  ? ({ children }) => children
+  : require('gatsby').Link
+
+/**
+ * Component that renders the main area.
+ */
+export default class Main extends Component {
+  static propTypes = {
+    siteTitle: PropTypes.string,
+  };
+  
+  static defaultProps = {
+    siteTitle: ``,
+  };
+
+  state = { isMenuOpen: false };
+
+  toggleOpen = () => {
+    this.setState(prevState => ({
+      isMenuOpen: !prevState.isMenuOpen
+    }));
+  };
+
+  open = () => {
+    this.props.toggleOpen();
+  }
+
+  render() {
+    const { pages, siteTitle } = this.props;
+    return (
+      <div className="sidebar">
+        <h1>
+          <Link to="/">
+            {siteTitle}
+          </Link>
+          <GridIcon
+            onClick={this.open}
+            aria-label="Close Overlay"
+          />
+        </h1>
+        <MainMenu listItems={pages} filter="pages" />
+        <footer>
+          © {new Date().getFullYear()}
+        </footer>
+      </div>
+    )
+  }
+}

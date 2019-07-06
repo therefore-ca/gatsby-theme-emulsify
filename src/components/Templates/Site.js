@@ -39,15 +39,14 @@ export default class Site extends Component {
           </MainMenu>
         </div>
         <div>
-          <Header
-            toggleOpen={this.toggleOpen.bind(this)}
-            siteTitle={title}
-          />
           <div>
-            <Main {...frontmatter} html={html} pages={edges} />
-            <footer>
-              © {new Date().getFullYear()}
-            </footer>
+            <Main
+              {...frontmatter}
+              html={html}
+              pages={edges}
+              siteTitle={title}
+              toggleOpen={this.toggleOpen.bind(this)}
+            />
           </div>
         </div>
       </div>

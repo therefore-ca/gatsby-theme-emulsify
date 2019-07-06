@@ -623,8 +623,3 @@ pre tt:after {
     font-size: 100%;
   }
 }
-
-footer {
-  border-top: 1px solid;
-  padding: 1rem;
-}
