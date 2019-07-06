@@ -1,17 +1,24 @@
 .sidebar {
+  background-color: #1a96ca;
+  color: #fff;
+  flex: 0 1 33%;
+  position: relative;
+}
+
+.sidebar__inner {
   display: flex;
-  flex: 0 1 35%;
   flex-direction: column;
   height: 100vh;
-  padding: 1rem;
+  padding: 2rem;
   position: sticky;
+  top:0;
 }
 
 .sidebar h1 {
   font-size: 2.75rem;
   margin: 3rem 0 3rem;
   border-bottom: 1px solid;
-  padding-bottom: 3rem;
+  padding: 0 0.5rem 3rem;
 }
 
 .sidebar a {
@@ -20,6 +27,5 @@
 
 footer {
   display: block;
-  padding: 1rem;
   margin-top: auto;
 }

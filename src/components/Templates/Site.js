@@ -38,17 +38,13 @@ export default class Site extends Component {
             />
           </MainMenu>
         </div>
-        <div>
-          <div>
-            <Main
-              {...frontmatter}
-              html={html}
-              pages={edges}
-              siteTitle={title}
-              toggleOpen={this.toggleOpen.bind(this)}
-            />
-          </div>
-        </div>
+        <Main
+          {...frontmatter}
+          html={html}
+          pages={edges}
+          siteTitle={title}
+          toggleOpen={this.toggleOpen.bind(this)}
+        />
       </div>
     );
   }

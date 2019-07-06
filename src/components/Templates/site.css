@@ -1,6 +1,4 @@
 .wrapper {
-  background-color: #1a96ca;
-  color: #fff;
   transition: transform .11s cubic-bezier(.2,0,1,.9),-webkit-transform .11s cubic-bezier(.2,0,1,.9);
   will-change: transform;
 }

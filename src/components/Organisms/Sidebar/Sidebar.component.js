@@ -37,19 +37,21 @@ export default class Main extends Component {
     const { pages, siteTitle } = this.props;
     return (
       <div className="sidebar">
-        <h1>
-          <Link to="/">
-            {siteTitle}
-          </Link>
-          <GridIcon
-            onClick={this.open}
-            aria-label="Close Overlay"
-          />
-        </h1>
-        <MainMenu listItems={pages} filter="pages" />
-        <footer>
-          © {new Date().getFullYear()}
-        </footer>
+        <div className="sidebar__inner">
+          <h1>
+            <Link to="/">
+              {siteTitle}
+            </Link>
+            <GridIcon
+              onClick={this.open}
+              aria-label="Close Overlay"
+            />
+          </h1>
+          <MainMenu listItems={pages} filter="pages" />
+          <footer>
+            © {new Date().getFullYear()}
+          </footer>
+        </div>
       </div>
     )
   }

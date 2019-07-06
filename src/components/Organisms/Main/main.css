@@ -9,12 +9,12 @@
 .main-content-content {
   background-color: #fff;
   color: #3b3f40;
-  height: 100vh;
   padding: 3rem;
 }
 
 .main-title {
   background-color: rgba(0, 100, 162, 0.67);
+  color: #fff;
   margin-bottom: 0;
   padding: 9rem 6rem;
 }
