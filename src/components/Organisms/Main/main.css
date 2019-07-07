@@ -4,12 +4,15 @@
 }
 
 .main-content {
+  display: flex;
+  flex-direction: column;
   width: 80%;
 }
 
 .main-content-content {
   background-color: #fff;
   color: #3b3f40;
+  flex: 1;
   padding: 3rem 6rem;
 }
 
@@ -21,6 +24,36 @@
   padding: 15rem 6rem 2rem;
 }
 
+/* Tabs */
+.tabs {
+  background-color: #3b3f40;
+  padding: 1rem 6rem 0;
+}
+
+.tabs li {
+  display: inline-block;
+  margin: 0;
+}
+
+.tabs a {
+  color: #fff;
+  display: block;
+  font-weight: bold;
+  margin-right: 0.5rem;
+  padding: 0.5rem 1rem;
+}
+
+.tabs a.active {
+  background-color: #fff;
+  color: #3b3f40;
+}
+
+.tabs ul {
+  list-style: none;
+  margin: 0;
+}
+
+/* Main Content */
 .main-content-content h1 {
   color: #085a7d;
   font-size: 1.8rem;

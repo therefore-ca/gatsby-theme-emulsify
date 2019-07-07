@@ -12,9 +12,9 @@ import Site from "./Site.js"
 
 export default class ComponentLayout extends Component {
   render() {
-    const { frontmatter, html, title, edges } = this.props
+    const { frontmatter, html, title, edges, siteMetadata, fields, id } = this.props
     return (
-      <Site frontmatter={frontmatter} html={html} title={title} edges={edges} />
+      <Site fields={fields} frontmatter={frontmatter} html={html} title={title} edges={edges} designSystems={siteMetadata.designSystems} id={id} />
     );
   }
 }

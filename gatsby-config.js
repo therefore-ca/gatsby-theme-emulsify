@@ -6,6 +6,16 @@ module.exports = {
     author: 'Four Kitchens',
     description: 'A Design System Driven by Gatsby',
     // siteUrl: '',
+    designSystems: [
+      {
+        name: 'Emulsify',
+        link:'/',
+      },
+      {
+        name: 'Four Kitchens',
+        link: 'http://fourkitchens.com',
+      },
+    ],
   },
   plugins: [
     `gatsby-plugin-react-helmet`,

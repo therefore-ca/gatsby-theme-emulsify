@@ -3,8 +3,6 @@ import React, { Component } from "react"
 import "./site.css"
 
 import Main from "../Organisms/Main/Main.component"
-import MainMenu from "../Molecules/Menus/MainMenu.component"
-import ListItem from "../Atoms/ListItem/ListItem.component"
 
 export default class Site extends Component {
   static propTypes = {
@@ -20,25 +18,24 @@ export default class Site extends Component {
   };
 
   render() {
-    const { frontmatter, title, html, edges } = this.props;
+    const { frontmatter, title, html, edges, designSystems, fields, id } = this.props;
     return (
       <div
         className={this.state.isMenuOpen ? 'wrapper-open wrapper' : 'wrapper'}
       >
-        <div className="parent-menu">
-          <MainMenu large>
-            <ListItem
-              itemName="Site 1"
-              itemLink="#"
-            />
-            <ListItem
-              itemName="Site 2"
-              itemLink="#"
-            />
-          </MainMenu>
-        </div>
+        <nav className="parent-menu">
+          <ul>
+            {designSystems.map(link => (
+              <li key={link.name}>
+                <a href={link.link}>{link.name}</a>
+                </li>
+            ))}
+          </ul>
+        </nav>
         <Main
+          {...fields}
           {...frontmatter}
+          id={id}
           html={html}
           pages={edges}
           siteTitle={title}

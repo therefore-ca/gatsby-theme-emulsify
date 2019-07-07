@@ -24,6 +24,11 @@ exports.createPages = ({ actions, graphql }) => {
           }
         }
       }
+      markdownRemark {
+        fields {
+          parentDir
+        }
+      }
     }
   `).then(result => {
     if (result.errors) {
@@ -55,6 +60,7 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
   if (node.internal.type === `MarkdownRemark`) {
     let value = createFilePath({ node, getNode }).toLowerCase()
     value = value.replace(/\s+/g, '-').toLowerCase()
+    console.log(value);
     createNodeField({
       name: `slug`,
       node,

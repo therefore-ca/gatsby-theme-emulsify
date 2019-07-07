@@ -31,7 +31,10 @@ export const pageQuery = graphql`
     site {
       siteMetadata {
         title
-        author
+        designSystems {
+          name
+          link
+        }
       }
     }
     markdownRemark(fields: { slug: { eq: $slug } }) {
@@ -41,6 +44,10 @@ export const pageQuery = graphql`
       frontmatter {
         title
         description
+        tab
+      }
+      fields {
+        parentDir
       }
     }
     allMarkdownRemark {
@@ -54,6 +61,7 @@ export const pageQuery = graphql`
           }
           frontmatter {
             title
+            tab
           }
         }
       }

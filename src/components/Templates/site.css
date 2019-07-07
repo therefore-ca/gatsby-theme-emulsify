@@ -16,11 +16,13 @@ body {
   color: #fff;
   height: 100%;
   left: -16rem;
-  overflow-y: auto;
-  overflow-x: hidden;
   position: fixed;
   top: 0;
   width: 16rem;
+}
+
+.parent-menu ul {
+  position: sticky;
 }
 
 .parent-menu .main-menu {
