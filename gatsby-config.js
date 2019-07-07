@@ -1,6 +1,7 @@
 const path = require("path")
 
 module.exports = {
+  pathPrefix: "/gatsby-theme-emulsify",
   siteMetadata: {
     title: 'Emulsify',
     author: 'Four Kitchens',

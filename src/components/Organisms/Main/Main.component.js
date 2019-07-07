@@ -14,7 +14,7 @@ export default class Main extends Component {
     let tabs = [];
     pages.forEach(page => {
       if (page.node.fields) {
-        if (page.node.fields.parentDir === parentDir) {
+        if (page.node.fields.parentDir === parentDir && page.node.frontmatter.tab) {
           tabs.push(page);
         }
       }
