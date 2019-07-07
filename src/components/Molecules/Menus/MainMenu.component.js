@@ -3,6 +3,8 @@ import React, { Component } from "react"
 import { graphql, StaticQuery } from 'gatsby'
 import "./main-menu.css"
 
+import DownIcon from "../../../../assets/down.svg"
+import UpIcon from "../../../../assets/up.svg"
 import ListItem from "../../Atoms/ListItem/ListItem.component"
 
 /**
@@ -21,30 +23,19 @@ class MainMenu extends Component {
     filter: null
   };
 
+  state = { toggled: false };
+
+  toggle = () => {
+    this.setState(prevState => ({
+      toggled: !prevState.toggled
+    }));
+  };
+
   render() {
     const { large, filter, data } = this.props;
     let menuItems = data.allFile.nodes
 
     const directoryTree = {};
-
-    // directories.forEach(dir => {
-    //   if (dir.name !== 'pages') {
-    //     if (dir.relativeDirectory) {
-    //       directoryTree.children = [];
-    //       directoryTree.children.push(
-    //         {
-    //           parent: dir.relativeDirectory,
-    //           item: dir.name
-    //         }
-    //       );
-    //     }
-    //     else {
-    //       directoryTree.item = dir.name;
-    //     }
-    //   }
-    // })
-
-    // ANOTHER IDEA: push the information below to the menuItems object?
 
     directoryTree.children = [];
 
@@ -72,53 +63,6 @@ class MainMenu extends Component {
         }
       }
     })
-    
-
-    // const directories = [];
-    // menuItems.forEach(item => {
-    //   let directory = item.relativeDirectory;
-    //   // Make sure it has a parent directory.
-    //   if (directory !== '') {
-    //     // Create directory array.
-    //     const directoryArray = directory.split('/');
-    //     const menuItem = directoryArray.map(tree =>
-          
-    //     )
-    //     directoryArray.forEach(item => {
-    //       if (!directories.includes(item)) {
-    //         directories.push(item);
-    //       }
-    //     });
-    //   }
-    // });
-    // const directory = directoryTree.map(dir => {
-    //   if (dir.children) {
-    //     return (
-    //       <div>
-    //       <li>{dir.children[0].parent}</li>
-    //       <ul key={dir.children[0].parent}>
-    //         <li>{dir.item}</li>
-    //       </ul>
-    //       </div>
-    //     )
-    //   }
-    //   else {
-    //     return (
-    //       <li>{dir.item}</li>
-    //     )
-    //   }
-    // });
-
-    // const items = menuItems.map(item => (
-    //   <ListItem
-    //     filter={filter}
-    //     item={item}
-    //     key={item.id}
-    //     itemName={item.name}
-    //     itemLink={item}
-    //     icon
-    //   />
-    // ))
 
     let childElement;
     // console.log(directoryTree.children.length)
@@ -126,8 +70,20 @@ class MainMenu extends Component {
       const menuItem = directoryTree.children[i];
       childElement = (
         <div>
-          <li className="menu-item">{menuItem.parent}</li>
-          <ul>
+          <li className="menu-item">
+            {menuItem.parent}
+            <DownIcon
+              className={`${this.state.toggled ? 'menu__icon--hidden menu__icon' : 'menu__icon'}`}
+              aria-label="Toggle Open"
+              onClick={this.toggle}
+            />
+            <UpIcon
+              className={`${this.state.toggled ? 'menu__icon menu__icon--shown' : 'menu__icon menu__icon--hidden'}`}
+              aria-label="Toggle Closed"
+              onClick={this.toggle}
+            />
+          </li>
+          <ul className={`menu-child ${this.state.toggled ? 'menu-child--open' : ''}`}>
             <li className="menu-item">{menuItem.child}</li>
             <ul>
             <ListItem
@@ -171,6 +127,20 @@ export default () => (
                 id
                 frontmatter {
                   title
+                }
+              }
+            }
+          }
+        }
+        allMarkdownRemark(filter: {fields: {collection: {eq: "pages"}}, frontmatter: {title: {ne: "Home"}}}) {
+          group(field: fields___parentDir) {
+            edges {
+              node {
+                frontmatter {
+                  title
+                }
+                fields {
+                  parentDir
                 }
               }
             }

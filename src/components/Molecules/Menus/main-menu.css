@@ -18,6 +18,19 @@
   padding: 2rem;
 }
 
+.menu__icon {
+  fill: #fff;
+  float: right;
+}
+
+.menu__icon--hidden {
+  display: none;
+}
+
+.menu__icon--shown {
+  display: block;
+}
+
 .menu-child {
   display: none;
 }

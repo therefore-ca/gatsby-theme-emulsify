@@ -10,7 +10,7 @@ export default class Main extends Component {
   render() {
     const { title, siteTitle, html, pages } = this.props;
     return (
-      <div className={this.state.isMenuOpen ? 'main-open main' : 'main'}>
+      <div className="main">
         <Sidebar
           pages={pages}
           siteTitle={siteTitle}

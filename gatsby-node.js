@@ -39,6 +39,8 @@ exports.createPages = ({ actions, graphql }) => {
         component: ComponentPost,
         context: {
           slug: post.node.fields.slug,
+          collection: post.node.fields.collection,
+          parentDir: post.node.fields.parentDir
         },
       })
     })
