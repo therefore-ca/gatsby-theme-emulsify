@@ -6,7 +6,7 @@
 
   ```sh
   # Install dependencies
-  yarn
+  npm install
   ```
 
 ## 🔧 Develop
