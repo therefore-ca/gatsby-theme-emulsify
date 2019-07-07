@@ -21,14 +21,6 @@ export default class Main extends Component {
     siteTitle: ``,
   };
 
-  state = { isMenuOpen: false };
-
-  toggleOpen = () => {
-    this.setState(prevState => ({
-      isMenuOpen: !prevState.isMenuOpen
-    }));
-  };
-
   open = () => {
     this.props.toggleOpen();
   }
@@ -50,7 +42,7 @@ export default class Main extends Component {
           </h1>
           <MainMenu listItems={pages} filter="pages" />
           <footer>
-            Design System Powered by <a href="http://emulsify.info" target="_blank">Emulsify</a>
+            Design System Powered by <a href="http://emulsify.info" target="_blank" rel="noopener noreferrer">Emulsify</a>
           </footer>
         </div>
       </div>

@@ -45,6 +45,7 @@ export default class ListItem extends Component {
     return (
       <li className="menu-item" key={key}>
         <a className="menu-link" href={itemLink}>{listItemContent.title}</a>
+        {children}
       </li>
     );
   }

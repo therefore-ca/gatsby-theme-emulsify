@@ -7,22 +7,14 @@ import Sidebar from "../Sidebar/Sidebar.component"
  * Component that renders the main area.
  */
 export default class Main extends Component {
-  state = { isMenuOpen: false };
-
-  toggleOpen = () => {
-    this.setState(prevState => ({
-      isMenuOpen: !prevState.isMenuOpen
-    }));
-  };
-  
   render() {
     const { title, siteTitle, html, pages } = this.props;
     return (
-      <div className="main">
+      <div className={this.state.isMenuOpen ? 'main-open main' : 'main'}>
         <Sidebar
           pages={pages}
           siteTitle={siteTitle}
-          toggleOpen={this.toggleOpen.bind(this)} 
+          toggleOpen={this.props.toggleOpen} 
         />
         <div className="main-content">
           <h1 className="main-title">
