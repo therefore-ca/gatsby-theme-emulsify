@@ -15,3 +15,8 @@
   ```sh
   gatsby develop
   ```
+
+## Publish to Github Pages
+  ```sh
+  npm run deploy
+  ```
