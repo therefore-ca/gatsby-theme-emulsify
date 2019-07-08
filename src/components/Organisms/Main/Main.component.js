@@ -10,7 +10,7 @@ import Sidebar from "../Sidebar/Sidebar.component"
 export default class Main extends Component {
   
   render() {
-    const { title, siteTitle, html, pages, parentDir, id } = this.props;
+    const { title, siteTitle, html, pages, parentDir, id, menu } = this.props;
     let tabs = [];
     pages.forEach(page => {
       if (page.node.fields) {
@@ -42,9 +42,11 @@ export default class Main extends Component {
     return (
       <div className="main">
         <Sidebar
+          id={id}
           pages={pages}
           siteTitle={siteTitle}
-          toggleOpen={this.props.toggleOpen} 
+          toggleOpen={this.props.toggleOpen}
+          menu={menu}
         />
         <div className="main-content">
           <h1 className="main-title">{title}</h1>
