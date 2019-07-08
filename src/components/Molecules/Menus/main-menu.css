@@ -6,10 +6,7 @@
 
 .main-menu li {
   list-style: none;
-}
-
-.main-menu li:hover {
-  color: #ddd;
+  transition: all .15s;
 }
 
 .menu-item {
@@ -80,6 +77,11 @@
 
 .menu-link {
   font-weight: bold;
+}
+
+.menu-link:hover {
+  opacity: .75;
+  text-decoration: none;
 }
 
 .menu-child--open {
