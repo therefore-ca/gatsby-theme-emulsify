@@ -34,10 +34,17 @@
 
 .menu-child {
   display: none;
+  margin: 0 0 0 1rem;
+}
+
+.menu-child .menu-item {
+  border: none;
+  font-size: .888888889rem;
+  margin-bottom: 0;
+  padding-bottom: 0;
 }
 
 .menu-link {
-  font-size: 1rem;
   font-weight: bold;
 }
 

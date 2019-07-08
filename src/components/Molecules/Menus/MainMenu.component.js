@@ -1,11 +1,11 @@
-import PropTypes from "prop-types"
-import React, { Component } from "react"
-import { graphql, StaticQuery } from 'gatsby'
-import "./main-menu.css"
+import PropTypes from "prop-types";
+import React, { Component } from "react";
+import { graphql, StaticQuery } from "gatsby";
+import "./main-menu.css";
 
-import DownIcon from "../../../../assets/down.svg"
-import UpIcon from "../../../../assets/up.svg"
-import ListItem from "../../Atoms/ListItem/ListItem.component"
+import DownIcon from "../../../../assets/down.svg";
+import UpIcon from "../../../../assets/up.svg";
+import ListItem from "../../Atoms/ListItem/ListItem.component";
 
 /**
  * Component that renders the main menu.
@@ -14,9 +14,9 @@ class MainMenu extends Component {
   static propTypes = {
     large: PropTypes.bool,
     listItems: PropTypes.arrayOf(PropTypes.object),
-    filter: PropTypes.string,
+    filter: PropTypes.string
   };
-  
+
   static defaultProps = {
     large: null,
     listItems: [],
@@ -33,36 +33,31 @@ class MainMenu extends Component {
 
   render() {
     const { large, filter, data } = this.props;
-    let menuItems = data.allFile.nodes
+    let menuItems = data.allFile.nodes;
 
     const directoryTree = {};
 
     directoryTree.children = [];
 
     menuItems.forEach(item => {
-      if (item.name !== 'index') {
-        const itemDir = item.relativeDirectory.split('/');
-        if (itemDir !== '') {
+      if (item.name !== "index") {
+        const itemDir = item.relativeDirectory.split("/");
+        if (itemDir !== "") {
           if (itemDir.length === 2) {
-            directoryTree.children.push(
-              {
-                parent: itemDir[0],
-                child: itemDir[1],
-                item: item
-              }
-            );
-          }
-          else {
-            directoryTree.children.push(
-              {
-                child: itemDir[0],
-                item: item
-              }
-            )
+            directoryTree.children.push({
+              parent: itemDir[0],
+              child: itemDir[1],
+              item: item
+            });
+          } else {
+            directoryTree.children.push({
+              child: itemDir[0],
+              item: item
+            });
           }
         }
       }
-    })
+    });
 
     let childElement;
     // console.log(directoryTree.children.length)
@@ -73,38 +68,54 @@ class MainMenu extends Component {
           <li className="menu-item">
             {menuItem.parent}
             <DownIcon
-              className={`${this.state.toggled ? 'menu__icon--hidden menu__icon' : 'menu__icon'}`}
+              className={`${
+                this.state.toggled
+                  ? "menu__icon--hidden menu__icon"
+                  : "menu__icon"
+              }`}
               aria-label="Toggle Open"
               onClick={this.toggle}
             />
             <UpIcon
-              className={`${this.state.toggled ? 'menu__icon menu__icon--shown' : 'menu__icon menu__icon--hidden'}`}
+              className={`${
+                this.state.toggled
+                  ? "menu__icon menu__icon--shown"
+                  : "menu__icon menu__icon--hidden"
+              }`}
               aria-label="Toggle Closed"
               onClick={this.toggle}
             />
           </li>
-          <ul className={`menu-child ${this.state.toggled ? 'menu-child--open' : ''}`}>
+          <ul
+            className={`menu-child ${
+              this.state.toggled ? "menu-child--open" : ""
+            }`}
+          >
             <li className="menu-item">{menuItem.child}</li>
-            <ul>
-            <ListItem
-              filter={filter}
-              item={menuItem.item}
-              key={menuItem.item.id}
-              itemName={menuItem.item.name}
-              itemLink={menuItem.item}
-              icon
-            />
+            <ul
+              className={`menu-child ${
+                this.state.toggled ? "menu-child--open" : ""
+              }`}
+            >
+              <ListItem
+                filter={filter}
+                item={menuItem.item}
+                key={menuItem.item.id}
+                itemName={menuItem.item.name}
+                itemLink={menuItem.item}
+                icon
+              />
             </ul>
           </ul>
         </div>
-      )
+      );
     }
 
     return (
-      <ul className={`main-menu ${large ? 'main-menu--large' : ''}`}>
+      <ul className={`main-menu ${large ? "main-menu--large" : ""}`}>
         {childElement}
       </ul>
-    )
+    );
   }
 }
 
@@ -112,7 +123,7 @@ export default () => (
   <StaticQuery
     query={graphql`
       query {
-        allDirectory(filter: {sourceInstanceName: {eq: "pages"}}) {
+        allDirectory(filter: { sourceInstanceName: { eq: "pages" } }) {
           nodes {
             name
             relativeDirectory
@@ -132,7 +143,12 @@ export default () => (
             }
           }
         }
-        allMarkdownRemark(filter: {fields: {collection: {eq: "pages"}}, frontmatter: {title: {ne: "Home"}}}) {
+        allMarkdownRemark(
+          filter: {
+            fields: { collection: { eq: "pages" } }
+            frontmatter: { title: { ne: "Home" } }
+          }
+        ) {
           group(field: fields___parentDir) {
             edges {
               node {
@@ -148,8 +164,6 @@ export default () => (
         }
       }
     `}
-    render={(data) => (
-      <MainMenu data={data} />
-    )}
+    render={data => <MainMenu data={data} />}
   />
-)
+);
