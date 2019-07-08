@@ -9,12 +9,14 @@ export default class Layout extends Component {
     const post = this.props.data.markdownRemark
     const site = this.props.data.site
     const allPages = this.props.data.allMarkdownRemark
+    const allFile = this.props.data.allFile
     return (
       <ComponentLayout
         title={site.siteMetadata.title}
         {...site}
         {...post}
         {...allPages}
+        {...allFile}
       >
         <SEO
           title={post.frontmatter.title}
@@ -62,6 +64,21 @@ export const pageQuery = graphql`
           frontmatter {
             title
             tab
+          }
+        }
+      }
+    }
+    allFile(filter: { sourceInstanceName: { eq: "pages" } }) {
+      nodes {
+        relativeDirectory
+        name
+        childMarkdownRemark {
+          id
+          frontmatter {
+            title
+          }
+          fields {
+            slug
           }
         }
       }
