@@ -6,10 +6,7 @@
 
 .main-menu li {
   list-style: none;
-}
-
-.main-menu li:hover {
-  color: #ddd;
+  transition: all .15s;
 }
 
 .menu-item {
@@ -21,6 +18,13 @@
   list-style: none;
   padding-bottom: 0.25rem;
   margin-bottom: 0.25rem;
+}
+
+.menu-item--child {
+  border: none;
+  font-size: .888888889rem;
+  margin-bottom: 0;
+  padding-bottom: 0;
 }
 
 .menu-item--child--active::before {
@@ -64,7 +68,7 @@
 
 .menu-child {
   display: none;
-  margin-top: 0;
+  margin: 0 0 0 1rem;
 }
 
 .menu-item--open .menu-child {
@@ -72,8 +76,12 @@
 }
 
 .menu-link {
-  font-size: 1rem;
   font-weight: bold;
+}
+
+.menu-link:hover {
+  opacity: .75;
+  text-decoration: none;
 }
 
 .menu-child--open {

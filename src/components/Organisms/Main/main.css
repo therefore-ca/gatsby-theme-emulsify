@@ -19,7 +19,7 @@
 .main-title {
   background-color: rgba(1, 80, 136, 0.63);
   color: #fff;
-  font-size: 3rem;
+  font-size: 2.666666667rem;
   margin-bottom: 0;
   padding: 15rem 6rem 2rem;
 }
@@ -37,10 +37,17 @@
 
 .tabs a {
   color: #fff;
+  border-radius: 2px 2px 0 0;
   display: block;
   font-weight: bold;
   margin-right: 0.5rem;
   padding: 0.5rem 1rem;
+  transition: all .15s;
+}
+
+.tabs a:hover {
+  background-color:#343738;
+  text-decoration: none;
 }
 
 .tabs a.active {
@@ -56,5 +63,5 @@
 /* Main Content */
 .main-content-content h1 {
   color: #085a7d;
-  font-size: 1.8rem;
+  font-size: 1.666666667rem;
 }

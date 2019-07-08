@@ -16,7 +16,7 @@ export default class Main extends Component {
   static propTypes = {
     siteTitle: PropTypes.string,
   };
-  
+
   static defaultProps = {
     siteTitle: ``,
   };
@@ -42,7 +42,7 @@ export default class Main extends Component {
           </h1>
           <MainMenu menu={menu} id={id} />
           <footer>
-            Design System Powered by <a href="http://emulsify.info" target="_blank" rel="noopener noreferrer">Emulsify</a>
+            Design System Powered by <a href="http://emulsify.info" target="_blank" rel="noopener noreferrer"><strong>Emulsify</strong></a>
           </footer>
         </div>
       </div>
