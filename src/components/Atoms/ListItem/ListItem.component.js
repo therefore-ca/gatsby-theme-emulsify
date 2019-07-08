@@ -1,5 +1,6 @@
 import PropTypes from "prop-types"
 import React, { Component } from "react"
+import { Link } from "gatsby"
 
 /**
  * Component that renders a list item.
@@ -32,8 +33,8 @@ export default class ListItem extends Component {
   };
 
   render() {
-    const { item, itemLink, key, children } = this.props;
-    const listItemContent = item.children[0].frontmatter;
+    const { item, itemLink, key, children, active } = this.props;
+    const listItemContent = item.childMarkdownRemark.frontmatter;
 
     // const directories = [];
     // let directory = item.relativeDirectory;
@@ -43,8 +44,8 @@ export default class ListItem extends Component {
     // }
 
     return (
-      <li className="menu-item" key={key}>
-        <a className="menu-link" href={itemLink}>{listItemContent.title}</a>
+      <li className={'menu-item--child' + `${active === true ? ' menu-item--child--active' : ''}`} key={key}>
+        <Link className="menu-link" to={itemLink}>{listItemContent.title}</Link>
         {children}
       </li>
     );
