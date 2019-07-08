@@ -12,13 +12,11 @@ import ListItem from "../../Atoms/ListItem/ListItem.component"
  */
 class MainMenu extends Component {
   static propTypes = {
-    large: PropTypes.bool,
     listItems: PropTypes.arrayOf(PropTypes.object),
     filter: PropTypes.string,
   };
   
   static defaultProps = {
-    large: null,
     listItems: [],
     filter: null
   };
@@ -32,7 +30,7 @@ class MainMenu extends Component {
   };
 
   render() {
-    const { large, filter, data } = this.props;
+    const { filter, data } = this.props;
     let menuItems = data.allFile.nodes
 
     const directoryTree = {};
@@ -41,70 +39,65 @@ class MainMenu extends Component {
 
     menuItems.forEach(item => {
       if (item.name !== 'index') {
-        const itemDir = item.relativeDirectory.split('/');
+        const itemDir = item.relativeDirectory;
         if (itemDir !== '') {
-          if (itemDir.length === 2) {
-            directoryTree.children.push(
-              {
-                parent: itemDir[0],
-                child: itemDir[1],
-                item: item
-              }
-            );
-          }
-          else {
-            directoryTree.children.push(
-              {
-                child: itemDir[0],
-                item: item
-              }
-            )
-          }
+          directoryTree.children.push(
+            {
+              parent: itemDir,
+              item: item
+            }
+          )
         }
       }
     })
 
-    let childElement;
-    // console.log(directoryTree.children.length)
-    for (let i = 0; i < directoryTree.children.length; i++) {
-      const menuItem = directoryTree.children[i];
-      childElement = (
-        <div>
-          <li className="menu-item">
-            {menuItem.parent}
-            <DownIcon
-              className={`${this.state.toggled ? 'menu__icon--hidden menu__icon' : 'menu__icon'}`}
-              aria-label="Toggle Open"
-              onClick={this.toggle}
-            />
-            <UpIcon
-              className={`${this.state.toggled ? 'menu__icon menu__icon--shown' : 'menu__icon menu__icon--hidden'}`}
-              aria-label="Toggle Closed"
-              onClick={this.toggle}
-            />
-          </li>
-          <ul className={`menu-child ${this.state.toggled ? 'menu-child--open' : ''}`}>
-            <li className="menu-item">{menuItem.child}</li>
-            <ul>
-            <ListItem
-              filter={filter}
-              item={menuItem.item}
-              key={menuItem.item.id}
-              itemName={menuItem.item.name}
-              itemLink={menuItem.item}
-              icon
-            />
-            </ul>
-          </ul>
-        </div>
-      )
-    }
+    const state = this.state;
 
-    return (
-      <ul className={`main-menu ${large ? 'main-menu--large' : ''}`}>
-        {childElement}
-      </ul>
+    const Toggle = (
+      <div>
+        <DownIcon
+          className={`${state.toggled ? 'menu__icon--hidden menu__icon' : 'menu__icon'}`}
+          aria-label="Toggle Open"
+          onClick={this.toggle.bind(this)}
+        />
+        <UpIcon
+          className={`${state.toggled ? 'menu__icon menu__icon--shown' : 'menu__icon menu__icon--hidden'}`}
+          aria-label="Toggle Closed"
+          onClick={this.toggle.bind(this)}
+        />
+      </div>
+    );
+
+    const mainMenu = (
+      <nav className="main-nav">
+        <ul className="main-menu">
+          {
+            directoryTree.children.map(function (menuItem, state) {
+              return (
+                <div key={menuItem.item.id}>
+                  <span className="menu-item">
+                    {menuItem.parent}
+                    {Toggle}
+                  </span>
+                  <ul className={`menu-child ${state.toggled ? 'menu-child--open' : ''}`}>
+                    <ListItem
+                      filter={filter}
+                      item={menuItem.item}
+                      key={menuItem.item.id}
+                      itemName={menuItem.item.name}
+                      itemLink={menuItem.item.childMarkdownRemark.fields.slug}
+                      icon
+                    />
+                  </ul>
+                </div>
+                )
+              })
+            }
+        </ul>
+      </nav>
     )
+
+    return mainMenu
   }
 }
 
@@ -112,22 +105,17 @@ export default () => (
   <StaticQuery
     query={graphql`
       query {
-        allDirectory(filter: {sourceInstanceName: {eq: "pages"}}) {
-          nodes {
-            name
-            relativeDirectory
-          }
-        }
         allFile(filter: { sourceInstanceName: { eq: "pages" } }) {
           nodes {
             relativeDirectory
             name
-            children {
-              ... on MarkdownRemark {
-                id
-                frontmatter {
-                  title
-                }
+            childMarkdownRemark {
+              id
+              frontmatter {
+                title
+              }
+              fields {
+                slug
               }
             }
           }

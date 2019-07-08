@@ -33,7 +33,7 @@ export default class ListItem extends Component {
 
   render() {
     const { item, itemLink, key, children } = this.props;
-    const listItemContent = item.children[0].frontmatter;
+    const listItemContent = item.childMarkdownRemark.frontmatter;
 
     // const directories = [];
     // let directory = item.relativeDirectory;
