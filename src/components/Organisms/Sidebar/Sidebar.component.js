@@ -26,7 +26,7 @@ export default class Main extends Component {
   }
 
   render() {
-    const { siteTitle, menu, id } = this.props;
+    const { siteTitle, menu, id, collection } = this.props;
     return (
       <div className="sidebar">
         <div className="sidebar__inner">
@@ -42,7 +42,7 @@ export default class Main extends Component {
           </h1>
           <nav className="main-nav">
             <ul className="main-menu">
-              <MainMenu menu={menu} id={id} filter="pages" />
+              <MainMenu menu={menu} id={id} filter="pages" collection={collection} />
             </ul>
           </nav>
           <footer>

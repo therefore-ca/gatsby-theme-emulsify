@@ -50,6 +50,7 @@ export const pageQuery = graphql`
       }
       fields {
         parentDir
+        collection
       }
     }
     allMarkdownRemark {

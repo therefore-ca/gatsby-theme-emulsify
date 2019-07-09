@@ -4,6 +4,7 @@ import "./main-menu.css"
 import DownIcon from "../../../../assets/down.svg"
 import UpIcon from "../../../../assets/up.svg"
 import ListItem from "../../Atoms/ListItem/ListItem.component"
+import Menu from "./Menu.component"
 
 /**
  * Component that renders the main menu.
@@ -21,11 +22,10 @@ export default class MainMenu extends Component {
   };
 
   render() {
-    const { menu, id, filter } = this.props;
+    const { menu, id, filter, collection } = this.props;
     let menuItems = menu
 
     const directoryTree = {};
-
     directoryTree.children = [];
 
     menuItems.forEach((item) => {
@@ -48,15 +48,6 @@ export default class MainMenu extends Component {
       }
     })
 
-    // Components Only
-    if (filter === 'components') {
-      directoryTree.children.forEach((item, i, object) => {
-        if (!item.item.childMarkdownRemark.frontmatter.tab || item.item.childMarkdownRemark.frontmatter.tab !== 'Code') {
-          object.splice(i, 1);
-        }
-      })
-    }
-
     return (
       <div>
       {
@@ -65,7 +56,7 @@ export default class MainMenu extends Component {
             return (
               <li 
                 key={menuItem.item.childMarkdownRemark.id}
-                className={`menu-item${menuItem.active ? ' menu-item--open' : ''} ${this.state.activeIndex===i ? ' menu-item--open' : ''}`}
+                className={`menu-item${collection === 'components' ? ' menu-item--open' : ''} ${this.state.activeIndex===i ? ' menu-item--open' : ''}`}
                 onClick={this.toggle.bind(this, i)}
               >
                 <span>
@@ -79,9 +70,7 @@ export default class MainMenu extends Component {
                       aria-label="Toggle Closed"
                     />
                 </span>
-                <ul className="menu-child">
-                  <MainMenu menu={menu} id={id} filter="components" />
-                </ul>
+                <Menu menu={menu} filter="components" id={id} />
               </li>
             )
           }
