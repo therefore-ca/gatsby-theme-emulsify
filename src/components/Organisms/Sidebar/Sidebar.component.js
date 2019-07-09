@@ -26,7 +26,7 @@ export default class Main extends Component {
   }
 
   render() {
-    const { siteTitle, menu, id } = this.props;
+    const { siteTitle, menu, id, collection } = this.props;
     return (
       <div className="sidebar">
         <div className="sidebar__inner">
@@ -40,7 +40,11 @@ export default class Main extends Component {
               aria-label="Close Overlay"
             />
           </h1>
-          <MainMenu menu={menu} id={id} />
+          <nav className="main-nav">
+            <ul className="main-menu">
+              <MainMenu menu={menu} id={id} filter="pages" collection={collection} />
+            </ul>
+          </nav>
           <footer>
             Design System Powered by <a href="http://emulsify.info" target="_blank" rel="noopener noreferrer"><strong>Emulsify</strong></a>
           </footer>
