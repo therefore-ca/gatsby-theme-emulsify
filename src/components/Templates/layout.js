@@ -68,14 +68,16 @@ export const pageQuery = graphql`
         }
       }
     }
-    allFile(filter: { sourceInstanceName: { eq: "pages" } }) {
+    allFile {
       nodes {
+        sourceInstanceName
         relativeDirectory
         name
         childMarkdownRemark {
           id
           frontmatter {
             title
+            tab
           }
           fields {
             slug
