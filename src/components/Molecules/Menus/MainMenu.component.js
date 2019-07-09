@@ -12,7 +12,12 @@ export default class MainMenu extends Component {
   state = { activeIndex: null };
 
   toggle = (index) => {
-    this.setState({ activeIndex: index });
+    if (this.state.activeIndex !== index) {
+      this.setState({ activeIndex: index });
+    }
+    else {
+      this.setState({ activeIndex: null });
+    }
   };
 
   render() {
@@ -38,12 +43,6 @@ export default class MainMenu extends Component {
       }
     })
 
-    // directoryTree.children.forEach((item, i) => {
-    //   if (item.active === true) {
-    //     this.state = { activeIndex: i };
-    //   }
-    // })
-
     return (
       <nav className="main-nav">
         <ul className="main-menu">
@@ -52,7 +51,7 @@ export default class MainMenu extends Component {
               return (
                 <li 
                   key={menuItem.item.childMarkdownRemark.id}
-                  className={'menu-item' + `${menuItem.active ? ' menu-item--open' : ''}` + `${this.state.activeIndex===i ? ' menu-item--open' : ''}`}
+                  className={`menu-item${menuItem.active ? ' menu-item--open' : ''} ${this.state.activeIndex===i ? ' menu-item--open' : ''}`}
                   onClick={this.toggle.bind(this, i)}
                 >
                   <span>

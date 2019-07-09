@@ -71,7 +71,8 @@
   margin: 0 0 0 1rem;
 }
 
-.menu-item--open .menu-child {
+.menu-item--open .menu-child,
+.menu-item--active .menu-child {
   display: block;
 }
 

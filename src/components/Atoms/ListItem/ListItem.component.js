@@ -36,15 +36,8 @@ export default class ListItem extends Component {
     const { item, itemLink, key, children, active } = this.props;
     const listItemContent = item.childMarkdownRemark.frontmatter;
 
-    // const directories = [];
-    // let directory = item.relativeDirectory;
-    // directory = directory.split('/')
-    // if (!directories.includes(directory)) {
-    //   directories.push(directory);
-    // }
-
     return (
-      <li className={'menu-item--child' + `${active === true ? ' menu-item--child--active' : ''}`} key={key}>
+      <li className={`menu-item--child${active === true ? ' menu-item--child--active' : ''}`} key={key}>
         <Link className="menu-link" to={itemLink}>{listItemContent.title}</Link>
         {children}
       </li>
