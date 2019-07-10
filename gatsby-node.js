@@ -1,11 +1,10 @@
-const path = require("path")
 const _ = require("lodash")
 const { createFilePath } = require(`gatsby-source-filesystem`)
 
 exports.createPages = ({ actions, graphql }) => {
   const { createPage } = actions
 
-  const ComponentPost = path.resolve(`./src/components/Templates/layout.js`)
+  const ComponentPost = require.resolve(`./src/components/Templates/layout.js`)
 
   return graphql(`
     {
