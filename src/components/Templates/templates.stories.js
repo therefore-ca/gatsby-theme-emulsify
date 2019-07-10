@@ -12,7 +12,7 @@ const site = {
 /**
  * Add storybook definition for Sections.
  */
-storiesOf('Templates/Layout', module)
-  .add('Default', () => (
-    <Site site={site} />
-  ))
+// storiesOf('Templates/Layout', module)
+//   .add('Default', () => (
+//     <Site site={site} />
+//   ))

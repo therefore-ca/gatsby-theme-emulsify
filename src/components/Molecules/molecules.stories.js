@@ -66,15 +66,3 @@ storiesOf('Molecules/Menus', module)
       </ListItem>
     </MainMenu>
   ))
-  .add('Main Menu Large', () => (
-    <MainMenu large>
-      <ListItem
-        item="Site 1"
-        itemLink="#"
-      />
-      <ListItem
-        item="Site 2"
-        itemLink="#"
-      />
-    </MainMenu>
-  ));
