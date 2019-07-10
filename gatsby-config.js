@@ -1,6 +1,6 @@
 const path = require("path")
 
-module.exports = ({ componentLibPath = 'src/components', basePath = '/' }) => ({
+module.exports = ({ componentLibPath = 'src/components', docPagesPath = 'styleguide/pages', basePath = '/' }) => ({
   pathPrefix: "/gatsby-theme-emulsify",
   siteMetadata: {
     title: 'Emulsify',
@@ -43,7 +43,7 @@ module.exports = ({ componentLibPath = 'src/components', basePath = '/' }) => ({
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `pages`,
-        path: `${__dirname}/content/pages`,
+        path: path.join(basePath, docPagesPath),
       },
     },
     {
