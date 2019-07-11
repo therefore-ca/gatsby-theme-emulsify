@@ -1,5 +1,4 @@
 .main {
-  background: url("./waves.jpg");
   display: flex;
 }
 
@@ -17,7 +16,7 @@
 }
 
 .main-title {
-  background-color: rgba(1, 80, 136, 0.63);
+  background-color: #000;
   color: #fff;
   font-size: 2.666666667rem;
   margin-bottom: 0;
@@ -62,6 +61,6 @@
 
 /* Main Content */
 .main-content-content h1 {
-  color: #085a7d;
+  color: #545454;
   font-size: 1.666666667rem;
 }

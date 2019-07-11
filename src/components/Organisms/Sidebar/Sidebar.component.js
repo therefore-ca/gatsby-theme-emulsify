@@ -1,6 +1,7 @@
 import PropTypes from "prop-types"
 import React, { Component } from "react"
 import "./sidebar.css"
+import "./sidebar-design.css"
 
 import DownIcon from "../../../../assets/down.svg"
 import MainMenu from "../../Molecules/Menus/MainMenu.component"

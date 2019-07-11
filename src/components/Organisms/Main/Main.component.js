@@ -1,6 +1,7 @@
 import React, { Component } from "react"
 import { Link } from "gatsby"
 import "./main.css"
+import "./main-design.css"
 
 import Sidebar from "../Sidebar/Sidebar.component"
 

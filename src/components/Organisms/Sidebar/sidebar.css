@@ -1,12 +1,11 @@
 .sidebar {
-  background-color: rgba(26, 150, 202, 0.71);
+  background-color: #7d7d7d;
   color: #fff;
   flex: 0 1 33%;
   position: relative;
 }
 
 .sidebar__inner {
-  background-image: linear-gradient(to top, #1a96ca 26%, transparent);;
   display: flex;
   flex-direction: column;
   height: 100vh;
