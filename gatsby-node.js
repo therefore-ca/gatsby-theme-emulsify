@@ -30,8 +30,8 @@ function createAssetMap(mdFiles, twigFiles, dataFiles, cssFiles, jsFiles) {
       dirs[mdParentDir] = true;
       return [...acc, {
         // Organize assets that are in the same directory as the published md file
-        cssFiles: cssFiles.filter(relativeDirEq(mdParentDir)),
-        jsFiles: jsFiles.filter(relativeDirEq(mdParentDir)),
+        cssFile: cssFiles.find(relativeDirEq(mdParentDir)),
+        jsFile: jsFiles.find(relativeDirEq(mdParentDir)),
         twigFile: twigFiles.find(relativeDirEq(mdParentDir)),
         dataFile: dataFiles.find(relativeDirEq(mdParentDir)),
       }]
@@ -148,20 +148,26 @@ exports.createPages = ({
     })
 
     return Promise.all(assetMap.map((assets) => {
-      const comp = assets.twigFile;
-      const dataFile = assets.dataFile;
-      
-      if (comp) {
+      const {
+        twigFile,
+        dataFile,
+        jsFile,
+        cssFile
+      }  = assets;
+
+      if (twigFile) {
         return readFile(dataFile.absolutePath, 'utf8')
           .then((yml) => {
             const data = yaml.safeLoad(yml);
-            const name = comp.name.replace(/\s+/g, '-').toLowerCase()
+            const name = twigFile.name.replace(/\s+/g, '-').toLowerCase()
             return createPage({
               path: `${name}-isolated`,
               component: IsolatedTwigComponent,
               context: {
-                ...comp,
-                data
+                data,
+                ...twigFile,
+                jsFile,
+                cssFile
               }
             })
           })
@@ -206,15 +212,22 @@ exports.onCreateNode = ({
   }
 
   if (node.internal.type === 'SitePage' && node.context && node.context.extension === 'twig') {
-    const name = node.context.base.replace(/\s+/g, '-').toLowerCase();
-    // Render the twig component and add an componentHtml to the page
-    // @TODO replace data with respective data yml file
-    return renderTwig(node.context.absolutePath, node.context.data).then(html => {
-      // @TODO add fields for css/js files to be added to the page
+    return Promise.all([renderTwig(node.context.absolutePath, node.context.data), readFile(node.context.jsFile.absolutePath, 'utf8'), readFile(node.context.cssFile.absolutePath, 'utf8')]).then(([componentHtml, js, css]) => {
+      console.log(css)
       createNodeField({
         node,
         name: 'componentHtml',
-        value: html,
+        value: componentHtml,
+      })
+      createNodeField({
+        node,
+        name: 'jsCode',
+        value: js,
+      })
+      createNodeField({
+        node,
+        name: 'cssCode',
+        value: css,
       })
     })
   }
