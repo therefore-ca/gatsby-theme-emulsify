@@ -28,7 +28,7 @@
 }
 
 .menu-item--child--active::before {
-  border: 5px solid #8dcbe5;
+  border: 5px solid #eee;
   border-bottom-color: transparent;
   border-right-color: transparent;
   border-top-color: transparent;

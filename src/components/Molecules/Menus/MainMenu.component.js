@@ -1,5 +1,6 @@
 import React, { Component } from "react"
 import "./main-menu.css"
+import "./main-menu-design.css"
 
 import DownIcon from "../../../../assets/down.svg"
 import UpIcon from "../../../../assets/up.svg"
