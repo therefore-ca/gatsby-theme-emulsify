@@ -84,7 +84,7 @@ exports.createPages = ({
           extension
           relativePath
           relativeDirectory
-          // DO NOT REMOVE: ctime is needed to bust gatsby cache for live reloading.
+          # DO NOT REMOVE: ctime is needed to bust gatsby cache for live reloading.
           ctime
           absolutePath
           name
@@ -96,7 +96,7 @@ exports.createPages = ({
           extension
           relativePath
           relativeDirectory
-          // DO NOT REMOVE: ctime is needed to bust gatsby cache for live reloading.
+          # DO NOT REMOVE: ctime is needed to bust gatsby cache for live reloading.
           ctime
           absolutePath
           name
@@ -108,7 +108,7 @@ exports.createPages = ({
           extension
           relativePath
           relativeDirectory
-          // DO NOT REMOVE: ctime is needed to bust gatsby cache for live reloading.
+          # DO NOT REMOVE: ctime is needed to bust gatsby cache for live reloading.
           ctime
           absolutePath
           name
