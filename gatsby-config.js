@@ -3,18 +3,18 @@ const path = require("path")
 module.exports = {
   pathPrefix: "/gatsby-theme-emulsify",
   siteMetadata: {
-    title: 'Emulsify',
-    author: 'Four Kitchens',
+    title: 'Project Name',
+    author: 'Your Organization',
     description: 'A Design System Driven by Gatsby',
     // siteUrl: '',
     designSystems: [
       {
-        name: 'Emulsify',
+        name: 'System 1',
         link:'/',
       },
       {
-        name: 'Four Kitchens',
-        link: 'http://fourkitchens.com',
+        name: 'System 2',
+        link: '',
       },
     ],
   },
