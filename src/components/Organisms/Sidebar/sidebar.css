@@ -23,21 +23,21 @@
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-between;
+  align-items: center;
+  padding-bottom: var(--gutter-width);
   border-bottom: 1px solid rgba(255, 255, 255, 0.4);
 }
 
 .sidebar h1 {
   font-size: 2.75rem;
-  padding-bottom: 1rem;
   margin: 0;
 }
 
-.down-icon {
+.sidebar__toggle {
   cursor: pointer;
   fill: #fff;
   height: 30px;
   float: right;
-  margin-top: 0.75rem;
   width: 30px;
 }
 

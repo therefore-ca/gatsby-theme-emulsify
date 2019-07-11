@@ -38,7 +38,7 @@ export default class Main extends Component {
               </Link>
             </h1>
             <DownIcon
-              className="down-icon"
+              className="sidebar__toggle"
               onClick={this.open}
               aria-label="Toggle Overlay"
             />
