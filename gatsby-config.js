@@ -27,12 +27,6 @@ module.exports = ({ componentLibPath = 'src/components', docPagesPath = 'stylegu
       },
     },
     {
-      resolve: "gatsby-plugin-compile-es6-packages",
-      options: {
-        modules: ["gatsby-theme-emulsify"],
-      },
-    },
-    {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `components`,
@@ -54,8 +48,13 @@ module.exports = ({ componentLibPath = 'src/components', docPagesPath = 'stylegu
         }
       }
     },
+    {
+      resolve: `gatsby-plugin-mdx`,
+      options: {
+        extensions: [`.mdx`, `.md`]
+      }
+    },
     `gatsby-transformer-remark`,
-    `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
   ],
 })
