@@ -167,7 +167,8 @@ exports.createPages = ({
                 data,
                 ...twigFile,
                 jsFile,
-                cssFile
+                cssFile,
+                assetMap
               }
             })
           })
@@ -176,7 +177,7 @@ exports.createPages = ({
   })
 }
 
-exports.onCreateNode = ({
+exports.onCreateNode = async ({
   node,
   actions,
   getNode
@@ -212,7 +213,35 @@ exports.onCreateNode = ({
   }
 
   if (node.internal.type === 'SitePage' && node.context && node.context.extension === 'twig') {
-    return Promise.all([renderTwig(node.context.absolutePath, node.context.data), readFile(node.context.jsFile.absolutePath, 'utf8'), readFile(node.context.cssFile.absolutePath, 'utf8')]).then(([componentHtml, js, css]) => {
+    const fileReads = [];
+
+    if (node.context.absolutePath) {
+      fileReads.push(renderTwig(node.context.absolutePath, node.context.data));
+    }
+    if (node.context.jsFile) {
+      fileReads.push(readFile(node.context.jsFile.absolutePath, 'utf8'));
+    } else {
+      fileReads.push(Promise.resolve(''));
+    }
+
+    const cssFileReads = [];
+    node.context.assetMap.forEach(asset => {
+      if (asset.cssFile) {
+        cssFileReads.push(readFile(asset.cssFile.absolutePath, 'utf8'))
+      }
+    })
+
+    const cssFiles = await Promise.all(cssFileReads);
+
+    // lol
+    if (cssFiles.length) {
+      fileReads.push(cssFiles.join('\n'))
+    } else {
+      fileReads.push(Promise.resolve(''));
+    }
+
+
+    return Promise.all(fileReads).then(([componentHtml, js, css]) => {
       createNodeField({
         node,
         name: 'componentHtml',

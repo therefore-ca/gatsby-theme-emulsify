@@ -21,12 +21,22 @@ export default class IsolatedTwigComponent extends React.Component {
 
 
   componentDidMount() {
-    this.addJs();
-    this.addCss();
+    const { data: { sitePage: { fields: { jsCode, cssCode } } } } = this.props;
+    if (jsCode) {
+      this.addJs();
+    }
+    if (cssCode) {
+      this.addCss();
+    }
   }
   componentDidUpdate() {
-    this.addJs();
-    this.addCss();
+    const { data: { sitePage: { fields: { jsCode, cssCode } } } } = this.props;
+    if (jsCode) {
+      this.addJs();
+    }
+    if (cssCode) {
+      this.addCss();
+    }
   }
 
   render() {
