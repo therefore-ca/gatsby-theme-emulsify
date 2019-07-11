@@ -5,6 +5,7 @@ body {
 .wrapper {
   transition: transform .11s cubic-bezier(.2,0,1,.9),-webkit-transform .11s cubic-bezier(.2,0,1,.9);
   will-change: transform;
+  height: 100vh;
 }
 
 .wrapper-open {
@@ -19,19 +20,22 @@ body {
   position: fixed;
   top: 0;
   width: 16rem;
+  display: flex;
+  flex-flow: column nowrap;
 }
 
-.parent-menu ul {
-  position: sticky;
-}
-
-.parent-menu .main-menu {
-  position: static;
+.parent-menu__toggle {
+  align-self: flex-end;
+  cursor: pointer;
+  fill: #fff;
+  height: 3rem;
+  padding: 0.75rem;
+  width: 3rem;
 }
 
 .parent-menu ul {
   list-style: none;
-  padding: 2rem;
+  padding: 0 var(--gutter-width);
   margin: 0;
 }
 

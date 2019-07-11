@@ -31,16 +31,18 @@ export default class Main extends Component {
     return (
       <div className="sidebar">
         <div className="sidebar__inner">
-          <h1>
-            <Link to="/">
-              {siteTitle}
-            </Link>
+          <div class="sidebar__header">
+            <h1>
+              <Link to="/">
+                {siteTitle}
+              </Link>
+            </h1>
             <DownIcon
               className="down-icon"
               onClick={this.open}
-              aria-label="Close Overlay"
+              aria-label="Toggle Overlay"
             />
-          </h1>
+          </div>
           <nav className="main-nav">
             <ul className="main-menu">
               <MainMenu menu={menu} id={id} filter="pages" collection={collection} />
