@@ -73,7 +73,7 @@ exports.createPages = ({
           relativePath
           relativeDirectory
           absolutePath
-          // DO NOT REMOVE: ctime is needed to bust gatsby cache for live reloading.
+          # DO NOT REMOVE: ctime is needed to bust gatsby cache for live reloading.
           ctime
           name
           base
