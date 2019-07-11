@@ -5,6 +5,10 @@ const {
 const path = require('path');
 const util = require('util')
 const Twig = require('twig');
+const yaml = require('js-yaml');
+const fs = require('fs');
+
+const readFile = util.promisify(fs.readFile);
 const renderTwig = util.promisify(Twig.renderFile);
 
 const IN_PRODUCTION = process.env.NODE_ENV === 'production';
@@ -18,7 +22,7 @@ function relativeDirEq(value) {
 /**
  * Uses the presence of published md files as a way to decide what assets should show in the styleuide and groups them together.
  */
-function createAssetMap(mdFiles, twigFiles, cssFiles, jsFiles) {
+function createAssetMap(mdFiles, twigFiles, dataFiles, cssFiles, jsFiles) {
   const dirs = {};
   return mdFiles.reduce((acc, current) => {
     const mdParentDir = current.fields.parentDir;
@@ -28,7 +32,8 @@ function createAssetMap(mdFiles, twigFiles, cssFiles, jsFiles) {
         // Organize assets that are in the same directory as the published md file
         cssFiles: cssFiles.filter(relativeDirEq(mdParentDir)),
         jsFiles: jsFiles.filter(relativeDirEq(mdParentDir)),
-        twigFile: twigFiles.find(relativeDirEq(mdParentDir))
+        twigFile: twigFiles.find(relativeDirEq(mdParentDir)),
+        dataFile: dataFiles.find(relativeDirEq(mdParentDir)),
       }]
     }
 
@@ -125,9 +130,10 @@ exports.createPages = ({
     const mdFiles = result.data.allMarkdownRemark.nodes
     const twigComponents = result.data.twigFiles.nodes
     const cssFiles = result.data.cssFiles.nodes
+    const dataFiles = result.data.dataFiles.nodes
     const jsFiles = result.data.jsFiles.nodes
 
-    const assetMap = createAssetMap(mdFiles, twigComponents, cssFiles, jsFiles)
+    const assetMap = createAssetMap(mdFiles, twigComponents, dataFiles, cssFiles, jsFiles)
 
     mdFiles.forEach((mdFile) => {
       createPage({
@@ -141,20 +147,26 @@ exports.createPages = ({
       })
     })
 
-    assetMap.forEach((assets) => {
+    return Promise.all(assetMap.map((assets) => {
       const comp = assets.twigFile;
+      const dataFile = assets.dataFile;
+      
       if (comp) {
-        const name = comp.name.replace(/\s+/g, '-').toLowerCase()
-        createPage({
-          path: `${name}-isolated`,
-          component: IsolatedTwigComponent,
-          context: {
-            ...comp
-          }
-        })
+        return readFile(dataFile.absolutePath, 'utf8')
+          .then((yml) => {
+            const data = yaml.safeLoad(yml);
+            const name = comp.name.replace(/\s+/g, '-').toLowerCase()
+            return createPage({
+              path: `${name}-isolated`,
+              component: IsolatedTwigComponent,
+              context: {
+                ...comp,
+                data
+              }
+            })
+          })
       }
-    })
-
+    }))
   })
 }
 
@@ -197,9 +209,7 @@ exports.onCreateNode = ({
     const name = node.context.base.replace(/\s+/g, '-').toLowerCase();
     // Render the twig component and add an componentHtml to the page
     // @TODO replace data with respective data yml file
-    return renderTwig(node.context.absolutePath, {
-      button_content: 'Hello world! 👋🏻'
-    }).then(html => {
+    return renderTwig(node.context.absolutePath, node.context.data).then(html => {
       // @TODO add fields for css/js files to be added to the page
       createNodeField({
         node,
