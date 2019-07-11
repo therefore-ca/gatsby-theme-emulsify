@@ -213,7 +213,6 @@ exports.onCreateNode = ({
 
   if (node.internal.type === 'SitePage' && node.context && node.context.extension === 'twig') {
     return Promise.all([renderTwig(node.context.absolutePath, node.context.data), readFile(node.context.jsFile.absolutePath, 'utf8'), readFile(node.context.cssFile.absolutePath, 'utf8')]).then(([componentHtml, js, css]) => {
-      console.log(css)
       createNodeField({
         node,
         name: 'componentHtml',
