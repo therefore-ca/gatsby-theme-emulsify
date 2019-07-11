@@ -1,6 +1,6 @@
 const path = require("path")
 
-module.exports = {
+module.exports = ({ componentLibPath = 'src/components', docPagesPath = 'styleguide/pages', basePath = '/' }) => ({
   pathPrefix: "/gatsby-theme-emulsify",
   siteMetadata: {
     title: 'Project Name',
@@ -36,14 +36,14 @@ module.exports = {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `components`,
-        path: `${__dirname}/content/components`,
+        path: path.join(basePath, componentLibPath),
       },
     },
     {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `pages`,
-        path: `${__dirname}/content/pages`,
+        path: path.join(basePath, docPagesPath),
       },
     },
     {
@@ -58,7 +58,7 @@ module.exports = {
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
   ],
-}
+})
 
 exports.onPreBootstrap = ({ store, reporter }) => {
   const { program } = store.getState()

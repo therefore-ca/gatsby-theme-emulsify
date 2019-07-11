@@ -16,8 +16,10 @@
   },
   "devDependencies": {
     "gatsby": "^2.9.4",
+    "js-yaml": "^3.13.1",
     "react": "^16.8.6",
-    "react-dom": "^16.8.6"
+    "react-dom": "^16.8.6",
+    "twig": "^1.13.3"
   },
   "scripts": {
     "develop": "gatsby develop",
