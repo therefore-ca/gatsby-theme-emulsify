@@ -7,9 +7,9 @@ import "./layout.css"
 
 export default class Layout extends Component {
   render() {
-    const post = this.props.data.markdownRemark
+    const post = this.props.data.mdx
     const site = this.props.data.site
-    const allPages = this.props.data.allMarkdownRemark
+    const allPages = this.props.data.allMdx
     const allFile = this.props.data.allFile
     return (
       <ComponentLayout
@@ -40,10 +40,10 @@ export const pageQuery = graphql`
         }
       }
     }
-    markdownRemark(fields: { slug: { eq: $slug } }) {
+    mdx(fields: { slug: { eq: $slug } }) {
       id
       excerpt(pruneLength: 160)
-      html
+      body
       frontmatter {
         title
         description
@@ -54,7 +54,7 @@ export const pageQuery = graphql`
         collection
       }
     }
-    allMarkdownRemark {
+    allMdx {
       edges {
         node {
           id
@@ -75,7 +75,7 @@ export const pageQuery = graphql`
         sourceInstanceName
         relativeDirectory
         name
-        childMarkdownRemark {
+        childMdx {
           id
           frontmatter {
             title

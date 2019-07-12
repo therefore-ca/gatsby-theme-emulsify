@@ -1,5 +1,6 @@
 import React, { Component } from "react"
 import { Link } from "gatsby"
+import { MDXRenderer } from "gatsby-plugin-mdx";
 import "./main.css"
 import "./main-design.css"
 
@@ -11,7 +12,7 @@ import Sidebar from "../Sidebar/Sidebar.component"
 export default class Main extends Component {
   
   render() {
-    const { title, siteTitle, html, pages, parentDir, id, menu, collection } = this.props;
+    const { title, siteTitle, body, pages, parentDir, id, menu, collection } = this.props;
     let tabs = [];
     pages.forEach(page => {
       if (page.node.fields) {
@@ -53,7 +54,9 @@ export default class Main extends Component {
         <div className="main-content">
           <h1 className="main-title">{title}</h1>
           {tabsElement}
-          <div dangerouslySetInnerHTML={{ __html: html }} className="main-content-content" />
+          <div className="main-content-content">
+            <MDXRenderer>{body}</MDXRenderer>
+          </div>
         </div>
       </div>
     )

@@ -56,7 +56,7 @@ exports.createPages = ({
 
   return graphql(`
     {
-      allMarkdownRemark(
+      allMdx(
         limit: 1000
         filter: {frontmatter: {publishToStyleGuide: {eq: true}}}
       ) {
@@ -127,7 +127,7 @@ exports.createPages = ({
     }
 
     // Create component pages.
-    const mdFiles = result.data.allMarkdownRemark.nodes
+    const mdFiles = result.data.allMdx.nodes
     const twigComponents = result.data.twigFiles.nodes
     const cssFiles = result.data.cssFiles.nodes
     const dataFiles = result.data.dataFiles.nodes
@@ -186,7 +186,7 @@ exports.onCreateNode = async ({
     createNodeField
   } = actions
 
-  if (node.internal.type === `MarkdownRemark`) {
+  if (node.internal.type === `Mdx`) {
     let value = createFilePath({
       node,
       getNode
