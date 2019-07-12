@@ -30,8 +30,8 @@ function createAssetMap(mdFiles, twigFiles, dataFiles, cssFiles, jsFiles) {
       dirs[mdParentDir] = true;
       return [...acc, {
         // Organize assets that are in the same directory as the published md file
-        cssFiles: cssFiles.filter(relativeDirEq(mdParentDir)),
-        jsFiles: jsFiles.filter(relativeDirEq(mdParentDir)),
+        cssFile: cssFiles.find(relativeDirEq(mdParentDir)),
+        jsFile: jsFiles.find(relativeDirEq(mdParentDir)),
         twigFile: twigFiles.find(relativeDirEq(mdParentDir)),
         dataFile: dataFiles.find(relativeDirEq(mdParentDir)),
       }]
@@ -56,7 +56,7 @@ exports.createPages = ({
 
   return graphql(`
     {
-      allMarkdownRemark(
+      allMdx(
         limit: 1000
         filter: {frontmatter: {publishToStyleGuide: {eq: true}}}
       ) {
@@ -127,7 +127,7 @@ exports.createPages = ({
     }
 
     // Create component pages.
-    const mdFiles = result.data.allMarkdownRemark.nodes
+    const mdFiles = result.data.allMdx.nodes
     const twigComponents = result.data.twigFiles.nodes
     const cssFiles = result.data.cssFiles.nodes
     const dataFiles = result.data.dataFiles.nodes
@@ -148,20 +148,27 @@ exports.createPages = ({
     })
 
     return Promise.all(assetMap.map((assets) => {
-      const comp = assets.twigFile;
-      const dataFile = assets.dataFile;
-      
-      if (comp) {
+      const {
+        twigFile,
+        dataFile,
+        jsFile,
+        cssFile
+      }  = assets;
+
+      if (twigFile) {
         return readFile(dataFile.absolutePath, 'utf8')
           .then((yml) => {
             const data = yaml.safeLoad(yml);
-            const name = comp.name.replace(/\s+/g, '-').toLowerCase()
+            const name = twigFile.name.replace(/\s+/g, '-').toLowerCase()
             return createPage({
               path: `${name}-isolated`,
               component: IsolatedTwigComponent,
               context: {
-                ...comp,
-                data
+                data,
+                ...twigFile,
+                jsFile,
+                cssFile,
+                assetMap
               }
             })
           })
@@ -170,7 +177,7 @@ exports.createPages = ({
   })
 }
 
-exports.onCreateNode = ({
+exports.onCreateNode = async ({
   node,
   actions,
   getNode
@@ -179,7 +186,7 @@ exports.onCreateNode = ({
     createNodeField
   } = actions
 
-  if (node.internal.type === `MarkdownRemark`) {
+  if (node.internal.type === `Mdx`) {
     let value = createFilePath({
       node,
       getNode
@@ -206,15 +213,59 @@ exports.onCreateNode = ({
   }
 
   if (node.internal.type === 'SitePage' && node.context && node.context.extension === 'twig') {
-    const name = node.context.base.replace(/\s+/g, '-').toLowerCase();
-    // Render the twig component and add an componentHtml to the page
-    // @TODO replace data with respective data yml file
-    return renderTwig(node.context.absolutePath, node.context.data).then(html => {
-      // @TODO add fields for css/js files to be added to the page
+    const fileReads = [];
+
+    if (node.context.absolutePath) {
+      fileReads.push(renderTwig(node.context.absolutePath, node.context.data));
+    }
+
+    const jsFileReads = [];
+    node.context.assetMap.forEach(asset => {
+      if (asset.jsFile) {
+        jsFileReads.push(readFile(asset.jsFile.absolutePath, 'utf8'))
+      }
+    })
+
+    const jsFiles = await Promise.all(jsFileReads);
+
+    if (jsFiles.length) {
+      fileReads.push(jsFiles.join('\n'))
+    } else {
+      fileReads.push('');
+    }
+
+    const cssFileReads = [];
+    node.context.assetMap.forEach(asset => {
+      if (asset.cssFile) {
+        cssFileReads.push(readFile(asset.cssFile.absolutePath, 'utf8'))
+      }
+    })
+
+    const cssFiles = await Promise.all(cssFileReads);
+
+    // lol
+    if (cssFiles.length) {
+      fileReads.push(cssFiles.join('\n'))
+    } else {
+      fileReads.push('');
+    }
+
+
+    return Promise.all(fileReads).then(([componentHtml, js, css]) => {
       createNodeField({
         node,
         name: 'componentHtml',
-        value: html,
+        value: componentHtml,
+      })
+      createNodeField({
+        node,
+        name: 'jsCode',
+        value: js,
+      })
+      createNodeField({
+        node,
+        name: 'cssCode',
+        value: css,
       })
     })
   }

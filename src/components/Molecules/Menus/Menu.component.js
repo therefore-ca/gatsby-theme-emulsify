@@ -18,7 +18,7 @@ export default class Menu extends Component {
           directoryTree.children.push(
             {
               item: item,
-              active: item.childMarkdownRemark.id === id ? true : false
+              active: item.childMdx.id === id ? true : false
             }
           )
         }
@@ -33,9 +33,9 @@ export default class Menu extends Component {
               <ListItem
                 active={item.active}
                 item={item.item}
-                key={item.item.childMarkdownRemark.id}
-                itemName={item.item.childMarkdownRemark.frontmatter.title}
-                itemLink={item.item.childMarkdownRemark.fields.slug}
+                key={item.item.childMdx.id}
+                itemName={item.item.childMdx.frontmatter.title}
+                itemLink={item.item.childMdx.fields.slug}
                 icon
               />
             )

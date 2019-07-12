@@ -2,6 +2,7 @@ import PropTypes from "prop-types"
 import React, { Component } from "react"
 import "./site.css"
 
+import CloseIcon from "../../../assets/close.svg"
 import Main from "../Organisms/Main/Main.component"
 
 export default class Site extends Component {
@@ -18,12 +19,17 @@ export default class Site extends Component {
   };
 
   render() {
-    const { frontmatter, title, html, edges, designSystems, fields, id, menu } = this.props;
+    const { frontmatter, title, body, edges, designSystems, fields, id, menu } = this.props;
     return (
       <div
         className={this.state.isMenuOpen ? 'wrapper-open wrapper' : 'wrapper'}
       >
         <nav className="parent-menu">
+          <CloseIcon
+            className="parent-menu__toggle"
+            onClick={this.toggleOpen}
+            aria-label="Toggle Overlay"
+          />
           <ul>
             {designSystems.map(link => (
               <li key={link.name}>
@@ -36,11 +42,11 @@ export default class Site extends Component {
           {...fields}
           {...frontmatter}
           id={id}
-          html={html}
+          body={body}
           menu={menu}
           pages={edges}
           siteTitle={title}
-          toggleOpen={this.toggleOpen.bind(this)}
+          toggleOpen={this.toggleOpen}
         />
       </div>
     );
