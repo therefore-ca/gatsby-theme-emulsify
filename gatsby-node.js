@@ -29,6 +29,7 @@ function createAssetMap(mdFiles, twigFiles, dataFiles, cssFiles, jsFiles) {
     if (!dirs[mdParentDir]) {
       dirs[mdParentDir] = true;
       return [...acc, {
+        mdFile: current,
         // Organize assets that are in the same directory as the published md file
         cssFile: cssFiles.find(relativeDirEq(mdParentDir)),
         jsFile: jsFiles.find(relativeDirEq(mdParentDir)),
@@ -136,10 +137,15 @@ exports.createPages = ({
     const assetMap = createAssetMap(mdFiles, twigComponents, dataFiles, cssFiles, jsFiles)
 
     mdFiles.forEach((mdFile) => {
+      const asset = assetMap.find(asset => mdFile.fields.parentDir === asset.mdFile.fields.parentDir)
+      const name = asset.twigFile ? asset.twigFile.name.replace(/\s+/g, '-').toLowerCase() : null;
+      const iframePath = `${name}-isolated`
+
       createPage({
         path: mdFile.fields.slug,
         component: ComponentPost,
         context: {
+          iframePath,
           slug: mdFile.fields.slug,
           collection: mdFile.fields.collection,
           parentDir: mdFile.fields.parentDir
