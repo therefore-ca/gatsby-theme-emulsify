@@ -9,21 +9,39 @@ body {
 }
 
 .wrapper-open {
-  transform: translate(16rem);
+  transform: translate(100vw);
 }
 
 .parent-menu {
   background-color: #131212;
   color: #fff;
   height: 100%;
-  left: -16rem;
+  width: 100vw;
   position: fixed;
   top: 0;
-  width: 16rem;
+  left: 100vw;
   display: flex;
   flex-flow: column nowrap;
 }
 
+.wrapper-open .parent-menu {
+  left: -100vw;
+}
+
+@media screen and (min-width: 768px) {
+  .wrapper-open {
+    transform: translate(16rem);
+  }
+
+  .parent-menu {
+    width: 16rem;
+    left: -16rem;
+  }
+
+  .wrapper-open .parent-menu {
+    left: -16rem;
+  }
+}
 .parent-menu__toggle {
   align-self: flex-end;
   cursor: pointer;
