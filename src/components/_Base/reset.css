@@ -173,7 +173,8 @@ textarea {
 }
 img {
   max-width: 100%;
-  margin: 0 0 1.45rem 0;
+  height: auto;
+  margin: 0;
   padding: 0;
   border-style: none;
 }
@@ -219,9 +220,3 @@ acronym {
   border-bottom: 1px dotted hsla(0, 0%, 0%, 0.5);
   cursor: help;
 }
-
-@import 'headers.css';
-@import 'links.css';
-@import 'lists.css';
-@import 'tables.css';
-@import 'code.css';

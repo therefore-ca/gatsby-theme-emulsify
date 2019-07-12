@@ -36,9 +36,9 @@
 .sidebar__toggle {
   cursor: pointer;
   fill: #fff;
-  height: 30px;
+  height: 2rem;
   float: right;
-  width: 30px;
+  width: 2rem;
 }
 
 .sidebar a {
