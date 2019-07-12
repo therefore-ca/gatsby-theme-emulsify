@@ -38,6 +38,7 @@
     left: -16rem;
   }
 }
+
 .parent-menu__toggle {
   align-self: flex-end;
   cursor: pointer;
