@@ -1,5 +1,5 @@
 html {
-  font: 17px/1.7 -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol, sans-serif;
+  font: 17px/1.7 var(--font-family-body);
   box-sizing: border-box;
   overflow-y: scroll;
   -ms-text-size-adjust: 100%;
@@ -10,19 +10,14 @@ html {
     font-size: 112.5%;
   }
 }
-* {
-  box-sizing: inherit;
-}
-*:before {
-  box-sizing: inherit;
-}
+*,
+*:before
 *:after {
   box-sizing: inherit;
 }
 body {
   margin: 0;
   color: hsla(0, 0%, 0%, 0.8);
-  font-family: georgia, serif;
   font-weight: normal;
   word-wrap: break-word;
   font-kerning: normal;
@@ -63,17 +58,6 @@ progress {
 [hidden],
 template {
   display: none;
-}
-a {
-  background-color: transparent;
-  color: inherit;
-  -webkit-text-decoration-skip: objects;
-  text-decoration: none;
-}
-a:active,
-a:hover {
-  outline-width: 0;
-  text-decoration: underline;
 }
 abbr[title] {
   border-bottom: none;
@@ -193,54 +177,6 @@ img {
   padding: 0;
   border-style: none;
 }
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  margin: 0 0 1.45rem 0;
-  padding: 0;
-  color: inherit;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-  font-weight: bold;
-  text-rendering: optimizeLegibility;
-  line-height: 1.1;
-}
-h1 {
-  font-size: 2.25rem;
-}
-h2 {
-  font-size: 1.62671rem;
-}
-h3 {
-  font-size: 1.38316rem;
-}
-h4 {
-  font-size: 1rem;
-}
-h5 {
-  font-size: 0.85028rem;
-}
-h6 {
-  font-size: 0.78405rem;
-}
-ul,
-ol {
-  margin-left: 0 0 1.45rem 1.45rem;
-  padding: 0;
-  list-style-position: outside;
-  list-style-image: none;
-}
-dl {
-  margin: 0 0 1.45rem;
-  padding: 0;
-}
-dd {
-  margin: 0 0 1.45rem 0;
-  padding: 0;
-}
 address,
 fieldset,
 figure,
@@ -255,14 +191,6 @@ blockquote {
   margin: 0 1.45rem 1.45rem 1.45rem;
   padding: 0;
 }
-table {
-  margin: 0 0 1.45rem 0;
-  padding: 0;
-  font-size: 1rem;
-  line-height: 1.45rem;
-  border-collapse: collapse;
-  width: 100%;
-}
 hr {
   margin: 0 0 calc(1.45rem - 1px) 0;
   padding: 0;
@@ -271,31 +199,12 @@ hr {
   height: 1px;
 }
 b,
-strong,
-dt,
-th {
+strong {
   font-weight: bold;
 }
-li {
-  margin-bottom: calc(1.45rem / 2);
-}
-ul li,
-ol li {
-  padding-left: 0;
-}
-li > ul,
-li > ol {
-  margin-left: 1.45rem;
-  margin-bottom: calc(1.45rem / 2);
-  margin-top: calc(1.45rem / 2);
-}
 blockquote *:last-child,
-li *:last-child
 p *:last-child {
   margin-bottom: 0;
-}
-li > p {
-  margin-bottom: calc(1.45rem / 2);
 }
 abbr {
   border-bottom: 1px dotted hsla(0, 0%, 0%, 0.5);
@@ -310,63 +219,9 @@ acronym {
   border-bottom: 1px dotted hsla(0, 0%, 0%, 0.5);
   cursor: help;
 }
-thead {
-  text-align: left;
-}
-td,
-th {
-  text-align: left;
-  border-bottom: 1px solid hsla(0, 0%, 0%, 0.12);
-  font-feature-settings: "tnum";
-  -moz-font-feature-settings: "tnum";
-  -ms-font-feature-settings: "tnum";
-  -webkit-font-feature-settings: "tnum";
-  padding-left: 0.96667rem;
-  padding-right: 0.96667rem;
-  padding-top: 0.725rem;
-  padding-bottom: calc(0.725rem - 1px);
-}
-th:first-child,
-td:first-child {
-  padding-left: 0;
-}
-th:last-child,
-td:last-child {
-  padding-right: 0;
-}
-code,
-kbd,
-pre,
-samp {
-  font-family: "SFMono-Regular", Consolas, "Roboto Mono", "Droid Sans Mono",
-    "Liberation Mono", Menlo, Courier, monospace;
-  font-size: 0.85rem;
-  line-height: 1.45rem;
-}
-code,
-pre {
-  background: hsla(0, 0%, 0%, 0.04);
-  border-radius: 3px;
-}
-code {
-  padding: 0.2em 0;
-}
-pre {
-  margin: 0 0 1.45rem 0;
-  padding: 1.45rem;
-  overflow: auto;
-  word-wrap: normal;
-}
-code:before,
-code:after,
-tt:before,
-tt:after {
-  letter-spacing: -0.2em;
-  content: " ";
-}
-pre code:before,
-pre code:after,
-pre tt:before,
-pre tt:after {
-  content: "";
-}
+
+@import 'headers.css';
+@import 'links.css';
+@import 'lists.css';
+@import 'tables.css';
+@import 'code.css';
