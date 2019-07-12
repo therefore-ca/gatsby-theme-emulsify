@@ -15,13 +15,9 @@
   width: 100vw;
   position: fixed;
   top: 0;
-  left: 100vw;
+  left: -100vw;
   display: flex;
   flex-flow: column nowrap;
-}
-
-.wrapper-open .parent-menu {
-  left: -100vw;
 }
 
 @media screen and (min-width: 768px) {
@@ -31,10 +27,6 @@
 
   .parent-menu {
     width: 16rem;
-    left: -16rem;
-  }
-
-  .wrapper-open .parent-menu {
     left: -16rem;
   }
 }
