@@ -3,6 +3,7 @@ import { graphql } from "gatsby"
 
 import ComponentLayout from "./component-layout"
 import SEO from "./seo"
+import "./layout.css"
 
 export default class Layout extends Component {
   render() {

@@ -1,18 +1,30 @@
 .main {
   display: flex;
+  flex-flow: column nowrap;
+}
+
+@media only screen and (min-width: 768px) {
+  .main {
+    flex-direction: row;
+  }
 }
 
 .main-content {
   display: flex;
   flex-direction: column;
-  width: 80%;
+}
+
+@media only screen and (min-width: 768px) {
+  .main-content {
+    flex-basis: 80%;
+  }
 }
 
 .main-content-content {
   background-color: #fff;
   color: #3b3f40;
   flex: 1;
-  padding: 3rem 6rem;
+  padding: 3rem var(--gutter-width);
 }
 
 .main-title {
@@ -20,13 +32,19 @@
   color: #fff;
   font-size: 2.666666667rem;
   margin-bottom: 0;
-  padding: 15rem 6rem 2rem;
+  padding: 2rem var(--gutter-width);
+}
+
+@media screen and (min-width: 768px) {
+  .main-title {
+    padding-top: 6rem;
+  }
 }
 
 /* Tabs */
 .tabs {
   background-color: #3b3f40;
-  padding: 1rem 6rem 0;
+  padding: 1rem var(--gutter-width) 0;
 }
 
 .tabs li {

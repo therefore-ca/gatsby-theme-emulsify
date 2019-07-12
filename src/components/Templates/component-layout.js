@@ -6,7 +6,6 @@
  */
 
 import React, { Component } from "react"
-import "./layout.css"
 
 import Site from "./Site.js"
 
