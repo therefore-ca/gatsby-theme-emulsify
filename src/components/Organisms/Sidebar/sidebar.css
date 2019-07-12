@@ -46,10 +46,15 @@
 }
 
 .sidebar footer {
-  border-top: 1px solid rgba(255, 255, 255, 0.4);
   display: block;
   font-size: 0.65rem;
   margin-top: auto;
   padding-top: 0.75rem;
   text-transform: uppercase;
+}
+
+@media screen and (min-width: 768px) {
+  .sidebar footer {
+    border-top: 1px solid rgba(255, 255, 255, 0.4);
+  }
 }
