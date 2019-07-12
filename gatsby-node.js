@@ -218,10 +218,20 @@ exports.onCreateNode = async ({
     if (node.context.absolutePath) {
       fileReads.push(renderTwig(node.context.absolutePath, node.context.data));
     }
-    if (node.context.jsFile) {
-      fileReads.push(readFile(node.context.jsFile.absolutePath, 'utf8'));
+
+    const jsFileReads = [];
+    node.context.assetMap.forEach(asset => {
+      if (asset.jsFile) {
+        jsFileReads.push(readFile(asset.jsFile.absolutePath, 'utf8'))
+      }
+    })
+
+    const jsFiles = await Promise.all(jsFileReads);
+
+    if (jsFiles.length) {
+      fileReads.push(jsFiles.join('\n'))
     } else {
-      fileReads.push(Promise.resolve(''));
+      fileReads.push('');
     }
 
     const cssFileReads = [];
@@ -237,7 +247,7 @@ exports.onCreateNode = async ({
     if (cssFiles.length) {
       fileReads.push(cssFiles.join('\n'))
     } else {
-      fileReads.push(Promise.resolve(''));
+      fileReads.push('');
     }
 
 
