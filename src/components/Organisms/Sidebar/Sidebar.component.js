@@ -3,7 +3,7 @@ import React, { Component } from "react"
 import "./sidebar.css"
 import "./sidebar-design.css"
 
-import DownIcon from "../../../../assets/down.svg"
+import MenuIcon from "../../../../assets/menu-bars.svg"
 import MainMenu from "../../Molecules/Menus/MainMenu.component"
 
 const Link = process.env.STORYBOOK_ENV
@@ -37,7 +37,7 @@ export default class Main extends Component {
                 {siteTitle}
               </Link>
             </h1>
-            <DownIcon
+            <MenuIcon
               className="sidebar__toggle"
               onClick={this.open}
               aria-label="Toggle Overlay"
