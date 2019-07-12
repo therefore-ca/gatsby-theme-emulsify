@@ -15,7 +15,7 @@
 
 @media screen and (min-width: 768px) {
   .sidebar__inner {
-    height: 100vh;
+    height: 96vh;
   }
 }
 
@@ -28,9 +28,21 @@
   border-bottom: 1px solid rgba(255, 255, 255, 0.4);
 }
 
+@media screen and (min-width: 768px) {
+  .sidebar__header {
+    margin-bottom: 3rem;
+  }
+}
+
 .sidebar h1 {
   font-size: 2.75rem;
   margin: 0;
+}
+
+@media screen and (min-width: 768px) {
+  .sidebar h1 {
+    margin: 1rem 0;
+  }
 }
 
 .sidebar__toggle {
