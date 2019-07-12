@@ -15,10 +15,21 @@ export default class Menu extends Component {
     menu.forEach((item) => {
       if (item.sourceInstanceName === filter) {
         if (item.name === 'Code') {
+          // Mark the item active if its id is the same as the id of the current page.
+          let isActive = item.childMarkdownRemark.id === id;
+          if (!isActive) {
+            // Also mark the item active if the current page id corresponds to a menu item that shares a prefix with the Code item (sibling).
+            let prefix = item.childMarkdownRemark.fields.slug.replace('code/', '');
+            let siblings = menu.filter(
+              menuitem => menuitem.childMarkdownRemark.id === id && menuitem.childMarkdownRemark.fields.slug.startsWith(prefix)
+            );
+            isActive = siblings.length > 0;
+          }
+
           directoryTree.children.push(
             {
               item: item,
-              active: item.childMarkdownRemark.id === id ? true : false
+              active: isActive,
             }
           )
         }
