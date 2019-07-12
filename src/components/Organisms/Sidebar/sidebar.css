@@ -36,16 +36,16 @@
 .sidebar__toggle {
   cursor: pointer;
   fill: #fff;
-  height: 30px;
+  height: 2rem;
   float: right;
-  width: 30px;
+  width: 2rem;
 }
 
 .sidebar a {
   color: #fff;
 }
 
-footer {
+.sidebar footer {
   display: block;
   font-size: 0.65rem;
   margin-top: auto;
@@ -54,7 +54,7 @@ footer {
 }
 
 @media screen and (min-width: 768px) {
-  footer {
+  .sidebar footer {
     border-top: 1px solid rgba(255, 255, 255, 0.4);
   }
 }
