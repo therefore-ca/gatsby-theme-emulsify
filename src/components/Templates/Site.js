@@ -2,7 +2,7 @@ import PropTypes from "prop-types"
 import React, { Component } from "react"
 import "./site.css"
 
-import DownIcon from "../../../assets/down.svg"
+import CloseIcon from "../../../assets/close.svg"
 import Main from "../Organisms/Main/Main.component"
 
 export default class Site extends Component {
@@ -25,7 +25,7 @@ export default class Site extends Component {
         className={this.state.isMenuOpen ? 'wrapper-open wrapper' : 'wrapper'}
       >
         <nav className="parent-menu">
-          <DownIcon
+          <CloseIcon
             className="parent-menu__toggle"
             onClick={this.toggleOpen}
             aria-label="Toggle Overlay"

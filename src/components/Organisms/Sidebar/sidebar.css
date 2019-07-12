@@ -37,8 +37,8 @@
   cursor: pointer;
   fill: #fff;
   height: 2rem;
-  float: right;
   width: 2rem;
+  margin-left: var(--gutter-width);
 }
 
 .sidebar a {
