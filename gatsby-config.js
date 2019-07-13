@@ -1,20 +1,20 @@
 const path = require("path")
 
-module.exports = {
+module.exports = ({ componentLibPath = 'src/components', docPagesPath = 'styleguide/pages', basePath = '/' }) => ({
   pathPrefix: "/gatsby-theme-emulsify",
   siteMetadata: {
-    title: 'Emulsify',
-    author: 'Four Kitchens',
+    title: 'Project Name',
+    author: 'Your Organization',
     description: 'A Design System Driven by Gatsby',
     // siteUrl: '',
     designSystems: [
       {
-        name: 'Emulsify',
+        name: 'System 1',
         link:'/',
       },
       {
-        name: 'Four Kitchens',
-        link: 'http://fourkitchens.com',
+        name: 'System 2',
+        link: '',
       },
     ],
   },
@@ -27,23 +27,17 @@ module.exports = {
       },
     },
     {
-      resolve: "gatsby-plugin-compile-es6-packages",
-      options: {
-        modules: ["gatsby-theme-emulsify"],
-      },
-    },
-    {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `components`,
-        path: `${__dirname}/content/components`,
+        path: path.join(basePath, componentLibPath),
       },
     },
     {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `pages`,
-        path: `${__dirname}/content/pages`,
+        path: path.join(basePath, docPagesPath),
       },
     },
     {
@@ -54,11 +48,16 @@ module.exports = {
         }
       }
     },
+    {
+      resolve: `gatsby-plugin-mdx`,
+      options: {
+        extensions: [`.mdx`, `.md`]
+      }
+    },
     `gatsby-transformer-remark`,
-    `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
   ],
-}
+})
 
 exports.onPreBootstrap = ({ store, reporter }) => {
   const { program } = store.getState()

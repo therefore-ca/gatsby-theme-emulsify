@@ -1,8 +1,9 @@
 import PropTypes from "prop-types"
 import React, { Component } from "react"
 import "./sidebar.css"
+import "./sidebar-design.css"
 
-import DownIcon from "../../../../assets/down.svg"
+import MenuIcon from "../../../../assets/menu-bars.svg"
 import MainMenu from "../../Molecules/Menus/MainMenu.component"
 
 const Link = process.env.STORYBOOK_ENV
@@ -30,16 +31,18 @@ export default class Main extends Component {
     return (
       <div className="sidebar">
         <div className="sidebar__inner">
-          <h1>
-            <Link to="/">
-              {siteTitle}
-            </Link>
-            <DownIcon
-              className="down-icon"
+          <div className="sidebar__header">
+            <h1>
+              <Link to="/">
+                {siteTitle}
+              </Link>
+            </h1>
+            <MenuIcon
+              className="sidebar__toggle"
               onClick={this.open}
-              aria-label="Close Overlay"
+              aria-label="Toggle Overlay"
             />
-          </h1>
+          </div>
           <nav className="main-nav">
             <ul className="main-menu">
               <MainMenu menu={menu} id={id} filter="pages" collection={collection} />

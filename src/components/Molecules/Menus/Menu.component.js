@@ -16,12 +16,12 @@ export default class Menu extends Component {
       if (item.sourceInstanceName === filter) {
         if (item.name === 'Code') {
           // Mark the item active if its id is the same as the id of the current page.
-          let isActive = item.childMarkdownRemark.id === id;
+          let isActive = item.childMdx.id === id;
           if (!isActive) {
             // Also mark the item active if the current page id corresponds to a menu item that shares a prefix with the Code item (sibling).
-            let prefix = item.childMarkdownRemark.fields.slug.replace('code/', '');
+            let prefix = item.childMdx.fields.slug.replace('code/', '');
             let siblings = menu.filter(
-              menuitem => menuitem.childMarkdownRemark.id === id && menuitem.childMarkdownRemark.fields.slug.startsWith(prefix)
+              menuitem => menuitem.childMdx ? menuitem.childMdx.id === id && menuitem.childMdx.fields.slug.startsWith(prefix) : ''
             );
             isActive = siblings.length > 0;
           }
@@ -44,9 +44,9 @@ export default class Menu extends Component {
               <ListItem
                 active={item.active}
                 item={item.item}
-                key={item.item.childMarkdownRemark.id}
-                itemName={item.item.childMarkdownRemark.frontmatter.title}
-                itemLink={item.item.childMarkdownRemark.fields.slug}
+                key={item.item.childMdx.id}
+                itemName={item.item.childMdx.frontmatter.title}
+                itemLink={item.item.childMdx.fields.slug}
                 icon
               />
             )
