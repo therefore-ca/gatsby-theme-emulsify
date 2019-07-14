@@ -14,7 +14,6 @@ export default class ComponentLayout extends Component {
     const { post, title, edges, siteMetadata, fields, id, nodes, parentDirectory } = this.props
     const frontmatter = post.frontmatter;
     const body = post.body;
-    console.log(this.props)
     return (
       <Site collection={post.fields.collection} id={post.id} menu={nodes} fields={fields} frontmatter={frontmatter} body={body} title={title} edges={edges} designSystems={siteMetadata.designSystems} parentDirectory={parentDirectory} />
     );
