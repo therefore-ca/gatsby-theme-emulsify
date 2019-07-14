@@ -28,9 +28,13 @@
   border-bottom: 1px solid rgba(255, 255, 255, 0.4);
 }
 
-.sidebar h1 {
+.sidebar__header svg {
+  flex: 0 0 2rem;
+}
+
+.sidebar__title {
   font-size: 2.75rem;
-  margin: 0;
+  margin: 0 auto 0 0;
 }
 
 .sidebar__toggle {
@@ -39,7 +43,12 @@
   height: 2rem;
   width: 2rem;
   padding-left: var(--gutter-width);
-  margin-left: auto;
+}
+
+@media screen and (min-width: 767px) {
+  .sidebar__toggle {
+    display: none;
+  }
 }
 
 .sidebar__footer {
@@ -54,8 +63,4 @@
   .sidebar__footer {
     border-top: 1px solid rgba(255, 255, 255, 0.4);
   }
-}
-
-.parent-menu__toggle--open {
-  transform: rotate(90deg);
 }

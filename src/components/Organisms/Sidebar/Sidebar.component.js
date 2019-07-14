@@ -32,13 +32,13 @@ export default class Main extends Component {
     return (
       <div className="sidebar">
         <div className="sidebar__inner">
-          <div class="sidebar__header">
+          <div className="sidebar__header">
             <DownIcon
               className="parent-menu__toggle parent-menu__toggle--open"
               onClick={this.open}
               aria-label="Toggle Parent Menu"
             />
-            <h1>
+            <h1 className="sidebar__title">
               <Link to="/">
                 {siteTitle}
               </Link>
