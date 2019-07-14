@@ -41,7 +41,6 @@
   cursor: pointer;
   fill: #fff;
   height: 2rem;
-  width: 2rem;
   padding-left: var(--gutter-width);
 }
 
