@@ -12,9 +12,9 @@ const Link = process.env.STORYBOOK_ENV
   : require('gatsby').Link
 
 /**
- * Component that renders the main area.
+ * Component that renders the sidebar.
  */
-export default class Main extends Component {
+export default class Sidebar extends Component {
   static propTypes = {
     siteTitle: PropTypes.string,
   };
