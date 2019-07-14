@@ -55,7 +55,7 @@ export default class MainMenu extends Component {
         directoryTree.children.map(function(menuItem, i) {
           if (menuItem.parent === 'Components') {
             return (
-              <li
+              <li 
                 key={menuItem.item.childMarkdownRemark.id}
                 className={`menu-item${collection === 'components' ? ' menu-item--open' : ''} ${this.state.activeIndex===i ? ' menu-item--open' : ''}`}
                 onClick={this.toggle.bind(this, i)}
@@ -77,7 +77,7 @@ export default class MainMenu extends Component {
           }
           else {
             return (
-              <li
+              <li 
                 key={menuItem.item.childMarkdownRemark.id}
                 className={`menu-item${menuItem.active ? ' menu-item--open' : ''} ${this.state.activeIndex===i ? ' menu-item--open' : ''}`}
                 onClick={this.toggle.bind(this, i)}
