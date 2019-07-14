@@ -23,6 +23,14 @@ export default class Sidebar extends Component {
     siteTitle: ``,
   };
 
+  state = { isSidebarOpen: false };
+
+  toggleSidebar = () => {
+    this.setState(prevState => ({
+      isSidebarOpen: !prevState.isSidebarOpen
+    }));
+  };
+
   open = () => {
     this.props.toggleOpen();
   }
@@ -45,10 +53,12 @@ export default class Sidebar extends Component {
             </h1>
             <MenuIcon
               className="sidebar__toggle"
+              onClick={this.toggleSidebar}
               aria-label="Toggle Sidebar Menu"
             />
           </div>
-          <nav className="sidebar__nav">
+          <nav
+            className={this.state.isSidebarOpen ? 'sidebar__nav sidebar__nav--open' : 'sidebar__nav'}>
             <ul className="main-menu">
               <MainMenu menu={menu} id={id} filter="pages" collection={collection} />
             </ul>

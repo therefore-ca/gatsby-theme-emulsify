@@ -51,6 +51,17 @@
   }
 }
 
+@media screen and (max-width: 767px) {
+  .sidebar__nav {
+    height: 0;
+    overflow: hidden;
+  }
+
+  .sidebar__nav--open {
+    height: auto;
+  }
+}
+
 .sidebar__footer {
   display: block;
   font-size: 0.65rem;
