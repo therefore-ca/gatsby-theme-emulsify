@@ -1,8 +1,14 @@
 .sidebar {
   background-color: #7d7d7d;
   color: #fff;
-  flex: 0 1 33%;
+  flex: 0 1 auto;
   position: relative;
+}
+
+@media screen and (min-width: 768px) {
+  .sidebar {
+    flex-basis: 33%;
+  }
 }
 
 .sidebar__inner {
