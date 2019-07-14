@@ -8,14 +8,14 @@
 .sidebar__inner {
   display: flex;
   flex-direction: column;
-  padding: var(--gutter-width);
+  padding: 0 var(--gutter-width);
   top:0;
   position: sticky;
 }
 
 @media screen and (min-width: 768px) {
   .sidebar__inner {
-    height: 96vh;
+    height: 100%;
   }
 }
 
@@ -77,7 +77,7 @@
   display: block;
   font-size: 0.65rem;
   margin-top: auto;
-  padding-top: 0.75rem;
+  padding: 0.75rem 0;
   text-transform: uppercase;
 }
 
