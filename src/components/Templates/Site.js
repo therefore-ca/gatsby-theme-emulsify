@@ -19,7 +19,7 @@ export default class Site extends Component {
   };
 
   render() {
-    const { frontmatter, title, html, edges, designSystems, fields, id, menu } = this.props;
+    const { frontmatter, title, body, edges, designSystems, fields, id, menu } = this.props;
     return (
       <div
         className={this.state.isMenuOpen ? 'wrapper-open wrapper' : 'wrapper'}
@@ -42,7 +42,7 @@ export default class Site extends Component {
           {...fields}
           {...frontmatter}
           id={id}
-          html={html}
+          body={body}
           menu={menu}
           pages={edges}
           siteTitle={title}

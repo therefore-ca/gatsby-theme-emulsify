@@ -1,32 +1,39 @@
-import React, { Component } from "react"
+import React from "react"
 import { graphql } from "gatsby"
-
+import { MDXProvider } from '@mdx-js/react'
 import ComponentLayout from "./component-layout"
 import SEO from "./seo"
 import "./layout.css"
 
-export default class Layout extends Component {
-  render() {
-    const post = this.props.data.markdownRemark
-    const site = this.props.data.site
-    const allPages = this.props.data.allMarkdownRemark
-    const allFile = this.props.data.allFile
+// Components for MDX
+import ComponentViewer from '../Atoms/ComponentViewer/ComponentViewer.component'
+
+export default (props) => {
+    const { pageContext } = props;
+    const [components] = React.useState({
+      ComponentViewer: (props) => !pageContext.iframePath === null ? 'Error: No Component Found' : <ComponentViewer url={`${window.origin}/${pageContext.iframePath}`} />
+    })
+    const post = props.data.mdx
+    const site = props.data.site
+    const allPages = props.data.allMdx
+    const allFile = props.data.allFile
     return (
-      <ComponentLayout
-        title={site.siteMetadata.title}
-        {...site}
-        {...post}
-        {...allPages}
-        {...allFile}
-      >
-        <SEO
-          title={post.frontmatter.title}
-          description={post.frontmatter.description || post.excerpt}
-          keywords={[`gatsby`, `application`, `react`]}
-        />
-      </ComponentLayout>
+      <MDXProvider components={components}>
+        <ComponentLayout
+          title={site.siteMetadata.title}
+          {...site}
+          post={post}
+          {...allPages}
+          {...allFile}
+        >
+          <SEO
+            title={post.frontmatter.title}
+            description={post.frontmatter.description || post.excerpt}
+            keywords={[`gatsby`, `application`, `react`]}
+          />
+        </ComponentLayout>
+      </MDXProvider>
     );
-  }
 }
 
 export const pageQuery = graphql`
@@ -40,10 +47,10 @@ export const pageQuery = graphql`
         }
       }
     }
-    markdownRemark(fields: { slug: { eq: $slug } }) {
+    mdx(fields: { slug: { eq: $slug } }) {
       id
       excerpt(pruneLength: 160)
-      html
+      body
       frontmatter {
         title
         description
@@ -54,7 +61,7 @@ export const pageQuery = graphql`
         collection
       }
     }
-    allMarkdownRemark {
+    allMdx {
       edges {
         node {
           id
@@ -75,7 +82,7 @@ export const pageQuery = graphql`
         sourceInstanceName
         relativeDirectory
         name
-        childMarkdownRemark {
+        childMdx {
           id
           frontmatter {
             title

@@ -41,7 +41,7 @@ export default class MainMenu extends Component {
               {
                 parent: itemDir,
                 item: item,
-                active: item.childMarkdownRemark.id === id ? true : false
+                active: item.childMdx.id === id ? true : false
               }
             )
           }
@@ -56,7 +56,7 @@ export default class MainMenu extends Component {
           if (menuItem.parent === 'Components') {
             return (
               <li 
-                key={menuItem.item.childMarkdownRemark.id}
+                key={menuItem.item.childMdx.id}
                 className={`menu-item${collection === 'components' ? ' menu-item--open' : ''} ${this.state.activeIndex===i ? ' menu-item--open' : ''}`}
                 onClick={this.toggle.bind(this, i)}
               >
@@ -78,7 +78,7 @@ export default class MainMenu extends Component {
           else {
             return (
               <li 
-                key={menuItem.item.childMarkdownRemark.id}
+                key={menuItem.item.childMdx.id}
                 className={`menu-item${menuItem.active ? ' menu-item--open' : ''} ${this.state.activeIndex===i ? ' menu-item--open' : ''}`}
                 onClick={this.toggle.bind(this, i)}
               >
@@ -99,7 +99,7 @@ export default class MainMenu extends Component {
                     item={menuItem.item}
                     key={menuItem.item.id}
                     itemName={menuItem.item.name}
-                    itemLink={menuItem.item.childMarkdownRemark.fields.slug}
+                    itemLink={menuItem.item.childMdx.fields.slug}
                     icon
                   />
                 </ul>

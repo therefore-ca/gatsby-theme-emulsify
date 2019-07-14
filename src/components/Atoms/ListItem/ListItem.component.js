@@ -34,7 +34,7 @@ export default class ListItem extends Component {
 
   render() {
     const { item, itemLink, key, children, active } = this.props;
-    const listItemContent = item.childMarkdownRemark.frontmatter;
+    const listItemContent = item.childMdx.frontmatter;
 
     return (
       <li className={`menu-item--child${active === true ? ' menu-item--child--active' : ''}`} key={key}>

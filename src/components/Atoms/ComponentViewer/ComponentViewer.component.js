@@ -15,8 +15,8 @@ const ComponentViewer = props => {
 
   return (
     <iframe 
-      src={url} 
-      frameborder="0" 
+      src={url}
+      frameBorder="0"
       className="ComponentViewer"
       scrolling="no">
     </iframe>
