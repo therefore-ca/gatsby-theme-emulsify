@@ -43,12 +43,12 @@ export default class Main extends Component {
               aria-label="Toggle Overlay"
             />
           </div>
-          <nav className="main-nav">
+          <nav className="sidebar__nav">
             <ul className="main-menu">
               <MainMenu menu={menu} id={id} filter="pages" collection={collection} />
             </ul>
           </nav>
-          <footer>
+          <footer className="sidebar__footer">
             Design System Powered by <a href="http://emulsify.info" target="_blank" rel="noopener noreferrer"><strong>Emulsify</strong></a>
           </footer>
         </div>
