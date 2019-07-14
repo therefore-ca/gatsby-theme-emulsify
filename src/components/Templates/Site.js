@@ -26,9 +26,9 @@ export default class Site extends Component {
       >
         <nav className="parent-menu">
           <CloseIcon
-            className="parent-menu__toggle"
+            className="parent-menu__toggle parent-menu__toggle--close"
             onClick={this.toggleOpen}
-            aria-label="Toggle Overlay"
+            aria-label="Toggle Parent Menu"
           />
           <ul>
             {designSystems.map(link => (

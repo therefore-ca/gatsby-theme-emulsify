@@ -3,6 +3,7 @@ import React, { Component } from "react"
 import "./sidebar.css"
 import "./sidebar-design.css"
 
+import DownIcon from "../../../../assets/down.svg"
 import MenuIcon from "../../../../assets/menu-bars.svg"
 import MainMenu from "../../Molecules/Menus/MainMenu.component"
 
@@ -32,6 +33,11 @@ export default class Main extends Component {
       <div className="sidebar">
         <div className="sidebar__inner">
           <div class="sidebar__header">
+            <DownIcon
+              className="parent-menu__toggle parent-menu__toggle--open"
+              onClick={this.open}
+              aria-label="Toggle Parent Menu"
+            />
             <h1>
               <Link to="/">
                 {siteTitle}
@@ -39,8 +45,7 @@ export default class Main extends Component {
             </h1>
             <MenuIcon
               className="sidebar__toggle"
-              onClick={this.open}
-              aria-label="Toggle Overlay"
+              aria-label="Toggle Sidebar Menu"
             />
           </div>
           <nav className="sidebar__nav">

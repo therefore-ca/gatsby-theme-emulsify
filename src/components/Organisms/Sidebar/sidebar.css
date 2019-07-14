@@ -38,7 +38,8 @@
   fill: #fff;
   height: 2rem;
   width: 2rem;
-  margin-left: var(--gutter-width);
+  padding-left: var(--gutter-width);
+  margin-left: auto;
 }
 
 .sidebar__footer {
@@ -53,4 +54,8 @@
   .sidebar__footer {
     border-top: 1px solid rgba(255, 255, 255, 0.4);
   }
+}
+
+.parent-menu__toggle--open {
+  transform: rotate(90deg);
 }
