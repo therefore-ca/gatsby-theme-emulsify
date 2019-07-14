@@ -34,9 +34,13 @@
   }
 }
 
-.sidebar h1 {
+.sidebar__header svg {
+  flex: 0 0 2rem;
+}
+
+.sidebar__title {
   font-size: 2.75rem;
-  margin: 0;
+  margin: 0 auto 0 0;
 }
 
 @media screen and (min-width: 768px) {
@@ -49,15 +53,27 @@
   cursor: pointer;
   fill: #fff;
   height: 2rem;
-  width: 2rem;
-  margin-left: var(--gutter-width);
+  padding-left: var(--gutter-width);
 }
 
-.sidebar a {
-  color: #fff;
+@media screen and (min-width: 767px) {
+  .sidebar__toggle {
+    display: none;
+  }
 }
 
-.sidebar footer {
+@media screen and (max-width: 767px) {
+  .sidebar__nav {
+    height: 0;
+    overflow: hidden;
+  }
+
+  .sidebar__nav--open {
+    height: auto;
+  }
+}
+
+.sidebar__footer {
   display: block;
   font-size: 0.65rem;
   margin-top: auto;
@@ -66,7 +82,7 @@
 }
 
 @media screen and (min-width: 768px) {
-  .sidebar footer {
+  .sidebar__footer {
     border-top: 1px solid rgba(255, 255, 255, 0.4);
   }
 }
