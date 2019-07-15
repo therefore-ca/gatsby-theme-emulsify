@@ -27,6 +27,12 @@
   padding: 3rem var(--gutter-width);
 }
 
+@media only screen and (min-width: 768px) {
+  .main-content-content {
+    padding: 3rem 4rem;
+  }
+}
+
 .main-title {
   background-color: #000;
   color: #fff;
@@ -37,7 +43,7 @@
 
 @media screen and (min-width: 768px) {
   .main-title {
-    padding-top: 6rem;
+    padding: 12rem 4rem 2rem;
   }
 }
 
@@ -45,6 +51,12 @@
 .tabs {
   background-color: #3b3f40;
   padding: 1rem var(--gutter-width) 0;
+}
+
+@media screen and (min-width: 768px) {
+  .tabs {
+    padding: 1rem 4rem 0;
+  }
 }
 
 .tabs li {
