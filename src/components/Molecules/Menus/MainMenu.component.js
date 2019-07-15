@@ -53,8 +53,17 @@ export default class MainMenu extends Component {
       if(a.parent[0] < b.parent[0]) { return -1; }
       if(a.parent[0] > b.parent[0]) { return 1; }
       return 0;
-    })
+    });
 
+    const groupedMenuItems = directoryTree.children.reduce((acc, item) => {
+      const parentItem = acc[item.parent] || [];
+      return {
+        ...acc,
+        [item.parent]: [...parentItem, item]
+      };
+    }, {});
+
+    console.log(groupedMenuItems);
     console.log(directoryTree.children)
     // var nodes = directoryTree.children,
     // tree = function (data, root) {
