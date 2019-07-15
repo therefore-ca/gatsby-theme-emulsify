@@ -2,12 +2,14 @@
   background-color: #7d7d7d;
   color: #fff;
   flex: 0 1 auto;
-  position: relative;
 }
 
 @media screen and (min-width: 768px) {
   .sidebar {
+    position: sticky;
+    top:0;
     flex-basis: 33%;
+    height: 100vh;
   }
 }
 
@@ -15,8 +17,6 @@
   display: flex;
   flex-direction: column;
   padding: 0 var(--gutter-width);
-  top:0;
-  position: sticky;
 }
 
 @media screen and (min-width: 768px) {

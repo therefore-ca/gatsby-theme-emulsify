@@ -2,7 +2,6 @@ import PropTypes from "prop-types"
 import React, { Component } from "react"
 import "./site.css"
 
-import CloseIcon from "../../../assets/close.svg"
 import Main from "../Organisms/Main/Main.component"
 
 export default class Site extends Component {
@@ -24,20 +23,7 @@ export default class Site extends Component {
       <div
         className={this.state.isMenuOpen ? 'wrapper-open wrapper' : 'wrapper'}
       >
-        <nav className="parent-menu">
-          <CloseIcon
-            className="parent-menu__toggle parent-menu__toggle--close"
-            onClick={this.toggleOpen}
-            aria-label="Toggle Parent Menu"
-          />
-          <ul>
-            {designSystems.map(link => (
-              <li key={link.name}>
-                <a href={link.link}>{link.name}</a>
-                </li>
-            ))}
-          </ul>
-        </nav>
+
         <Main
           {...fields}
           {...frontmatter}
@@ -47,6 +33,7 @@ export default class Site extends Component {
           pages={edges}
           siteTitle={title}
           toggleOpen={this.toggleOpen}
+          designSystems={designSystems}
         />
       </div>
     );
