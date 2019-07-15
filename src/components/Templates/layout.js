@@ -25,6 +25,7 @@ export default (props) => {
           post={post}
           {...allPages}
           {...allFile}
+          parentDirectory={props.pageContext.parentDir}
         >
           <SEO
             title={post.frontmatter.title}
