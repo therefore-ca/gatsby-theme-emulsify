@@ -49,11 +49,18 @@ export default class MainMenu extends Component {
       }
     })
 
+    directoryTree.children.sort(function(a, b) {
+      if(a.parent[0] < b.parent[0]) { return -1; }
+      if(a.parent[0] > b.parent[0]) { return 1; }
+      return 0;
+    })
+
     return (
       <div>
       {
         directoryTree.children.map(function(menuItem, i) {
-          if (menuItem.parent === 'Components') {
+          const menuParentTrimmed = menuItem.parent.split('__').pop()
+          if (menuParentTrimmed === 'Components') {
             return (
               <li 
                 key={menuItem.item.childMdx.id}
@@ -61,7 +68,7 @@ export default class MainMenu extends Component {
                 onClick={this.toggle.bind(this, i)}
               >
                 <span>
-                  {"Components"}
+                  {menuParentTrimmed}
                     <DownIcon
                       className="menu-icon menu-icon--down"
                       aria-label="Toggle Open"
@@ -83,7 +90,7 @@ export default class MainMenu extends Component {
                 onClick={this.toggle.bind(this, i)}
               >
                 <span>
-                  {menuItem.parent.split('__').pop()}
+                  {menuParentTrimmed}
                     <DownIcon
                       className="menu-icon menu-icon--down"
                       aria-label="Toggle Open"
