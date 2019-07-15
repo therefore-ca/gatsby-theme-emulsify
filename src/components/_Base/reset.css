@@ -17,7 +17,7 @@ html {
 }
 body {
   margin: 0;
-  color: hsla(0, 0%, 0%, 0.8);
+  color: var(--color-var--black);
   font-weight: normal;
   word-wrap: break-word;
   font-kerning: normal;
@@ -68,8 +68,8 @@ dfn {
   font-style: italic;
 }
 mark {
-  background-color: #ff0;
-  color: #000;
+  background-color: var(--color-var--yellow);
+  color: var(--color-var--black);
 }
 small {
   font-size: 80%;

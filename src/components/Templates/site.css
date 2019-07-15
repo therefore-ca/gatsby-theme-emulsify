@@ -9,8 +9,8 @@
 }
 
 .parent-menu {
-  background-color: #131212;
-  color: #fff;
+  background-color: var(--color-var--gray-darkest);
+  color: var(--color-var--white);
   height: 100%;
   width: 100vw;
   position: fixed;
@@ -33,7 +33,7 @@
 
 .parent-menu__toggle {
   cursor: pointer;
-  fill: #fff;
+  fill: var(--color-var--white);
   height: 2rem;
   padding: 0.75rem;
 }
@@ -53,5 +53,5 @@
 }
 
 .parent-menu a {
-  color: white;
+  color: var(--color-var--white);
 }

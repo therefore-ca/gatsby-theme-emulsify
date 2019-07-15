@@ -46,7 +46,7 @@
 }
 
 .menu-icon {
-  fill: #fff;
+  fill: var(--color-var--white);
   float: right;
   height: 20px;
   position: relative;

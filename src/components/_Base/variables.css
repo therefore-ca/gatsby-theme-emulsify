@@ -5,4 +5,14 @@
   --font-family-body: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, sans-serif;
   --font-family-header: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
   --font-family-code: "SFMono-Regular", Consolas, "Roboto Mono", "Droid Sans Mono", "Liberation Mono", Menlo, Courier, monospace;
+  /* Color Variables */
+  --color-var--yellow: #ff0;
+  --color-var--gray-lighter: #eee;
+  --color-var--gray-light: #aaa;
+  --color-var--gray: #7d7d7d;
+  --color-var--gray-dark: #3b3f40;
+  --color-var--gray-darker: #343738;
+  --color-var--gray-darkest: #2f2f2f;
+  --color-var--black: #000;
+  --color-var--white: #fff;
 }
