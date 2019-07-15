@@ -43,7 +43,7 @@ export default class Sidebar extends Component {
         <nav className="parent-menu">
           <CloseIcon
             className="parent-menu__toggle parent-menu__toggle--close"
-            onClick={this.toggleOpen}
+            onClick={this.open}
             aria-label="Toggle Parent Menu"
           />
           <ul>
