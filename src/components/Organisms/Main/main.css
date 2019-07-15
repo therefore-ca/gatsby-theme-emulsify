@@ -21,8 +21,6 @@
 }
 
 .main-content-content {
-  background-color: var(--color-var--white);
-  color: var(--color-var--gray-dark);
   flex: 1;
   padding: 3rem var(--gutter-width);
 }
@@ -91,6 +89,5 @@
 
 /* Main Content */
 .main-content-content h1 {
-  color: var(--color-var--gray-dark);
   font-size: 1.666666667rem;
 }
