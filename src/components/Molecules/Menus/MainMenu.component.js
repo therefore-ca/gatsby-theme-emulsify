@@ -59,97 +59,45 @@ export default class MainMenu extends Component {
       const parentItem = acc[item.parent] || [];
       return {
         ...acc,
-        [item.parent]: [...parentItem, item]
+        [item.parent]: [...parentItem, item.item]
       };
     }, {});
 
-    console.log(groupedMenuItems);
-    console.log(directoryTree.children)
-    // var nodes = directoryTree.children,
-    // tree = function (data, root) {
-    //     var r = [], o = {};
-    //     data.forEach(function (a) {
-    //         if (o[a.id] && o[a.id].children) {
-    //             a.children = o[a.id] && o[a.id].children;
-    //         }
-    //         o[a.id] = a;
-    //         if (a.pid === root) {
-    //             r.push(a);
-    //         } else {
-    //             o[a.pid] = o[a.pid] || {};
-    //             o[a.pid].children = o[a.pid].children || [];
-    //             o[a.pid].children.push(a);
-    //         }
-    //     });
-    //     return r;
-    // }(nodes, 0);
-
-    // let parents = [];
-    // directoryTree.children.forEach(child => {
-    //   if (!parents.includes(child.parent)) {
-    //     parents.push(child.parent)
-    //   }
-    //   let parentsObject = Object.assign({}, parents);
-    //   for (let [key, value] of Object.entries(parentsObject)) {
-    //     if (child.parent === value) {
-    //       parentsObject[key].push(child)
-    //     }
-    //   }
-    // })
+    const isComponentsMenu = (name) => name === 'Components';
+    const parentIsOpen = (i) => collection === 'components' || this.state.activeIndex === i;
 
     return (
       <div>
       {
-        directoryTree.children.map(function(menuItem, i) {
-          const menuParentTrimmed = menuItem.parent.split('__').pop()
-          if (menuParentTrimmed === 'Components') {
-            return (
-              <li 
-                key={menuItem.item.childMdx.id}
-                className={`menu-item${collection === 'components' ? ' menu-item--open' : ''} ${this.state.activeIndex===i ? ' menu-item--open' : ''}`}
-                onClick={this.toggle.bind(this, i)}
-              >
-                <span>
-                  {menuParentTrimmed}
-                    <DownIcon
-                      className="menu-icon menu-icon--down"
-                      aria-label="Toggle Open"
-                    />
-                    <UpIcon
-                      className="menu-icon menu-icon--up"
-                      aria-label="Toggle Closed"
-                    />
-                </span>
-                <Menu menu={menu} filter="components" id={id} />
-              </li>
-            )
-          }
-          else {
-            
-            return (
-              <li 
-                key={menuItem.item.childMdx.id}
-                className={`menu-item${menuItem.active ? ' menu-item--open' : ''} ${this.state.activeIndex===i ? ' menu-item--open' : ''}`}
-                onClick={this.toggle.bind(this, i)}
-              >
-                <span>
-                  {menuParentTrimmed}
-                    <DownIcon
-                      className="menu-icon menu-icon--down"
-                      aria-label="Toggle Open"
-                    />
-                    <UpIcon
-                      className="menu-icon menu-icon--up"
-                      aria-label="Toggle Closed"
-                    />
-                </span>
-                <Menu menu={menu} filter="components" id={id} />
-              </li>
-              )
-            }
-          }, this)
-        }
+        Object.keys(groupedMenuItems).map((parentKey, parentIndex) => {
+          const parentName = parentKey.split('__').pop();
+          return (
+            <li
+              key={parentIndex}
+              className={`menu-item ${parentIsOpen(parentIndex) ? 'menu-item--open' : '' }`}
+              onClick={this.toggle.bind(this, parentIndex)}
+            >
+              <span>
+                {parentName}
+                <DownIcon
+                  className="menu-icon menu-icon--down"
+                  aria-label="Toggle Open"
+                />
+                <UpIcon
+                  className="menu-icon menu-icon--up"
+                  aria-label="Toggle Closed"
+                />
+              </span>
+              <Menu
+                menu={isComponentsMenu(parentName) ? menu : groupedMenuItems[parentKey]}
+                filter={isComponentsMenu(parentName) ? 'components' : 'pages'}
+                id={id}
+              />
+            </li>
+          )
+        })
+      }
       </div>
-    )
+    );
   }
 }
