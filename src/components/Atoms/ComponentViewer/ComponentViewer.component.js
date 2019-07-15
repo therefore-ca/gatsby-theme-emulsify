@@ -18,7 +18,9 @@ const ComponentViewer = props => {
       src={url}
       frameBorder="0"
       className="ComponentViewer"
-      scrolling="no">
+      scrolling="no"
+      title="Component Viewer"
+    >
     </iframe>
   );
 };
