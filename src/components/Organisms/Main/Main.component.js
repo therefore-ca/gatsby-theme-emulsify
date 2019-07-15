@@ -12,11 +12,11 @@ import Sidebar from "../Sidebar/Sidebar.component"
 export default class Main extends Component {
 
   render() {
-    const { title, siteTitle, body, pages, parentDir, id, menu, collection, designSystems } = this.props;
+    const { title, siteTitle, body, pages, parentDirectory, id, menu, collection, designSystems} = this.props;
     let tabs = [];
     pages.forEach(page => {
       if (page.node.fields) {
-        if (page.node.fields.parentDir === parentDir && page.node.frontmatter.tab) {
+        if (page.node.fields.parentDir === parentDirectory && page.node.frontmatter.tab) {
           tabs.push(page);
         }
       }

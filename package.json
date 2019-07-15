@@ -1,6 +1,6 @@
 {
   "name": "gatsby-theme-emulsify",
-  "version": "0.0.5",
+  "version": "0.0.7",
   "description": "Emulsify Gatsby Theme",
   "main": "index.js",
   "keywords": [
@@ -10,8 +10,7 @@
   "author": "Evan Willhite <evan@fourkitchens.com>",
   "license": "MIT",
   "devDependencies": {
-    "js-yaml": "^3.13.1",
-    "twig": "^1.13.3"
+    
   },
   "scripts": {
     "develop": "gatsby develop",
@@ -32,8 +31,10 @@
     "gatsby-transformer-remark": "^2.4.0",
     "prism-react-renderer": "^0.1.7",
     "gh-pages": "^2.0.1",
+    "js-yaml": "^3.13.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "react-helmet": "^5.2.1"
+    "react-helmet": "^5.2.1",
+    "twig": "^1.13.3"
   }
 }
