@@ -55,6 +55,39 @@ export default class MainMenu extends Component {
       return 0;
     })
 
+    console.log(directoryTree.children)
+    // var nodes = directoryTree.children,
+    // tree = function (data, root) {
+    //     var r = [], o = {};
+    //     data.forEach(function (a) {
+    //         if (o[a.id] && o[a.id].children) {
+    //             a.children = o[a.id] && o[a.id].children;
+    //         }
+    //         o[a.id] = a;
+    //         if (a.pid === root) {
+    //             r.push(a);
+    //         } else {
+    //             o[a.pid] = o[a.pid] || {};
+    //             o[a.pid].children = o[a.pid].children || [];
+    //             o[a.pid].children.push(a);
+    //         }
+    //     });
+    //     return r;
+    // }(nodes, 0);
+
+    // let parents = [];
+    // directoryTree.children.forEach(child => {
+    //   if (!parents.includes(child.parent)) {
+    //     parents.push(child.parent)
+    //   }
+    //   let parentsObject = Object.assign({}, parents);
+    //   for (let [key, value] of Object.entries(parentsObject)) {
+    //     if (child.parent === value) {
+    //       parentsObject[key].push(child)
+    //     }
+    //   }
+    // })
+
     return (
       <div>
       {
@@ -83,6 +116,7 @@ export default class MainMenu extends Component {
             )
           }
           else {
+            
             return (
               <li 
                 key={menuItem.item.childMdx.id}
@@ -100,16 +134,7 @@ export default class MainMenu extends Component {
                       aria-label="Toggle Closed"
                     />
                 </span>
-                <ul className="menu-child">
-                  <ListItem
-                    active={menuItem.active}
-                    item={menuItem.item}
-                    key={menuItem.item.id}
-                    itemName={menuItem.item.name}
-                    itemLink={menuItem.item.childMdx.fields.slug}
-                    icon
-                  />
-                </ul>
+                <Menu menu={menu} filter="components" id={id} />
               </li>
               )
             }
