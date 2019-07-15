@@ -1,6 +1,6 @@
 .sidebar {
-  background-color: var(--color-var--gray);
-  color: var(--color-var--white);
+  background-color: var(--color--sidebar-bg);
+  color: var(--color--sidebar-text);
   flex: 0 1 33%;
   position: relative;
 }
@@ -51,7 +51,7 @@
 
 .sidebar__toggle {
   cursor: pointer;
-  fill: var(--color-var--white);
+  fill: var(--color--sidebar-text);
   height: 2rem;
   padding-left: var(--gutter-width);
 }

@@ -15,4 +15,23 @@
   --color-var--gray-darkest: #2f2f2f;
   --color-var--black: #000;
   --color-var--white: #fff;
+  /* Color Usage */
+  /* Defaults */
+  --color--body-text: var(--color-var--gray-dark);
+  /* Header */
+  --color--header-bg: var(--color-var--black);
+  --color--header-text: var(--color-var--white);
+  /* Tabs */
+  --color--tabs-default-bg: var(--color-var--gray-dark);
+  --color--tabs-default-text: var(--color-var--white);
+  --color--tabs-hover-bg: var(--color-var--gray-darker);
+  --color--tabs-active-bg: var(--color-var--white);
+  --color--tabs-active-text: var(--color-var--gray-dark);
+  /* Sidebar */
+  --color--sidebar-bg: var(--color-var--gray);
+  --color--sidebar-text: var(--color-var--white);
+  --color--sidebar-dropdown: var(--color-var--gray-lighter);
+  /* Parent Menu */
+  --color--parent-menu-bg: var(--color-var--gray-darkest);
+  --color--parent-menu-text: var(--color-var--white);
 }

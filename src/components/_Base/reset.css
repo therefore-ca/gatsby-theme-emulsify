@@ -17,7 +17,7 @@ html {
 }
 body {
   margin: 0;
-  color: var(--color-var--gray-dark);
+  color: var(--color--body-text);
   font-weight: normal;
   word-wrap: break-word;
   font-kerning: normal;
