@@ -1,5 +1,7 @@
 .ComponentViewer {
+    background-color: #eee;
     border-width:0;
-    width: 100%;
-    height: 200px;
+    height: auto;
+    padding: 4%;
+    width: 92%;
 }
