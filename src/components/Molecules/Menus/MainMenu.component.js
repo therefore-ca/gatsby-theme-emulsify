@@ -83,7 +83,7 @@ export default class MainMenu extends Component {
                 onClick={this.toggle.bind(this, i)}
               >
                 <span>
-                  {menuItem.parent}
+                  {menuItem.parent.split('__').pop()}
                     <DownIcon
                       className="menu-icon menu-icon--down"
                       aria-label="Toggle Open"
