@@ -11,7 +11,7 @@ import Site from "./Site.js"
 
 export default class ComponentLayout extends Component {
   render() {
-    const { post, title, edges, siteMetadata, fields, id, nodes, parentDirectory } = this.props
+    const { post, title, edges, siteMetadata, fields, nodes, parentDirectory } = this.props
     const frontmatter = post.frontmatter;
     const body = post.body;
     return (
