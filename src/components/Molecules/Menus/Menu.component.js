@@ -7,7 +7,7 @@ import ListItem from "../../Atoms/ListItem/ListItem.component"
  */
 export default class Menu extends Component {
   render() {
-    const { menu, filter, id } = this.props;
+    const { menu, id } = this.props;
 
     const directoryTree = {};
     directoryTree.children = [];
