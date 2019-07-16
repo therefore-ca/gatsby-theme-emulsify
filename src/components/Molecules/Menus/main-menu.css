@@ -28,7 +28,7 @@
 }
 
 .menu-item--child--active::before {
-  border: 5px solid #eee;
+  border: 5px solid var(--color--sidebar-dropdown);
   border-bottom-color: transparent;
   border-right-color: transparent;
   border-top-color: transparent;
@@ -46,7 +46,7 @@
 }
 
 .menu-icon {
-  fill: #fff;
+  fill: var(--color--sidebar-dropdown);
   float: right;
   height: 20px;
   position: relative;

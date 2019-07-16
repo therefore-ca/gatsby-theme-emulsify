@@ -8,8 +8,7 @@
 }
 
 .parent-menu {
-  background-color: #131212;
-  color: #fff;
+  background-color: var(--color--parent-menu-bg);
   height: 100%;
   width: 100vw;
   position: absolute;
@@ -32,17 +31,18 @@
 
 .parent-menu__toggle {
   cursor: pointer;
-  fill: #fff;
   height: 2rem;
   padding: 0.75rem;
 }
 
 .parent-menu__toggle--open {
   transform: rotate(90deg);
+  fill: var(--color--sidebar-text);
 }
 
 .parent-menu__toggle--close {
   align-self: flex-end;
+  fill: var(--color--parent-menu-text);
 }
 
 .parent-menu ul {
@@ -52,5 +52,5 @@
 }
 
 .parent-menu a {
-  color: white;
+  color: var(--color--parent-menu-text);
 }

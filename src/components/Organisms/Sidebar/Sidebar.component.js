@@ -61,7 +61,7 @@ export default class Sidebar extends Component {
               onClick={this.open}
               aria-label="Toggle Parent Menu"
             />
-            <h1 className="sidebar__title">
+            <h1 className="sidebar__heading">
               <Link to="/">
                 {siteTitle}
               </Link>
