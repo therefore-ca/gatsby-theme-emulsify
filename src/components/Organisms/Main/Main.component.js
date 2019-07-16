@@ -24,6 +24,9 @@ export default class Main extends Component {
 
     let tabsElement;
     if (tabs.length > 1) {
+      tabs.sort(function(a, b) {
+        return a.node.frontmatter.tabOrder - b.node.frontmatter.tabOrder
+      })
       tabsElement = (
         <nav className="tabs">
           <ul>

@@ -11,7 +11,6 @@ export default class ListItem extends Component {
     itemName: PropTypes.string,
     itemLink: PropTypes.string,
     children: PropTypes.node,
-    key: PropTypes.string,
     filter: PropTypes.string,
   };
   
@@ -20,7 +19,6 @@ export default class ListItem extends Component {
     itemName: null,
     itemLink: null,
     children: [],
-    key: null,
     filter: null
   };
 
@@ -33,11 +31,11 @@ export default class ListItem extends Component {
   };
 
   render() {
-    const { item, itemLink, key, children, active } = this.props;
+    const { item, itemLink, children, active } = this.props;
     const listItemContent = item.childMdx.frontmatter;
 
     return (
-      <li className={`menu-item--child${active === true ? ' menu-item--child--active' : ''}`} key={key}>
+      <li className={`menu-item--child${active === true ? ' menu-item--child--active' : ''}`}>
         <Link className="menu-link" to={itemLink}>{listItemContent.title}</Link>
         {children}
       </li>
