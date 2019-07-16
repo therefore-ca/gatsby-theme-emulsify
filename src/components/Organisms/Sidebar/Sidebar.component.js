@@ -3,6 +3,7 @@ import React, { Component } from "react"
 import "./sidebar.css"
 import "./sidebar-design.css"
 
+import CloseIcon from "../../../../assets/close.svg"
 import DownIcon from "../../../../assets/down.svg"
 import MenuIcon from "../../../../assets/menu-bars.svg"
 import MainMenu from "../../Molecules/Menus/MainMenu.component"
@@ -36,9 +37,23 @@ export default class Sidebar extends Component {
   }
 
   render() {
-    const { siteTitle, menu, id, collection } = this.props;
+    const { siteTitle, menu, id, collection, designSystems } = this.props;
     return (
       <div className="sidebar">
+        <nav className="parent-menu">
+          <CloseIcon
+            className="parent-menu__toggle parent-menu__toggle--close"
+            onClick={this.open}
+            aria-label="Toggle Parent Menu"
+          />
+          <ul>
+            {designSystems.map(link => (
+              <li key={link.name}>
+                <a href={link.link}>{link.name}</a>
+                </li>
+            ))}
+          </ul>
+        </nav>
         <div className="sidebar__inner">
           <div className="sidebar__header">
             <DownIcon

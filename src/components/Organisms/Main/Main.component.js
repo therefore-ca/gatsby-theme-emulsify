@@ -10,9 +10,9 @@ import Sidebar from "../Sidebar/Sidebar.component"
  * Component that renders the main area.
  */
 export default class Main extends Component {
-  
+
   render() {
-    const { title, siteTitle, body, pages, parentDirectory, id, menu, collection } = this.props;
+    const { title, siteTitle, body, pages, parentDirectory, id, menu, collection, designSystems} = this.props;
     let tabs = [];
     pages.forEach(page => {
       if (page.node.fields) {
@@ -53,6 +53,7 @@ export default class Main extends Component {
           toggleOpen={this.props.toggleOpen}
           menu={menu}
           collection={collection}
+          designSystems={designSystems}
         />
         <div className="main-content">
           <h1 className="main-title">{title}</h1>

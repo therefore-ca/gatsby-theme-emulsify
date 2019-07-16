@@ -1,7 +1,6 @@
 .wrapper {
   transition: transform .11s cubic-bezier(.2,0,1,.9),-webkit-transform .11s cubic-bezier(.2,0,1,.9);
   will-change: transform;
-  height: 100vh;
 }
 
 .wrapper-open {
@@ -12,7 +11,7 @@
   background-color: var(--color--parent-menu-bg);
   height: 100%;
   width: 100vw;
-  position: fixed;
+  position: absolute;
   top: 0;
   left: -100vw;
   display: flex;
