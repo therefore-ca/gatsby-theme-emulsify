@@ -1,8 +1,8 @@
 .btn {
-  background-color: #2f2f2f;
+  background-color: var(--color-var--gray-darkest);
   border: none;
   border-radius: 0.15rem;
-  color: white;
+  color: var(--color-var--white);
   cursor: pointer;
   display: inline-block;
   font-size: 1rem;
@@ -18,5 +18,5 @@
 
 .btn:hover,
 .btnWhite:hover {
-  background-color: #aaa;
+  background-color: var(--color-var--gray-light);
 }
