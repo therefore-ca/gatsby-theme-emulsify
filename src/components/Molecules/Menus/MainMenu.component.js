@@ -4,8 +4,8 @@ import "./main-menu-design.css"
 
 import DownIcon from "../../../../assets/down.svg"
 import UpIcon from "../../../../assets/up.svg"
-import ListItem from "../../Atoms/ListItem/ListItem.component"
 import Menu from "./Menu.component"
+import MenuComponent from "./MenuComponent.component"
 
 /**
  * Component that renders the main menu.
@@ -53,69 +53,64 @@ export default class MainMenu extends Component {
       if(a.parent[0] < b.parent[0]) { return -1; }
       if(a.parent[0] > b.parent[0]) { return 1; }
       return 0;
-    })
+    });
+
+    const groupedMenuItems = directoryTree.children.reduce((acc, item) => {
+      const parentItem = acc[item.parent] || [];
+      return {
+        ...acc,
+        [item.parent]: [...parentItem, item.item]
+      };
+    }, {});
+
+    const isComponentsMenu = (name) => name === 'Components';
 
     return (
       <div>
       {
-        directoryTree.children.map(function(menuItem, i) {
-          const menuParentTrimmed = menuItem.parent.split('__').pop()
-          if (menuParentTrimmed === 'Components') {
-            return (
-              <li 
-                key={menuItem.item.childMdx.id}
-                className={`menu-item${collection === 'components' ? ' menu-item--open' : ''} ${this.state.activeIndex===i ? ' menu-item--open' : ''}`}
-                onClick={this.toggle.bind(this, i)}
-              >
-                <span>
-                  {menuParentTrimmed}
-                    <DownIcon
-                      className="menu-icon menu-icon--down"
-                      aria-label="Toggle Open"
-                    />
-                    <UpIcon
-                      className="menu-icon menu-icon--up"
-                      aria-label="Toggle Closed"
-                    />
-                </span>
-                <Menu menu={menu} filter="components" id={id} />
-              </li>
-            )
-          }
-          else {
-            return (
-              <li 
-                key={menuItem.item.childMdx.id}
-                className={`menu-item${menuItem.active ? ' menu-item--open' : ''} ${this.state.activeIndex===i ? ' menu-item--open' : ''}`}
-                onClick={this.toggle.bind(this, i)}
-              >
-                <span>
-                  {menuParentTrimmed}
-                    <DownIcon
-                      className="menu-icon menu-icon--down"
-                      aria-label="Toggle Open"
-                    />
-                    <UpIcon
-                      className="menu-icon menu-icon--up"
-                      aria-label="Toggle Closed"
-                    />
-                </span>
-                <ul className="menu-child">
-                  <ListItem
-                    active={menuItem.active}
-                    item={menuItem.item}
-                    key={menuItem.item.id}
-                    itemName={menuItem.item.name}
-                    itemLink={menuItem.item.childMdx.fields.slug}
-                    icon
-                  />
-                </ul>
-              </li>
-              )
+        Object.keys(groupedMenuItems).map((parentKey, parentIndex) => {
+          const parentName = parentKey.split('__').pop();
+          let activeItem = false;
+          groupedMenuItems[parentKey].forEach(item => {
+            if (item.childMdx.id === id) {
+              activeItem = true;
             }
-          }, this)
-        }
+          })
+          return (
+            <li
+              key={parentIndex}
+              className={`menu-item ${activeItem === true || this.state.activeIndex === parentIndex || groupedMenuItems[parentKey][0].name.toLowerCase() === collection ? 'menu-item--open' : '' }`}
+              onClick={this.toggle.bind(this, parentIndex)}
+            >
+              <span>
+                {parentName}
+                <DownIcon
+                  className="menu-icon menu-icon--down"
+                  aria-label="Toggle Open"
+                />
+                <UpIcon
+                  className="menu-icon menu-icon--up"
+                  aria-label="Toggle Closed"
+                />
+              </span>
+              {isComponentsMenu(parentName) ? (
+                <MenuComponent
+                  menu={menu}
+                  filter="components"
+                  id={id}
+                />
+              ) : (
+                <Menu
+                  menu={groupedMenuItems[parentKey]}
+                  filter="pages"
+                  id={id}
+                />
+              )}
+            </li>
+          )
+        })
+      }
       </div>
-    )
+    );
   }
 }

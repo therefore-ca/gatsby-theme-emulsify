@@ -7,16 +7,19 @@ import ListItem from "../../Atoms/ListItem/ListItem.component"
  */
 export default class Menu extends Component {
   render() {
-    const { menu, filter, id } = this.props;
+    const { menu, id } = this.props;
 
     const directoryTree = {};
     directoryTree.children = [];
 
     menu.forEach((item) => {
-      if (item.sourceInstanceName === filter) {
+      let isActive = false;
+      // Components
+      if (item.sourceInstanceName === 'components') {
+        // Only add one Components subitem to menu - should be refactored later.
         if (item.name === 'Code') {
           // Mark the item active if its id is the same as the id of the current page.
-          let isActive = item.childMdx.id === id;
+          isActive = item.childMdx.id === id;
           if (!isActive) {
             // Also mark the item active if the current page id corresponds to a menu item that shares a prefix with the Code item (sibling).
             let prefix = item.childMdx.fields.slug.replace('code/', '');
@@ -25,7 +28,18 @@ export default class Menu extends Component {
             );
             isActive = siblings.length > 0;
           }
-
+          directoryTree.children.push(
+            {
+              item: item,
+              active: isActive,
+            }
+          )
+        }
+      }
+      // Pages
+      else {
+        if (item.childMdx) {
+          isActive = item.childMdx.id === id;
           directoryTree.children.push(
             {
               item: item,
