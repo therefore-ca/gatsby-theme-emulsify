@@ -4,8 +4,8 @@ import "./main-menu-design.css"
 
 import DownIcon from "../../../../assets/down.svg"
 import UpIcon from "../../../../assets/up.svg"
-import ListItem from "../../Atoms/ListItem/ListItem.component"
 import Menu from "./Menu.component"
+import MenuComponent from "./MenuComponent.component"
 
 /**
  * Component that renders the main menu.
@@ -64,17 +64,22 @@ export default class MainMenu extends Component {
     }, {});
 
     const isComponentsMenu = (name) => name === 'Components';
-    const parentIsOpen = (i) => collection === 'components' || this.state.activeIndex === i;
 
     return (
       <div>
       {
         Object.keys(groupedMenuItems).map((parentKey, parentIndex) => {
           const parentName = parentKey.split('__').pop();
+          let activeItem = false;
+          groupedMenuItems[parentKey].forEach(item => {
+            if (item.childMdx.id === id) {
+              activeItem = true;
+            }
+          })
           return (
             <li
               key={parentIndex}
-              className={`menu-item ${parentIsOpen(parentIndex) ? 'menu-item--open' : '' }`}
+              className={`menu-item ${activeItem === true || this.state.activeIndex === parentIndex || groupedMenuItems[parentKey][0].name.toLowerCase() === collection ? 'menu-item--open' : '' }`}
               onClick={this.toggle.bind(this, parentIndex)}
             >
               <span>
@@ -88,11 +93,19 @@ export default class MainMenu extends Component {
                   aria-label="Toggle Closed"
                 />
               </span>
-              <Menu
-                menu={isComponentsMenu(parentName) ? menu : groupedMenuItems[parentKey]}
-                filter={isComponentsMenu(parentName) ? 'components' : 'pages'}
-                id={id}
-              />
+              {isComponentsMenu(parentName) ? (
+                <MenuComponent
+                  menu={menu}
+                  filter="components"
+                  id={id}
+                />
+              ) : (
+                <Menu
+                  menu={groupedMenuItems[parentKey]}
+                  filter="pages"
+                  id={id}
+                />
+              )}
             </li>
           )
         })
