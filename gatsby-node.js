@@ -222,7 +222,16 @@ exports.onCreateNode = async ({
     const fileReads = [];
 
     if (node.context.absolutePath) {
+      // console.log(node.context.data)
+      // Understanding https://github.com/twigjs/twig.js/blob/bd3f64dddb2f292ce4a68b4c5b575358ebbf1e36/src/twig.exports.js for parsing renderFile would be helpful I think.
       fileReads.push(renderTwig(node.context.absolutePath, node.context.data));
+      // fileReads.push(
+      //   Twig.twig({
+      //       data: node.context.absolutePath,
+      //       ref: node.context.data,
+      //       namespaces: { 'atoms': 'components/01-atoms/' }
+      //   }).render(node.context.data)
+      // );
     }
 
     const jsFileReads = [];
