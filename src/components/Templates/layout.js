@@ -1,4 +1,5 @@
 import React from "react"
+import { renderToString } from 'react-dom/server'
 import { graphql } from "gatsby"
 import { MDXProvider } from '@mdx-js/react'
 import ComponentLayout from "./component-layout"
@@ -7,11 +8,13 @@ import "./layout.css"
 
 // Components for MDX
 import ComponentViewer from '../Atoms/ComponentViewer/ComponentViewer.component'
+import CodeSnippet from '../Atoms/CodeSnippet/CodeSnippet.component'
 
 export default (props) => {
     const { pageContext } = props;
     const [components] = React.useState({
-      ComponentViewer: (props) => !pageContext.iframePath === null ? 'Error: No Component Found' : <ComponentViewer url={`${window.origin}/${pageContext.iframePath}`} />
+      ComponentViewer: (props) => !pageContext.iframePath === null ? 'Error: No Component Found' : <ComponentViewer url={`${window.origin}/${pageContext.iframePath}`} />,
+      CodeSnippet: (props) => !pageContext.twigCode === null ? 'Error: No Code Found' : <CodeSnippet code={ `${pageContext.twigCode}`} />
     })
     const post = props.data.mdx
     const site = props.data.site

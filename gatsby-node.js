@@ -140,16 +140,19 @@ exports.createPages = ({
       const asset = assetMap.find(asset => mdFile.fields.parentDir === asset.mdFile.fields.parentDir)
       const name = asset.twigFile ? asset.twigFile.name.replace(/\s+/g, '-').toLowerCase() : null;
       const iframePath = `${name}-isolated`
-
-      createPage({
-        path: mdFile.fields.slug,
-        component: ComponentPost,
-        context: {
-          iframePath,
-          slug: mdFile.fields.slug,
-          collection: mdFile.fields.collection,
-          parentDir: mdFile.fields.parentDir
-        },
+      const fileRead = asset.twigFile ? readFile(asset.twigFile.absolutePath) : Promise.resolve('No Code found');
+      return fileRead.then(twigCode => {
+        createPage({
+          path: mdFile.fields.slug,
+          component: ComponentPost,
+          context: {
+            iframePath,
+            twigCode: String(twigCode),
+            slug: mdFile.fields.slug,
+            collection: mdFile.fields.collection,
+            parentDir: mdFile.fields.parentDir
+          },
+        })
       })
     })
 
@@ -255,8 +258,6 @@ exports.onCreateNode = async ({
     } else {
       fileReads.push('');
     }
-
-
     return Promise.all(fileReads).then(([componentHtml, js, css]) => {
       createNodeField({
         node,
