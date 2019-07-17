@@ -26,12 +26,11 @@ As a Gatsby theme, this project is not meant to be used directly but rather as a
     "build": "gatsby build"
   }
 }
+```
 
 2. `yarn` or `npm install`
 3. Add the directory `styleguide/pages` (For your Styleguide Documentation.)
 4. Add the directory `components`
-
-```
 
 ### Starter
 
