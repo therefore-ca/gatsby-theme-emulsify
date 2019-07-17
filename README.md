@@ -23,7 +23,7 @@ As a Gatsby theme, this project is not meant to be used directly but rather as a
   },
   "scripts": {
     "develop": "gatsby develop",
-    "build": "gatsby build",
+    "build": "gatsby build"
   }
 }
 
