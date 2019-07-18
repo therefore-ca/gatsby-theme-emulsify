@@ -2,7 +2,7 @@
   Emulsify Gatsby Theme
 </h1>
 
-<p align="center"> A Design System _Generator_ powered by [Gatsby](https://gatsbyjs.org) and using [MDX](https://github.com/mdx-js/specification).
+<p align="center"> A Design System _Generator_ powered by <a href="https://gatsbyjs.org">Gatsby</a> and using <a href="https://github.com/mdx-js/specification">MDX</a>.
 </p>
 
 ## 🚀 Install
