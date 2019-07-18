@@ -2,7 +2,7 @@
   Emulsify Gatsby Theme
 </h1>
 
-<h4 align="center"> A Design System <em>Generator</em> powered by <a href="https://gatsbyjs.org">Gatsby</a> and <a href="https://github.com/mdx-js/specification">MDX</a>.
+<h4 align="center">A Design System <em>Generator</em> powered by <a href="https://gatsbyjs.org">Gatsby</a> and <a href="https://github.com/mdx-js/specification">MDX</a>.
 </h4>
 
 ## 🚀 Usage
