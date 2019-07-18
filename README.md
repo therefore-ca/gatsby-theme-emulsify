@@ -11,4 +11,4 @@ As a Gatsby theme, this project is not meant to be installed directly but rather
 
 There is currently a starter for Drupal projects called [Gatsby Starter Emulsify (Drupal)](https://github.com/fourkitchens/gatsby-starter-emulsify-drupal), but more starters can be created.
 
-Instructions for installing that starter can be found in that repo's [README file](https://github.com/fourkitchens/gatsby-starter-emulsify-drupal/blob/master/README.md).
+Instructions for installing that starter can be found in that repo's [README file](https://github.com/fourkitchens/gatsby-starter-emulsify-drupal#--emulsify-gatsby---drupal-starter).
