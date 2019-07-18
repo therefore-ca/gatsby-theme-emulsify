@@ -16,7 +16,7 @@ const CodeSnippet = props => {
 
   return (
     <div className="code-snippet">
-      <Highlight {...defaultProps} code={props.code.trim()} language="jsx">
+      <Highlight {...defaultProps} code={code.trim()} language="jsx">
         {({ className, style, tokens, getLineProps, getTokenProps }) => (
           <pre className={className} style={style}>
             {tokens.map((line, i) => (

@@ -1,5 +1,4 @@
 import React from "react"
-import { renderToString } from 'react-dom/server'
 import { graphql } from "gatsby"
 import { MDXProvider } from '@mdx-js/react'
 import ComponentLayout from "./component-layout"
