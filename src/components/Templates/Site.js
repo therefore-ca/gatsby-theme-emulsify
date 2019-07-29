@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { MDXRenderer } from "gatsby-plugin-mdx";
 
 import Sidebar from "../Organisms/Sidebar/Sidebar.component";

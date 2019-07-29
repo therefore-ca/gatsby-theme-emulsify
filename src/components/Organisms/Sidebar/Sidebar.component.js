@@ -40,20 +40,22 @@ export default class Sidebar extends Component {
     const { siteTitle, menu, id, collection, designSystems } = this.props;
     return (
       <div className="sidebar">
-        <nav className="parent-menu">
-          <CloseIcon
-            className="parent-menu__toggle parent-menu__toggle--close"
-            onClick={this.open}
-            aria-label="Toggle Parent Menu"
-          />
-          <ul>
-            {designSystems.map(link => (
-              <li key={link.name}>
-                <a href={link.link}>{link.name}</a>
-              </li>
-            ))}
-          </ul>
-        </nav>
+        {designSystems.length ? (
+          <nav className="parent-menu">
+            <CloseIcon
+              className="parent-menu__toggle parent-menu__toggle--close"
+              onClick={this.open}
+              aria-label="Toggle Parent Menu"
+            />
+            <ul>
+              {designSystems.map(link => (
+                <li key={link.name}>
+                  <a href={link.link}>{link.name}</a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        ) : null}
         <div className="sidebar__inner">
           <div className="sidebar__header">
             <DownIcon
