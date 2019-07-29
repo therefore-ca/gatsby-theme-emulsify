@@ -1,6 +1,5 @@
 const _ = require("lodash");
 const { createFilePath } = require(`gatsby-source-filesystem`);
-const path = require("path");
 const util = require("util");
 const Twig = require("twig");
 const yaml = require("js-yaml");
@@ -44,7 +43,7 @@ function createAssetMap(mdFiles, twigFiles, dataFiles, cssFiles, jsFiles) {
 }
 
 exports.createPages = ({ actions, graphql }) => {
-  const { createPage, deletePage } = actions;
+  const { createPage } = actions;
 
   const ComponentPost = require.resolve(`./src/components/Templates/layout.js`);
   const IsolatedTwigComponent = require.resolve(
@@ -185,6 +184,7 @@ exports.createPages = ({ actions, graphql }) => {
             });
           });
         }
+        return Promise.resolve();
       })
     );
   });
