@@ -1,8 +1,13 @@
-import PropTypes from "prop-types";
 import React, { Component } from "react";
-import "./site.css";
+import PropTypes from "prop-types";
+import { MDXRenderer } from "gatsby-plugin-mdx";
 
-import Main from "../Organisms/Main/Main.component";
+import Sidebar from "../Organisms/Sidebar/Sidebar.component";
+import Tabs from "../Organisms/Tabs/Tabs.component";
+
+import "./site.css";
+import "./main.css";
+import "./main-design.css";
 
 export default class Site extends Component {
   static propTypes = {
@@ -19,34 +24,54 @@ export default class Site extends Component {
 
   render() {
     const {
-      frontmatter,
       title,
       body,
-      edges,
+      docPages,
       designSystems,
-      fields,
       id,
       menu,
       parentDirectory,
       collection
     } = this.props;
+    let tabs = [];
+    docPages.forEach(page => {
+      if (page.node.fields) {
+        if (
+          page.node.fields.parentDir === parentDirectory &&
+          page.node.frontmatter.tab
+        ) {
+          tabs.push(page);
+        }
+      }
+    });
+
+    if (tabs.length > 1) {
+      tabs.sort(function(a, b) {
+        return a.node.frontmatter.tabOrder - b.node.frontmatter.tabOrder;
+      });
+    }
     return (
       <div
         className={this.state.isMenuOpen ? "wrapper-open wrapper" : "wrapper"}
       >
-        <Main
-          {...fields}
-          {...frontmatter}
-          id={id}
-          body={body}
-          collection={collection}
-          menu={menu}
-          pages={edges}
-          parentDirectory={parentDirectory}
-          siteTitle={title}
-          toggleOpen={this.toggleOpen}
-          designSystems={designSystems}
-        />
+        <div className="main">
+          <Sidebar
+            id={id}
+            pages={docPages}
+            siteTitle={title}
+            toggleOpen={this.props.toggleOpen}
+            menu={menu}
+            collection={collection}
+            designSystems={designSystems}
+          />
+          <div className="main-content">
+            <h1 className="main-title">{title}</h1>
+            {tabs.length ? <Tabs tabs={tabs} id={id} /> : null}
+            <div className="main-content-content">
+              <MDXRenderer>{body}</MDXRenderer>
+            </div>
+          </div>
+        </div>
       </div>
     );
   }

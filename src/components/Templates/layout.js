@@ -43,7 +43,7 @@ export default props => {
         frontmatter={post.frontmatter}
         body={post.body}
         title={site.siteMetadata.title}
-        edges={docPages}
+        docPages={docPages}
         designSystems={site.siteMetadata.designSystems}
         parentDirectory={props.pageContext.parentDir}
       />
