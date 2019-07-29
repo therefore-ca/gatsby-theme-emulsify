@@ -59,20 +59,3 @@ module.exports = ({
     `gatsby-plugin-sharp`
   ]
 });
-
-exports.onPreBootstrap = ({ store, reporter }) => {
-  const { program } = store.getState();
-
-  const dirs = [
-    path.join(program.directory, "posts"),
-    path.join(program.directory, "src/pages"),
-    path.join(program.directory, "src/data")
-  ];
-
-  dirs.forEach(dir => {
-    if (!fs.existsSync(dir)) {
-      reporter.log(`creating the ${dir} directory`);
-      mkdirp.sync(dir);
-    }
-  });
-};
