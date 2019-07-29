@@ -1,6 +1,10 @@
 import React from "react";
 import { graphql } from "gatsby";
 
+/**
+ * This page template is used for rendering a twig component in isolation.
+ * An iframe is used to ensure the component and the style guide don't leak styles
+ */
 export default class IsolatedTwigComponent extends React.Component {
   assetReference = "asset";
 
