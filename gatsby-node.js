@@ -1,22 +1,20 @@
-const _ = require("lodash")
-const {
-  createFilePath
-} = require(`gatsby-source-filesystem`)
-const path = require('path');
-const util = require('util')
-const Twig = require('twig');
-const yaml = require('js-yaml');
-const fs = require('fs');
+const _ = require("lodash");
+const { createFilePath } = require(`gatsby-source-filesystem`);
+const path = require("path");
+const util = require("util");
+const Twig = require("twig");
+const yaml = require("js-yaml");
+const fs = require("fs");
 
 const readFile = util.promisify(fs.readFile);
 const renderTwig = util.promisify(Twig.renderFile);
 
-const IN_PRODUCTION = process.env.NODE_ENV === 'production';
+const IN_PRODUCTION = process.env.NODE_ENV === "production";
 
 Twig.cache(IN_PRODUCTION);
 
 function relativeDirEq(value) {
-  return file => file.relativeDirectory === value
+  return file => file.relativeDirectory === value;
 }
 
 /**
@@ -28,38 +26,36 @@ function createAssetMap(mdFiles, twigFiles, dataFiles, cssFiles, jsFiles) {
     const mdParentDir = current.fields.parentDir;
     if (!dirs[mdParentDir]) {
       dirs[mdParentDir] = true;
-      return [...acc, {
-        mdFile: current,
-        // Organize assets that are in the same directory as the published md file
-        cssFile: cssFiles.find(relativeDirEq(mdParentDir)),
-        jsFile: jsFiles.find(relativeDirEq(mdParentDir)),
-        twigFile: twigFiles.find(relativeDirEq(mdParentDir)),
-        dataFile: dataFiles.find(relativeDirEq(mdParentDir)),
-      }]
+      return [
+        ...acc,
+        {
+          mdFile: current,
+          // Organize assets that are in the same directory as the published md file
+          cssFile: cssFiles.find(relativeDirEq(mdParentDir)),
+          jsFile: jsFiles.find(relativeDirEq(mdParentDir)),
+          twigFile: twigFiles.find(relativeDirEq(mdParentDir)),
+          dataFile: dataFiles.find(relativeDirEq(mdParentDir))
+        }
+      ];
     }
 
     return acc;
-  }, [])
-
+  }, []);
 }
 
-exports.createPages = ({
-  actions,
-  graphql
-}) => {
-  const {
-    createPage,
-    deletePage
-  } = actions
+exports.createPages = ({ actions, graphql }) => {
+  const { createPage, deletePage } = actions;
 
-  const ComponentPost = require.resolve(`./src/components/Templates/layout.js`)
-  const IsolatedTwigComponent = require.resolve(`./src/components/Templates/IsolatedTwigComponent.js`)
+  const ComponentPost = require.resolve(`./src/components/Templates/layout.js`);
+  const IsolatedTwigComponent = require.resolve(
+    `./src/components/Templates/IsolatedTwigComponent.js`
+  );
 
   return graphql(`
     {
       allMdx(
         limit: 1000
-        filter: {frontmatter: {publishToStyleGuide: {eq: true}}}
+        filter: { frontmatter: { publishToStyleGuide: { eq: true } } }
       ) {
         nodes {
           fields {
@@ -73,7 +69,7 @@ exports.createPages = ({
           }
         }
       }
-      twigFiles: allFile(filter: {extension: {eq: "twig"}}) {
+      twigFiles: allFile(filter: { extension: { eq: "twig" } }) {
         nodes {
           extension
           relativePath
@@ -85,7 +81,7 @@ exports.createPages = ({
           base
         }
       }
-      jsFiles: allFile(filter: {extension: {eq: "js"}}) {
+      jsFiles: allFile(filter: { extension: { eq: "js" } }) {
         nodes {
           extension
           relativePath
@@ -97,7 +93,7 @@ exports.createPages = ({
           base
         }
       }
-      cssFiles: allFile(filter: {extension: {eq: "css"}}) {
+      cssFiles: allFile(filter: { extension: { eq: "css" } }) {
         nodes {
           extension
           relativePath
@@ -109,7 +105,7 @@ exports.createPages = ({
           base
         }
       }
-      dataFiles: allFile(filter: {extension: {eq: "yml"}}) {
+      dataFiles: allFile(filter: { extension: { eq: "yml" } }) {
         nodes {
           extension
           relativePath
@@ -124,23 +120,35 @@ exports.createPages = ({
     }
   `).then(result => {
     if (result.errors) {
-      throw result.errors
+      throw result.errors;
     }
 
     // Create component pages.
-    const mdFiles = result.data.allMdx.nodes
-    const twigComponents = result.data.twigFiles.nodes
-    const cssFiles = result.data.cssFiles.nodes
-    const dataFiles = result.data.dataFiles.nodes
-    const jsFiles = result.data.jsFiles.nodes
+    const mdFiles = result.data.allMdx.nodes;
+    const twigComponents = result.data.twigFiles.nodes;
+    const cssFiles = result.data.cssFiles.nodes;
+    const dataFiles = result.data.dataFiles.nodes;
+    const jsFiles = result.data.jsFiles.nodes;
 
-    const assetMap = createAssetMap(mdFiles, twigComponents, dataFiles, cssFiles, jsFiles)
+    const assetMap = createAssetMap(
+      mdFiles,
+      twigComponents,
+      dataFiles,
+      cssFiles,
+      jsFiles
+    );
 
-    mdFiles.forEach((mdFile) => {
-      const asset = assetMap.find(asset => mdFile.fields.parentDir === asset.mdFile.fields.parentDir)
-      const name = asset.twigFile ? asset.twigFile.name.replace(/\s+/g, '-').toLowerCase() : null;
-      const iframePath = `${name}-isolated`
-      const fileRead = asset.twigFile ? readFile(asset.twigFile.absolutePath) : Promise.resolve('No Code found');
+    mdFiles.forEach(mdFile => {
+      const asset = assetMap.find(
+        asset => mdFile.fields.parentDir === asset.mdFile.fields.parentDir
+      );
+      const name = asset.twigFile
+        ? asset.twigFile.name.replace(/\s+/g, "-").toLowerCase()
+        : null;
+      const iframePath = `${name}-isolated`;
+      const fileRead = asset.twigFile
+        ? readFile(asset.twigFile.absolutePath)
+        : Promise.resolve("No Code found");
       return fileRead.then(twigCode => {
         createPage({
           path: mdFile.fields.slug,
@@ -151,24 +159,19 @@ exports.createPages = ({
             slug: mdFile.fields.slug,
             collection: mdFile.fields.collection,
             parentDir: mdFile.fields.parentDir
-          },
-        })
-      })
-    })
+          }
+        });
+      });
+    });
 
-    return Promise.all(assetMap.map((assets) => {
-      const {
-        twigFile,
-        dataFile,
-        jsFile,
-        cssFile
-      }  = assets;
+    return Promise.all(
+      assetMap.map(assets => {
+        const { twigFile, dataFile, jsFile, cssFile } = assets;
 
-      if (twigFile) {
-        return readFile(dataFile.absolutePath, 'utf8')
-          .then((yml) => {
+        if (twigFile) {
+          return readFile(dataFile.absolutePath, "utf8").then(yml => {
             const data = yaml.safeLoad(yml);
-            const name = twigFile.name.replace(/\s+/g, '-').toLowerCase()
+            const name = twigFile.name.replace(/\s+/g, "-").toLowerCase();
             return createPage({
               path: `${name}-isolated`,
               component: IsolatedTwigComponent,
@@ -179,49 +182,48 @@ exports.createPages = ({
                 cssFile,
                 assetMap
               }
-            })
-          })
-      }
-    }))
-  })
-}
+            });
+          });
+        }
+      })
+    );
+  });
+};
 
-exports.onCreateNode = async ({
-  node,
-  actions,
-  getNode
-}) => {
-  const {
-    createNodeField
-  } = actions
+exports.onCreateNode = async ({ node, actions, getNode }) => {
+  const { createNodeField } = actions;
 
   if (node.internal.type === `Mdx`) {
     let value = createFilePath({
       node,
       getNode
-    }).toLowerCase()
-    value = value.replace(/\s+/g, '-').toLowerCase()
+    }).toLowerCase();
+    value = value.replace(/\s+/g, "-").toLowerCase();
     createNodeField({
       name: `slug`,
       node,
-      value,
-    })
+      value
+    });
 
     // Get the parent node
-    const parent = getNode(_.get(node, 'parent'))
+    const parent = getNode(_.get(node, "parent"));
     createNodeField({
       node,
-      name: 'collection',
-      value: _.get(parent, 'sourceInstanceName'),
-    })
+      name: "collection",
+      value: _.get(parent, "sourceInstanceName")
+    });
     createNodeField({
       node,
-      name: 'parentDir',
-      value: _.get(parent, 'relativeDirectory'),
-    })
+      name: "parentDir",
+      value: _.get(parent, "relativeDirectory")
+    });
   }
 
-  if (node.internal.type === 'SitePage' && node.context && node.context.extension === 'twig') {
+  if (
+    node.internal.type === "SitePage" &&
+    node.context &&
+    node.context.extension === "twig"
+  ) {
     const fileReads = [];
 
     if (node.context.absolutePath) {
@@ -231,49 +233,49 @@ exports.onCreateNode = async ({
     const jsFileReads = [];
     node.context.assetMap.forEach(asset => {
       if (asset.jsFile) {
-        jsFileReads.push(readFile(asset.jsFile.absolutePath, 'utf8'))
+        jsFileReads.push(readFile(asset.jsFile.absolutePath, "utf8"));
       }
-    })
+    });
 
     const jsFiles = await Promise.all(jsFileReads);
 
     if (jsFiles.length) {
-      fileReads.push(jsFiles.join('\n'))
+      fileReads.push(jsFiles.join("\n"));
     } else {
-      fileReads.push('');
+      fileReads.push("");
     }
 
     const cssFileReads = [];
     node.context.assetMap.forEach(asset => {
       if (asset.cssFile) {
-        cssFileReads.push(readFile(asset.cssFile.absolutePath, 'utf8'))
+        cssFileReads.push(readFile(asset.cssFile.absolutePath, "utf8"));
       }
-    })
+    });
 
     const cssFiles = await Promise.all(cssFileReads);
 
     // lol
     if (cssFiles.length) {
-      fileReads.push(cssFiles.join('\n'))
+      fileReads.push(cssFiles.join("\n"));
     } else {
-      fileReads.push('');
+      fileReads.push("");
     }
     return Promise.all(fileReads).then(([componentHtml, js, css]) => {
       createNodeField({
         node,
-        name: 'componentHtml',
-        value: componentHtml,
-      })
+        name: "componentHtml",
+        value: componentHtml
+      });
       createNodeField({
         node,
-        name: 'jsCode',
-        value: js,
-      })
+        name: "jsCode",
+        value: js
+      });
       createNodeField({
         node,
-        name: 'cssCode',
-        value: css,
-      })
-    })
+        name: "cssCode",
+        value: css
+      });
+    });
   }
-}
+};

@@ -1,11 +1,11 @@
-import React, { Component } from "react"
-import "./main-menu.css"
-import "./main-menu-design.css"
+import React, { Component } from "react";
+import "./main-menu.css";
+import "./main-menu-design.css";
 
-import DownIcon from "../../../../assets/down.svg"
-import UpIcon from "../../../../assets/up.svg"
-import Menu from "./Menu.component"
-import MenuComponent from "./MenuComponent.component"
+import DownIcon from "../../../../assets/down.svg";
+import UpIcon from "../../../../assets/up.svg";
+import Menu from "./Menu.component";
+import MenuComponent from "./MenuComponent.component";
 
 /**
  * Component that renders the main menu.
@@ -13,45 +13,46 @@ import MenuComponent from "./MenuComponent.component"
 export default class MainMenu extends Component {
   state = { activeIndex: null };
 
-  toggle = (index) => {
+  toggle = index => {
     if (this.state.activeIndex !== index) {
       this.setState({ activeIndex: index });
-    }
-    else {
+    } else {
       this.setState({ activeIndex: null });
     }
   };
 
   render() {
     const { menu, id, filter, collection } = this.props;
-    let menuItems = menu
+    let menuItems = menu;
 
     const directoryTree = {};
     directoryTree.children = [];
 
-    menuItems.forEach((item) => {
+    menuItems.forEach(item => {
       // Filter by filter prop.
       if (item.sourceInstanceName === filter) {
         // Not the following pages.
-        if (item.name !== 'index' || item.name !== '404') {
+        if (item.name !== "index" || item.name !== "404") {
           const itemDir = item.relativeDirectory;
           // Only if it has a parent directory.
-          if (itemDir !== '') {
-            directoryTree.children.push(
-              {
-                parent: itemDir,
-                item: item,
-                active: item.childMdx.id === id ? true : false
-              }
-            )
+          if (itemDir !== "") {
+            directoryTree.children.push({
+              parent: itemDir,
+              item: item,
+              active: item.childMdx.id === id ? true : false
+            });
           }
         }
       }
-    })
+    });
 
     directoryTree.children.sort(function(a, b) {
-      if(a.parent[0] < b.parent[0]) { return -1; }
-      if(a.parent[0] > b.parent[0]) { return 1; }
+      if (a.parent[0] < b.parent[0]) {
+        return -1;
+      }
+      if (a.parent[0] > b.parent[0]) {
+        return 1;
+      }
       return 0;
     });
 
@@ -63,23 +64,28 @@ export default class MainMenu extends Component {
       };
     }, {});
 
-    const isComponentsMenu = (name) => name === 'Components';
+    const isComponentsMenu = name => name === "Components";
 
     return (
       <div>
-      {
-        Object.keys(groupedMenuItems).map((parentKey, parentIndex) => {
-          const parentName = parentKey.split('__').pop();
+        {Object.keys(groupedMenuItems).map((parentKey, parentIndex) => {
+          const parentName = parentKey.split("__").pop();
           let activeItem = false;
           groupedMenuItems[parentKey].forEach(item => {
             if (item.childMdx.id === id) {
               activeItem = true;
             }
-          })
+          });
           return (
             <li
               key={parentIndex}
-              className={`menu-item ${activeItem === true || this.state.activeIndex === parentIndex || groupedMenuItems[parentKey][0].name.toLowerCase() === collection ? 'menu-item--open' : '' }`}
+              className={`menu-item ${
+                activeItem === true ||
+                this.state.activeIndex === parentIndex ||
+                groupedMenuItems[parentKey][0].name.toLowerCase() === collection
+                  ? "menu-item--open"
+                  : ""
+              }`}
               onClick={this.toggle.bind(this, parentIndex)}
             >
               <span>
@@ -94,11 +100,7 @@ export default class MainMenu extends Component {
                 />
               </span>
               {isComponentsMenu(parentName) ? (
-                <MenuComponent
-                  menu={menu}
-                  filter="components"
-                  id={id}
-                />
+                <MenuComponent menu={menu} filter="components" id={id} />
               ) : (
                 <Menu
                   menu={groupedMenuItems[parentKey]}
@@ -107,9 +109,8 @@ export default class MainMenu extends Component {
                 />
               )}
             </li>
-          )
-        })
-      }
+          );
+        })}
       </div>
     );
   }

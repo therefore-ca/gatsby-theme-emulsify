@@ -1,43 +1,53 @@
-import React from "react"
-import { graphql } from "gatsby"
-import { MDXProvider } from '@mdx-js/react'
-import ComponentLayout from "./component-layout"
-import SEO from "./seo"
-import "./layout.css"
+import React from "react";
+import { graphql } from "gatsby";
+import { MDXProvider } from "@mdx-js/react";
+import ComponentLayout from "./component-layout";
+import SEO from "./seo";
+import "./layout.css";
 
 // Components for MDX
-import ComponentViewer from '../Atoms/ComponentViewer/ComponentViewer.component'
-import CodeSnippet from '../Atoms/CodeSnippet/CodeSnippet.component'
+import ComponentViewer from "../Atoms/ComponentViewer/ComponentViewer.component";
+import CodeSnippet from "../Atoms/CodeSnippet/CodeSnippet.component";
 
-export default (props) => {
-    const { pageContext } = props;
-    const [components] = React.useState({
-      Component: (props) => !pageContext.iframePath === null ? 'Error: No Component Found' : <ComponentViewer url={`${window.origin}/${pageContext.iframePath}`} />,
-      Code: (props) => !pageContext.twigCode === null ? 'Error: No Code Found' : <CodeSnippet code={ `${pageContext.twigCode}`} />
-    })
-    const post = props.data.mdx
-    const site = props.data.site
-    const allPages = props.data.allMdx
-    const allFile = props.data.allFile
-    return (
-      <MDXProvider components={components}>
-        <ComponentLayout
-          title={site.siteMetadata.title}
-          {...site}
-          post={post}
-          {...allPages}
-          {...allFile}
-          parentDirectory={props.pageContext.parentDir}
-        >
-          <SEO
-            title={post.frontmatter.title}
-            description={post.frontmatter.description || post.excerpt}
-            keywords={[`gatsby`, `application`, `react`]}
-          />
-        </ComponentLayout>
-      </MDXProvider>
-    );
-}
+export default props => {
+  const { pageContext } = props;
+  const [components] = React.useState({
+    Component: props =>
+      !pageContext.iframePath === null ? (
+        "Error: No Component Found"
+      ) : (
+        <ComponentViewer url={`${window.origin}/${pageContext.iframePath}`} />
+      ),
+    Code: props =>
+      !pageContext.twigCode === null ? (
+        "Error: No Code Found"
+      ) : (
+        <CodeSnippet code={`${pageContext.twigCode}`} />
+      )
+  });
+  const post = props.data.mdx;
+  const site = props.data.site;
+  const allPages = props.data.allMdx;
+  const allFile = props.data.allFile;
+  return (
+    <MDXProvider components={components}>
+      <ComponentLayout
+        title={site.siteMetadata.title}
+        {...site}
+        post={post}
+        {...allPages}
+        {...allFile}
+        parentDirectory={props.pageContext.parentDir}
+      >
+        <SEO
+          title={post.frontmatter.title}
+          description={post.frontmatter.description || post.excerpt}
+          keywords={[`gatsby`, `application`, `react`]}
+        />
+      </ComponentLayout>
+    </MDXProvider>
+  );
+};
 
 export const pageQuery = graphql`
   query ComponentBySlug($slug: String!) {
@@ -99,4 +109,4 @@ export const pageQuery = graphql`
       }
     }
   }
-`
+`;

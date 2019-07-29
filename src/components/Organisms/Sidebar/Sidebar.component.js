@@ -1,27 +1,27 @@
-import PropTypes from "prop-types"
-import React, { Component } from "react"
-import "./sidebar.css"
-import "./sidebar-design.css"
+import PropTypes from "prop-types";
+import React, { Component } from "react";
+import "./sidebar.css";
+import "./sidebar-design.css";
 
-import CloseIcon from "../../../../assets/close.svg"
-import DownIcon from "../../../../assets/down.svg"
-import MenuIcon from "../../../../assets/menu-bars.svg"
-import MainMenu from "../../Molecules/Menus/MainMenu.component"
+import CloseIcon from "../../../../assets/close.svg";
+import DownIcon from "../../../../assets/down.svg";
+import MenuIcon from "../../../../assets/menu-bars.svg";
+import MainMenu from "../../Molecules/Menus/MainMenu.component";
 
 const Link = process.env.STORYBOOK_ENV
   ? ({ children }) => children
-  : require('gatsby').Link
+  : require("gatsby").Link;
 
 /**
  * Component that renders the sidebar.
  */
 export default class Sidebar extends Component {
   static propTypes = {
-    siteTitle: PropTypes.string,
+    siteTitle: PropTypes.string
   };
 
   static defaultProps = {
-    siteTitle: ``,
+    siteTitle: ``
   };
 
   state = { isSidebarOpen: false };
@@ -34,7 +34,7 @@ export default class Sidebar extends Component {
 
   open = () => {
     this.props.toggleOpen();
-  }
+  };
 
   render() {
     const { siteTitle, menu, id, collection, designSystems } = this.props;
@@ -50,7 +50,7 @@ export default class Sidebar extends Component {
             {designSystems.map(link => (
               <li key={link.name}>
                 <a href={link.link}>{link.name}</a>
-                </li>
+              </li>
             ))}
           </ul>
         </nav>
@@ -62,9 +62,7 @@ export default class Sidebar extends Component {
               aria-label="Toggle Parent Menu"
             />
             <h1 className="sidebar__heading">
-              <Link to="/">
-                {siteTitle}
-              </Link>
+              <Link to="/">{siteTitle}</Link>
             </h1>
             <MenuIcon
               className="sidebar__toggle"
@@ -73,16 +71,33 @@ export default class Sidebar extends Component {
             />
           </div>
           <nav
-            className={this.state.isSidebarOpen ? 'sidebar__nav sidebar__nav--open' : 'sidebar__nav'}>
+            className={
+              this.state.isSidebarOpen
+                ? "sidebar__nav sidebar__nav--open"
+                : "sidebar__nav"
+            }
+          >
             <ul className="main-menu">
-              <MainMenu menu={menu} id={id} filter="pages" collection={collection} />
+              <MainMenu
+                menu={menu}
+                id={id}
+                filter="pages"
+                collection={collection}
+              />
             </ul>
           </nav>
           <footer className="sidebar__footer">
-            Design System Powered by <a href="http://emulsify.info" target="_blank" rel="noopener noreferrer"><strong>Emulsify</strong></a>
+            Design System Powered by{" "}
+            <a
+              href="http://emulsify.info"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <strong>Emulsify</strong>
+            </a>
           </footer>
         </div>
       </div>
-    )
+    );
   }
 }

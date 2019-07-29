@@ -1,12 +1,12 @@
-import PropTypes from "prop-types"
-import React, { Component } from "react"
-import "./site.css"
+import PropTypes from "prop-types";
+import React, { Component } from "react";
+import "./site.css";
 
-import Main from "../Organisms/Main/Main.component"
+import Main from "../Organisms/Main/Main.component";
 
 export default class Site extends Component {
   static propTypes = {
-    frontmatter: PropTypes.object.isRequired,
+    frontmatter: PropTypes.object.isRequired
   };
 
   state = { isMenuOpen: false };
@@ -18,12 +18,22 @@ export default class Site extends Component {
   };
 
   render() {
-    const { frontmatter, title, body, edges, designSystems, fields, id, menu, parentDirectory, collection } = this.props;
+    const {
+      frontmatter,
+      title,
+      body,
+      edges,
+      designSystems,
+      fields,
+      id,
+      menu,
+      parentDirectory,
+      collection
+    } = this.props;
     return (
       <div
-        className={this.state.isMenuOpen ? 'wrapper-open wrapper' : 'wrapper'}
+        className={this.state.isMenuOpen ? "wrapper-open wrapper" : "wrapper"}
       >
-
         <Main
           {...fields}
           {...frontmatter}

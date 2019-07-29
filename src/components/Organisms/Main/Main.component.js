@@ -1,32 +1,44 @@
-import React, { Component } from "react"
-import { Link } from "gatsby"
+import React, { Component } from "react";
+import { Link } from "gatsby";
 import { MDXRenderer } from "gatsby-plugin-mdx";
-import "./main.css"
-import "./main-design.css"
+import "./main.css";
+import "./main-design.css";
 
-import Sidebar from "../Sidebar/Sidebar.component"
+import Sidebar from "../Sidebar/Sidebar.component";
 
 /**
  * Component that renders the main area.
  */
 export default class Main extends Component {
-
   render() {
-    const { title, siteTitle, body, pages, parentDirectory, id, menu, collection, designSystems} = this.props;
+    const {
+      title,
+      siteTitle,
+      body,
+      pages,
+      parentDirectory,
+      id,
+      menu,
+      collection,
+      designSystems
+    } = this.props;
     let tabs = [];
     pages.forEach(page => {
       if (page.node.fields) {
-        if (page.node.fields.parentDir === parentDirectory && page.node.frontmatter.tab) {
+        if (
+          page.node.fields.parentDir === parentDirectory &&
+          page.node.frontmatter.tab
+        ) {
           tabs.push(page);
         }
       }
-    })
+    });
 
     let tabsElement;
     if (tabs.length > 1) {
       tabs.sort(function(a, b) {
-        return a.node.frontmatter.tabOrder - b.node.frontmatter.tabOrder
-      })
+        return a.node.frontmatter.tabOrder - b.node.frontmatter.tabOrder;
+      });
       tabsElement = (
         <nav className="tabs">
           <ul>
@@ -34,7 +46,7 @@ export default class Main extends Component {
               <li key={tab.node.id}>
                 <Link
                   to={tab.node.fields.slug}
-                  className={tab.node.id === id ? 'active': ''}
+                  className={tab.node.id === id ? "active" : ""}
                 >
                   {tab.node.frontmatter.tab}
                 </Link>
@@ -42,7 +54,7 @@ export default class Main extends Component {
             ))}
           </ul>
         </nav>
-      )
+      );
     }
     return (
       <div className="main">
@@ -63,6 +75,6 @@ export default class Main extends Component {
           </div>
         </div>
       </div>
-    )
+    );
   }
 }

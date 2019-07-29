@@ -1,18 +1,17 @@
-import React from 'react';
-import { storiesOf } from '@storybook/react';
+import React from "react";
+import { storiesOf } from "@storybook/react";
 
-import Site from "./Site.js"
+import Site from "./Site.js";
 
 const site = {
   siteMetadata: {
     title: "Emulsify Gatsby"
   }
-}
+};
 
 /**
  * Add storybook definition for Sections.
  */
-storiesOf('Templates/Layout', module)
-  .add('Default', () => (
-    <Site site={site} />
-  ))
+storiesOf("Templates/Layout", module).add("Default", () => (
+  <Site site={site} />
+));

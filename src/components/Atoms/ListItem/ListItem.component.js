@@ -1,6 +1,6 @@
-import PropTypes from "prop-types"
-import React, { Component } from "react"
-import { Link } from "gatsby"
+import PropTypes from "prop-types";
+import React, { Component } from "react";
+import { Link } from "gatsby";
 
 /**
  * Component that renders a list item.
@@ -11,9 +11,9 @@ export default class ListItem extends Component {
     itemName: PropTypes.string,
     itemLink: PropTypes.string,
     children: PropTypes.node,
-    filter: PropTypes.string,
+    filter: PropTypes.string
   };
-  
+
   static defaultProps = {
     item: [],
     itemName: null,
@@ -35,8 +35,14 @@ export default class ListItem extends Component {
     const listItemContent = item.childMdx.frontmatter;
 
     return (
-      <li className={`menu-item--child${active === true ? ' menu-item--child--active' : ''}`}>
-        <Link className="menu-link" to={itemLink}>{listItemContent.title}</Link>
+      <li
+        className={`menu-item--child${
+          active === true ? " menu-item--child--active" : ""
+        }`}
+      >
+        <Link className="menu-link" to={itemLink}>
+          {listItemContent.title}
+        </Link>
         {children}
       </li>
     );
