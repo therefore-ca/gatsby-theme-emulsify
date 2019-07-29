@@ -17,11 +17,13 @@ export default props => {
    */
   const [components] = React.useState({
     Component: props =>
-      !pageContext.iframePath === null ? (
-        "Error: No Component Found"
-      ) : (
-        <ComponentViewer url={`${window.origin}/${pageContext.iframePath}`} />
-      ),
+      !pageContext.iframePath === null
+        ? "Error: No Component Found"
+        : typeof window !== "undefined" && (
+            <ComponentViewer
+              url={`${window.origin}/${pageContext.iframePath}`}
+            />
+          ),
     Code: props =>
       !pageContext.twigCode === null ? (
         "Error: No Code Found"
