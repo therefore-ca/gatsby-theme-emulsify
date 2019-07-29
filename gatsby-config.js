@@ -3,24 +3,27 @@ const path = require("path");
 module.exports = ({
   componentLibPath = "src/components",
   docPagesPath = "styleguide/pages",
-  basePath = "/"
+  basePath = "/",
+  designSystems = [
+    {
+      name: "System 1",
+      link: "/"
+    },
+    {
+      name: "System 2",
+      link: ""
+    }
+  ],
+  siteMetadata = {
+    title: "Project Name",
+    author: "Your Organization",
+    description: "A Design System Driven by Gatsby"
+  }
 }) => ({
   pathPrefix: "/gatsby-theme-emulsify",
   siteMetadata: {
-    title: "Project Name",
-    author: "Your Organization",
-    description: "A Design System Driven by Gatsby",
-    // siteUrl: '',
-    designSystems: [
-      {
-        name: "System 1",
-        link: "/"
-      },
-      {
-        name: "System 2",
-        link: ""
-      }
-    ]
+    ...siteMetadata,
+    designSystems
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
