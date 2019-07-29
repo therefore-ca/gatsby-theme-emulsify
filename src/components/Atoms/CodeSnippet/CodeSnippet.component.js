@@ -3,10 +3,10 @@
  * Exports a CodeSnippet component.
  */
 
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from "react";
+import PropTypes from "prop-types";
 import Highlight, { defaultProps } from "prism-react-renderer";
-import './code-snippet.css';
+import "./code-snippet.css";
 
 /**
  * Component that renders a CodeSnippet.
@@ -34,11 +34,11 @@ const CodeSnippet = props => {
 };
 
 CodeSnippet.propTypes = {
-  code: PropTypes.string,
+  code: PropTypes.string
 };
 
 CodeSnippet.defaultProps = {
-  code: `// No code specified.`,
+  code: `// No code specified.`
 };
 
 export default CodeSnippet;

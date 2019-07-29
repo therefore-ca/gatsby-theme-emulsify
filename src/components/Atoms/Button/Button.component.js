@@ -3,9 +3,9 @@
  * Exports a button component.
  */
 
-import React from 'react';
-import PropTypes from 'prop-types';
-import './Button.css';
+import React from "react";
+import PropTypes from "prop-types";
+import "./Button.css";
 
 /**
  * Component that renders a button with a click handler.
@@ -14,11 +14,7 @@ const Button = props => {
   const { onClick, children } = props;
 
   return (
-    <button
-      type="button"
-      className="btn"
-      onClick={onClick}
-    >
+    <button type="button" className="btn" onClick={onClick}>
       {children}
     </button>
   );
@@ -26,12 +22,12 @@ const Button = props => {
 
 Button.propTypes = {
   onClick: PropTypes.func,
-  children: PropTypes.node,
+  children: PropTypes.node
 };
 
 Button.defaultProps = {
   children: null,
-  onClick: () => {},
+  onClick: () => {}
 };
 
 export default Button;
