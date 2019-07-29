@@ -1,7 +1,7 @@
 import React from "react";
 import { graphql } from "gatsby";
 import { MDXProvider } from "@mdx-js/react";
-import ComponentLayout from "./component-layout";
+import Site from "./Site";
 import SEO from "./seo";
 import "./layout.css";
 
@@ -11,6 +11,10 @@ import CodeSnippet from "../Atoms/CodeSnippet/CodeSnippet.component";
 
 export default props => {
   const { pageContext } = props;
+  /**
+   * These components are exposed to the style guide authors
+   * so that they can use MDX to layout their component documentation, usage, etc.
+   */
   const [components] = React.useState({
     Component: props =>
       !pageContext.iframePath === null ? (
@@ -27,24 +31,27 @@ export default props => {
   });
   const post = props.data.mdx;
   const site = props.data.site;
-  const allPages = props.data.allMdx;
-  const allFile = props.data.allFile;
+  const docPages = props.data.allMdx.edges;
+  const componentNodes = props.data.allFile.nodes;
   return (
     <MDXProvider components={components}>
-      <ComponentLayout
+      <Site
+        collection={post.fields.collection}
+        id={post.id}
+        menu={componentNodes}
+        fields={post.fields}
+        frontmatter={post.frontmatter}
+        body={post.body}
         title={site.siteMetadata.title}
-        {...site}
-        post={post}
-        {...allPages}
-        {...allFile}
+        edges={docPages}
+        designSystems={site.siteMetadata.designSystems}
         parentDirectory={props.pageContext.parentDir}
-      >
-        <SEO
-          title={post.frontmatter.title}
-          description={post.frontmatter.description || post.excerpt}
-          keywords={[`gatsby`, `application`, `react`]}
-        />
-      </ComponentLayout>
+      />
+      <SEO
+        title={post.frontmatter.title}
+        description={post.frontmatter.description || post.excerpt}
+        keywords={[`gatsby`, `application`, `react`]}
+      />
     </MDXProvider>
   );
 };
