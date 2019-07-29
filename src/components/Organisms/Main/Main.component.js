@@ -5,6 +5,7 @@ import "./main.css";
 import "./main-design.css";
 
 import Sidebar from "../Sidebar/Sidebar.component";
+import Tabs from "../Tabs/Tabs.component";
 
 /**
  * Component that renders the main area.
@@ -34,27 +35,10 @@ export default class Main extends Component {
       }
     });
 
-    let tabsElement;
     if (tabs.length > 1) {
       tabs.sort(function(a, b) {
         return a.node.frontmatter.tabOrder - b.node.frontmatter.tabOrder;
       });
-      tabsElement = (
-        <nav className="tabs">
-          <ul>
-            {tabs.map(tab => (
-              <li key={tab.node.id}>
-                <Link
-                  to={tab.node.fields.slug}
-                  className={tab.node.id === id ? "active" : ""}
-                >
-                  {tab.node.frontmatter.tab}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </nav>
-      );
     }
     return (
       <div className="main">
@@ -69,7 +53,7 @@ export default class Main extends Component {
         />
         <div className="main-content">
           <h1 className="main-title">{title}</h1>
-          {tabsElement}
+          {tabs.length ? <Tabs tabs={tabs} id={id} /> : null}
           <div className="main-content-content">
             <MDXRenderer>{body}</MDXRenderer>
           </div>
