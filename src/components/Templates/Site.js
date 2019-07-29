@@ -33,23 +33,16 @@ export default class Site extends Component {
       parentDirectory,
       collection
     } = this.props;
-    let tabs = [];
-    docPages.forEach(page => {
-      if (page.node.fields) {
-        if (
-          page.node.fields.parentDir === parentDirectory &&
-          page.node.frontmatter.tab
-        ) {
-          tabs.push(page);
-        }
-      }
-    });
-
-    if (tabs.length > 1) {
-      tabs.sort(function(a, b) {
+    let tabs = docPages
+      .filter(
+        docPage =>
+          docPage.node.fields &&
+          docPage.node.fields.parentDir === parentDirectory &&
+          docPage.node.frontmatter.tab
+      )
+      .sort(function(a, b) {
         return a.node.frontmatter.tabOrder - b.node.frontmatter.tabOrder;
       });
-    }
     return (
       <div
         className={this.state.isMenuOpen ? "wrapper-open wrapper" : "wrapper"}
