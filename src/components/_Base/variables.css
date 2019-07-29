@@ -7,17 +7,17 @@
   --font-family-code: "SFMono-Regular", Consolas, "Roboto Mono", "Droid Sans Mono", "Liberation Mono", Menlo, Courier, monospace;
   /* Color Variables */
   --color-var--yellow: #ff0;
-  --color-var--gray-lighter: #eee;
-  --color-var--gray-light: #aaa;
-  --color-var--gray: #7d7d7d;
-  --color-var--gray-dark: #3b3f40;
-  --color-var--gray-darker: #343738;
-  --color-var--gray-darkest: #2f2f2f;
-  --color-var--black: #000;
+  --color-var--gray-lighter: #E2EBF2;
+  --color-var--gray-light: #C1C9CF;
+  --color-var--gray: #889096;
+  --color-var--gray-dark: #6E7479;
+  --color-var--gray-darker: #505558;
+  --color-var--gray-darkest: #313436;
+  --color-var--black: #313436;
   --color-var--white: #fff;
   /* Color Usage */
   /* Defaults */
-  --color--body-text: var(--color-var--gray-dark);
+  --color--body-text: var(--color-var--gray-darkest);
   /* Header */
   --color--header-bg: var(--color-var--black);
   --color--header-text: var(--color-var--white);
@@ -34,4 +34,10 @@
   /* Parent Menu */
   --color--parent-menu-bg: var(--color-var--gray-darkest);
   --color--parent-menu-text: var(--color-var--white);
+
+  /* Dots */
+  --dot-bg-color: var(--color-var--gray-darkest);
+  --dot-color: var(--color-var--gray-darker);
+  --dot-size: 2px;
+  --dot-space: 22px;
 }
