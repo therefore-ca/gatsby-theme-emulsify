@@ -28,12 +28,6 @@ module.exports = ({
   plugins: [
     `gatsby-plugin-react-helmet`,
     {
-      resolve: "gatsby-plugin-page-creator",
-      options: {
-        path: path.join(__dirname, "src", "pages")
-      }
-    },
-    {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `components`,
