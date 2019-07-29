@@ -5,13 +5,15 @@
   "main": "index.js",
   "keywords": [
     "gatsby",
-    "gatsby-theme"
+    "gatsby-theme",
+    "gatsby-plugin"
   ],
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:fourkitchens/gatsby-theme-emulsify.git"
+  },
   "author": "Evan Willhite <evan@fourkitchens.com>",
   "license": "MIT",
-  "devDependencies": {
-    
-  },
   "scripts": {
     "develop": "gatsby develop",
     "build": "gatsby build",
