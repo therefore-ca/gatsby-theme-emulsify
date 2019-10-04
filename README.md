@@ -18,6 +18,7 @@ Emulsify is a customizable and themeable design system _generator_ built with Ga
 Using a Gatsby Starter is the fastest way to get up-and-running.
 
 - [Twig Starter](https://github.com/fourkitchens/gatsby-starter-emulsify-twig)
+- [Drupal Starter](https://github.com/fourkitchens/gatsby-starter-emulsify-drupal) (Drupal 8 theme including Storybook for a Pattern Library)
 
 #### Manual Installation
 
