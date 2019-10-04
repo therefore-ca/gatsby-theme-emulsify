@@ -74,6 +74,7 @@ export default props => {
         collection={post.fields.collection}
         id={post.id}
         menu={componentNodes}
+        pageTitle={post.frontmatter.title}
         fields={post.fields}
         frontmatter={post.frontmatter}
         body={post.body}
