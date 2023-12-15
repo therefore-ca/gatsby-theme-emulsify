@@ -24,7 +24,7 @@
     "@mdx-js/mdx": "^1.0.21",
     "@mdx-js/react": "^1.0.21",
     "cross-env": "5.0.5",
-    "gatsby": "^2.13.15",
+    "gatsby": "^4.0.0",
     "gatsby-plugin-mdx": "^1.0.11",
     "gatsby-plugin-page-creator": "^2.0.13",
     "gatsby-plugin-react-helmet": "^3.0.12",
